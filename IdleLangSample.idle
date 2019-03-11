@@ -1,0 +1,62 @@
+import Test;
+
+type Animal class {
+    name string;
+    age int;
+
+    GetName() string {
+        return $name;
+    }
+}
+
+
+type Dog <- Animal class {
+    breed string;
+
+    Bark() bool {
+        if $age > 1 {
+            io.Print("Wooof");
+            return true;
+        }
+        return false;
+    }
+}
+
+type Main class {
+    Main() void
+    var name string;
+    var dogs [5]Dog;
+    var sum int;
+    var i int;
+    {
+
+        IO.print("Enter name: ");
+        name = IO.readString();
+        mydog = Dog(name, "Chihuahua");
+        mydog.Bark();
+
+        for i = 0; i < dogs.size(); i = i + 1 {
+            IO.print(dogs[i].getName());
+        }
+
+        sum = 0;
+        for i = 0; i < 10; i = i + 1 {
+            sum = sum + i;
+        }
+        IO.print(sum);
+
+        while true && false {
+            // do stuff
+        }
+
+        if false {
+            // do stuff
+        }
+        else if true {
+            // do stuff
+        }
+        else {
+            // do stuff
+        }
+    }
+}

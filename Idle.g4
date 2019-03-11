@@ -159,7 +159,7 @@ forLoop
 	: 'for' assignment? ';' expression ';' assignment? block;
 
 call
-	: (reference '.')? reference '(' callArguments? ')'
+	: (reference '.')? ID '(' callArguments? ')'
 	| read;
 
 callArguments
