@@ -12,7 +12,6 @@ grammar Idle;
 BOOL:				'bool';
 CLASS:              'class';
 ELSE:               'else';
-ELSEIF:				'elseif';
 FLOAT:              'float';
 FOR:                'for';
 IF:                 'if';
