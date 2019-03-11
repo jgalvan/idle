@@ -1,4 +1,4 @@
-# Generated from Idle.g4 by ANTLR 4.7.1
+# Generated from Idle.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .IdleParser import IdleParser
@@ -80,24 +80,6 @@ class IdleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by IdleParser#block.
-    def enterBlock(self, ctx:IdleParser.BlockContext):
-        pass
-
-    # Exit a parse tree produced by IdleParser#block.
-    def exitBlock(self, ctx:IdleParser.BlockContext):
-        pass
-
-
-    # Enter a parse tree produced by IdleParser#statement.
-    def enterStatement(self, ctx:IdleParser.StatementContext):
-        pass
-
-    # Exit a parse tree produced by IdleParser#statement.
-    def exitStatement(self, ctx:IdleParser.StatementContext):
-        pass
-
-
     # Enter a parse tree produced by IdleParser#varsDecl.
     def enterVarsDecl(self, ctx:IdleParser.VarsDeclContext):
         pass
@@ -116,12 +98,21 @@ class IdleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by IdleParser#varsDeclAssignment.
-    def enterVarsDeclAssignment(self, ctx:IdleParser.VarsDeclAssignmentContext):
+    # Enter a parse tree produced by IdleParser#block.
+    def enterBlock(self, ctx:IdleParser.BlockContext):
         pass
 
-    # Exit a parse tree produced by IdleParser#varsDeclAssignment.
-    def exitVarsDeclAssignment(self, ctx:IdleParser.VarsDeclAssignmentContext):
+    # Exit a parse tree produced by IdleParser#block.
+    def exitBlock(self, ctx:IdleParser.BlockContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#statement.
+    def enterStatement(self, ctx:IdleParser.StatementContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#statement.
+    def exitStatement(self, ctx:IdleParser.StatementContext):
         pass
 
 
@@ -176,6 +167,15 @@ class IdleListener(ParseTreeListener):
 
     # Exit a parse tree produced by IdleParser#literal.
     def exitLiteral(self, ctx:IdleParser.LiteralContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#reference.
+    def enterReference(self, ctx:IdleParser.ReferenceContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#reference.
+    def exitReference(self, ctx:IdleParser.ReferenceContext):
         pass
 
 

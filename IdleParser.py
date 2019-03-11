@@ -1,142 +1,149 @@
-# Generated from Idle.g4 by ANTLR 4.7.1
+# Generated from Idle.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
 
+
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3,")
-        buf.write("\u0128\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\67")
+        buf.write("\u0134\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
         buf.write("\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36")
         buf.write("\3\2\7\2>\n\2\f\2\16\2A\13\2\3\2\6\2D\n\2\r\2\16\2E\3")
         buf.write("\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\5\4P\n\4\3\4\3\4\3\4\3")
-        buf.write("\5\3\5\3\5\7\5X\n\5\f\5\16\5[\13\5\3\5\3\5\3\6\3\6\3\6")
-        buf.write("\3\6\3\7\3\7\3\7\5\7f\n\7\3\7\3\7\3\7\5\7k\n\7\3\7\3\7")
-        buf.write("\3\b\3\b\3\b\3\b\3\b\7\bt\n\b\f\b\16\bw\13\b\3\t\3\t\3")
-        buf.write("\n\3\n\6\n}\n\n\r\n\16\n~\3\n\3\n\3\13\3\13\3\13\3\13")
-        buf.write("\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u008f\n")
-        buf.write("\13\3\f\3\f\3\f\3\f\7\f\u0095\n\f\f\f\16\f\u0098\13\f")
-        buf.write("\3\f\3\f\3\f\5\f\u009d\n\f\3\f\3\f\3\f\3\r\3\r\3\r\5\r")
-        buf.write("\u00a5\n\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3")
-        buf.write("\16\3\17\3\17\3\17\3\17\3\20\3\20\3\20\5\20\u00b8\n\20")
-        buf.write("\3\20\5\20\u00bb\n\20\3\21\3\21\3\21\7\21\u00c0\n\21\f")
-        buf.write("\21\16\21\u00c3\13\21\3\22\3\22\3\22\7\22\u00c8\n\22\f")
-        buf.write("\22\16\22\u00cb\13\22\3\23\3\23\3\23\3\23\3\23\5\23\u00d2")
-        buf.write("\n\23\3\23\5\23\u00d5\n\23\3\24\3\24\3\24\3\24\3\24\3")
-        buf.write("\24\5\24\u00dd\n\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26")
-        buf.write("\3\26\3\27\3\27\3\27\3\27\7\27\u00eb\n\27\f\27\16\27\u00ee")
-        buf.write("\13\27\3\27\3\27\5\27\u00f2\n\27\3\30\3\30\3\30\3\30\3")
-        buf.write("\30\3\31\3\31\3\31\3\31\3\32\3\32\3\32\5\32\u0100\n\32")
-        buf.write("\3\32\3\32\3\32\3\32\5\32\u0106\n\32\3\32\3\32\3\33\3")
-        buf.write("\33\5\33\u010c\n\33\3\33\3\33\3\33\5\33\u0111\n\33\3\33")
-        buf.write("\3\33\3\34\3\34\3\34\7\34\u0118\n\34\f\34\16\34\u011b")
-        buf.write("\13\34\3\35\3\35\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3")
-        buf.write("\36\3\36\3\36\2\2\37\2\4\6\b\n\f\16\20\22\24\26\30\32")
-        buf.write("\34\36 \"$&(*,.\60\62\64\668:\2\6\4\2\16\21\'\'\3\2\27")
-        buf.write("\30\3\2\31\32\3\2#%\2\u0133\2?\3\2\2\2\4G\3\2\2\2\6K\3")
-        buf.write("\2\2\2\bT\3\2\2\2\n^\3\2\2\2\fb\3\2\2\2\16n\3\2\2\2\20")
-        buf.write("x\3\2\2\2\22z\3\2\2\2\24\u008e\3\2\2\2\26\u0090\3\2\2")
-        buf.write("\2\30\u00a4\3\2\2\2\32\u00aa\3\2\2\2\34\u00b0\3\2\2\2")
-        buf.write("\36\u00ba\3\2\2\2 \u00bc\3\2\2\2\"\u00c4\3\2\2\2$\u00d4")
-        buf.write("\3\2\2\2&\u00dc\3\2\2\2(\u00de\3\2\2\2*\u00e3\3\2\2\2")
-        buf.write(",\u00e6\3\2\2\2.\u00f3\3\2\2\2\60\u00f8\3\2\2\2\62\u00fc")
-        buf.write("\3\2\2\2\64\u010b\3\2\2\2\66\u0114\3\2\2\28\u011c\3\2")
-        buf.write("\2\2:\u0122\3\2\2\2<>\5\4\3\2=<\3\2\2\2>A\3\2\2\2?=\3")
-        buf.write("\2\2\2?@\3\2\2\2@C\3\2\2\2A?\3\2\2\2BD\5\6\4\2CB\3\2\2")
-        buf.write("\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\3\3\2\2\2GH\7\3\2\2")
-        buf.write("HI\7\'\2\2IJ\7\4\2\2J\5\3\2\2\2KL\7\5\2\2LO\7\'\2\2MN")
-        buf.write("\7\6\2\2NP\7\'\2\2OM\3\2\2\2OP\3\2\2\2PQ\3\2\2\2QR\7\7")
-        buf.write("\2\2RS\5\b\5\2S\7\3\2\2\2TY\7\b\2\2UX\5\n\6\2VX\5\f\7")
-        buf.write("\2WU\3\2\2\2WV\3\2\2\2X[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z")
-        buf.write("\\\3\2\2\2[Y\3\2\2\2\\]\7\t\2\2]\t\3\2\2\2^_\7\'\2\2_")
-        buf.write("`\5\20\t\2`a\7\4\2\2a\13\3\2\2\2bc\7\'\2\2ce\7\n\2\2d")
-        buf.write("f\5\16\b\2ed\3\2\2\2ef\3\2\2\2fg\3\2\2\2gj\7\13\2\2hk")
-        buf.write("\5\20\t\2ik\7\f\2\2jh\3\2\2\2ji\3\2\2\2kl\3\2\2\2lm\5")
-        buf.write("\22\n\2m\r\3\2\2\2no\7\'\2\2ou\5\20\t\2pq\7\r\2\2qr\7")
-        buf.write("\'\2\2rt\5\20\t\2sp\3\2\2\2tw\3\2\2\2us\3\2\2\2uv\3\2")
-        buf.write("\2\2v\17\3\2\2\2wu\3\2\2\2xy\t\2\2\2y\21\3\2\2\2z|\7\b")
-        buf.write("\2\2{}\5\24\13\2|{\3\2\2\2}~\3\2\2\2~|\3\2\2\2~\177\3")
-        buf.write("\2\2\2\177\u0080\3\2\2\2\u0080\u0081\7\t\2\2\u0081\23")
-        buf.write("\3\2\2\2\u0082\u008f\5\26\f\2\u0083\u008f\5\30\r\2\u0084")
-        buf.write("\u008f\5\32\16\2\u0085\u008f\5,\27\2\u0086\u0087\5\64")
-        buf.write("\33\2\u0087\u0088\7\4\2\2\u0088\u008f\3\2\2\2\u0089\u008f")
-        buf.write("\5\62\32\2\u008a\u008f\5\60\31\2\u008b\u008f\58\35\2\u008c")
-        buf.write("\u008f\5:\36\2\u008d\u008f\5\34\17\2\u008e\u0082\3\2\2")
-        buf.write("\2\u008e\u0083\3\2\2\2\u008e\u0084\3\2\2\2\u008e\u0085")
-        buf.write("\3\2\2\2\u008e\u0086\3\2\2\2\u008e\u0089\3\2\2\2\u008e")
-        buf.write("\u008a\3\2\2\2\u008e\u008b\3\2\2\2\u008e\u008c\3\2\2\2")
-        buf.write("\u008e\u008d\3\2\2\2\u008f\25\3\2\2\2\u0090\u0091\7\22")
-        buf.write("\2\2\u0091\u0096\7\'\2\2\u0092\u0093\7\r\2\2\u0093\u0095")
-        buf.write("\7\'\2\2\u0094\u0092\3\2\2\2\u0095\u0098\3\2\2\2\u0096")
-        buf.write("\u0094\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u009c\3\2\2\2")
-        buf.write("\u0098\u0096\3\2\2\2\u0099\u009a\7\23\2\2\u009a\u009b")
-        buf.write("\7(\2\2\u009b\u009d\7\24\2\2\u009c\u0099\3\2\2\2\u009c")
-        buf.write("\u009d\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u009f\5\20\t")
-        buf.write("\2\u009f\u00a0\7\4\2\2\u00a0\27\3\2\2\2\u00a1\u00a5\5")
-        buf.write("*\26\2\u00a2\u00a5\5(\25\2\u00a3\u00a5\7\'\2\2\u00a4\u00a1")
-        buf.write("\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5")
-        buf.write("\u00a6\3\2\2\2\u00a6\u00a7\7\25\2\2\u00a7\u00a8\5\36\20")
-        buf.write("\2\u00a8\u00a9\7\4\2\2\u00a9\31\3\2\2\2\u00aa\u00ab\7")
-        buf.write("\22\2\2\u00ab\u00ac\7\'\2\2\u00ac\u00ad\7\25\2\2\u00ad")
-        buf.write("\u00ae\5\36\20\2\u00ae\u00af\7\4\2\2\u00af\33\3\2\2\2")
-        buf.write("\u00b0\u00b1\7\26\2\2\u00b1\u00b2\5\36\20\2\u00b2\u00b3")
-        buf.write("\7\4\2\2\u00b3\35\3\2\2\2\u00b4\u00b7\5 \21\2\u00b5\u00b6")
-        buf.write("\7+\2\2\u00b6\u00b8\5 \21\2\u00b7\u00b5\3\2\2\2\u00b7")
-        buf.write("\u00b8\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9\u00bb\7*\2\2")
-        buf.write("\u00ba\u00b4\3\2\2\2\u00ba\u00b9\3\2\2\2\u00bb\37\3\2")
-        buf.write("\2\2\u00bc\u00c1\5\"\22\2\u00bd\u00be\t\3\2\2\u00be\u00c0")
-        buf.write("\5\"\22\2\u00bf\u00bd\3\2\2\2\u00c0\u00c3\3\2\2\2\u00c1")
-        buf.write("\u00bf\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2!\3\2\2\2\u00c3")
-        buf.write("\u00c1\3\2\2\2\u00c4\u00c9\5$\23\2\u00c5\u00c6\t\4\2\2")
-        buf.write("\u00c6\u00c8\5$\23\2\u00c7\u00c5\3\2\2\2\u00c8\u00cb\3")
-        buf.write("\2\2\2\u00c9\u00c7\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca#")
-        buf.write("\3\2\2\2\u00cb\u00c9\3\2\2\2\u00cc\u00cd\7\n\2\2\u00cd")
-        buf.write("\u00ce\5\36\20\2\u00ce\u00cf\7\13\2\2\u00cf\u00d5\3\2")
-        buf.write("\2\2\u00d0\u00d2\t\3\2\2\u00d1\u00d0\3\2\2\2\u00d1\u00d2")
-        buf.write("\3\2\2\2\u00d2\u00d3\3\2\2\2\u00d3\u00d5\5&\24\2\u00d4")
-        buf.write("\u00cc\3\2\2\2\u00d4\u00d1\3\2\2\2\u00d5%\3\2\2\2\u00d6")
-        buf.write("\u00dd\7\'\2\2\u00d7\u00dd\7(\2\2\u00d8\u00dd\7)\2\2\u00d9")
-        buf.write("\u00dd\5(\25\2\u00da\u00dd\5*\26\2\u00db\u00dd\5\64\33")
-        buf.write("\2\u00dc\u00d6\3\2\2\2\u00dc\u00d7\3\2\2\2\u00dc\u00d8")
-        buf.write("\3\2\2\2\u00dc\u00d9\3\2\2\2\u00dc\u00da\3\2\2\2\u00dc")
-        buf.write("\u00db\3\2\2\2\u00dd\'\3\2\2\2\u00de\u00df\7\'\2\2\u00df")
-        buf.write("\u00e0\7\23\2\2\u00e0\u00e1\7(\2\2\u00e1\u00e2\7\24\2")
-        buf.write("\2\u00e2)\3\2\2\2\u00e3\u00e4\7\33\2\2\u00e4\u00e5\7\'")
-        buf.write("\2\2\u00e5+\3\2\2\2\u00e6\u00e7\7\34\2\2\u00e7\u00e8\5")
-        buf.write("\36\20\2\u00e8\u00ec\5\22\n\2\u00e9\u00eb\5.\30\2\u00ea")
-        buf.write("\u00e9\3\2\2\2\u00eb\u00ee\3\2\2\2\u00ec\u00ea\3\2\2\2")
-        buf.write("\u00ec\u00ed\3\2\2\2\u00ed\u00f1\3\2\2\2\u00ee\u00ec\3")
-        buf.write("\2\2\2\u00ef\u00f0\7\35\2\2\u00f0\u00f2\5\22\n\2\u00f1")
-        buf.write("\u00ef\3\2\2\2\u00f1\u00f2\3\2\2\2\u00f2-\3\2\2\2\u00f3")
-        buf.write("\u00f4\7\35\2\2\u00f4\u00f5\7\34\2\2\u00f5\u00f6\5\36")
-        buf.write("\20\2\u00f6\u00f7\5\22\n\2\u00f7/\3\2\2\2\u00f8\u00f9")
-        buf.write("\7\36\2\2\u00f9\u00fa\5\36\20\2\u00fa\u00fb\5\22\n\2\u00fb")
-        buf.write("\61\3\2\2\2\u00fc\u00ff\7\37\2\2\u00fd\u0100\5\32\16\2")
-        buf.write("\u00fe\u0100\5\30\r\2\u00ff\u00fd\3\2\2\2\u00ff\u00fe")
-        buf.write("\3\2\2\2\u00ff\u0100\3\2\2\2\u0100\u0101\3\2\2\2\u0101")
-        buf.write("\u0102\7\4\2\2\u0102\u0103\5\36\20\2\u0103\u0105\7\4\2")
-        buf.write("\2\u0104\u0106\5\36\20\2\u0105\u0104\3\2\2\2\u0105\u0106")
-        buf.write("\3\2\2\2\u0106\u0107\3\2\2\2\u0107\u0108\5\22\n\2\u0108")
-        buf.write("\63\3\2\2\2\u0109\u010a\7\'\2\2\u010a\u010c\7 \2\2\u010b")
-        buf.write("\u0109\3\2\2\2\u010b\u010c\3\2\2\2\u010c\u010d\3\2\2\2")
-        buf.write("\u010d\u010e\7\'\2\2\u010e\u0110\7\n\2\2\u010f\u0111\5")
-        buf.write("\66\34\2\u0110\u010f\3\2\2\2\u0110\u0111\3\2\2\2\u0111")
-        buf.write("\u0112\3\2\2\2\u0112\u0113\7\13\2\2\u0113\65\3\2\2\2\u0114")
-        buf.write("\u0119\7\'\2\2\u0115\u0116\7\r\2\2\u0116\u0118\7\'\2\2")
-        buf.write("\u0117\u0115\3\2\2\2\u0118\u011b\3\2\2\2\u0119\u0117\3")
-        buf.write("\2\2\2\u0119\u011a\3\2\2\2\u011a\67\3\2\2\2\u011b\u0119")
-        buf.write("\3\2\2\2\u011c\u011d\7!\2\2\u011d\u011e\7\n\2\2\u011e")
-        buf.write("\u011f\5\36\20\2\u011f\u0120\7\13\2\2\u0120\u0121\7\4")
-        buf.write("\2\2\u01219\3\2\2\2\u0122\u0123\7\"\2\2\u0123\u0124\t")
-        buf.write("\5\2\2\u0124\u0125\7&\2\2\u0125\u0126\7\4\2\2\u0126;\3")
-        buf.write("\2\2\2\35?EOWYeju~\u008e\u0096\u009c\u00a4\u00b7\u00ba")
-        buf.write("\u00c1\u00c9\u00d1\u00d4\u00dc\u00ec\u00f1\u00ff\u0105")
-        buf.write("\u010b\u0110\u0119")
+        buf.write("\5\3\5\7\5W\n\5\f\5\16\5Z\13\5\3\5\7\5]\n\5\f\5\16\5`")
+        buf.write("\13\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\5\7k\n\7\3\7")
+        buf.write("\3\7\3\7\5\7p\n\7\3\7\7\7s\n\7\f\7\16\7v\13\7\3\7\3\7")
+        buf.write("\3\b\3\b\3\b\3\b\3\b\7\b\177\n\b\f\b\16\b\u0082\13\b\3")
+        buf.write("\t\3\t\3\n\3\n\3\n\3\n\7\n\u008a\n\n\f\n\16\n\u008d\13")
+        buf.write("\n\3\n\3\n\3\n\5\n\u0092\n\n\3\n\3\n\3\n\3\13\3\13\3\13")
+        buf.write("\3\13\3\f\3\f\7\f\u009d\n\f\f\f\16\f\u00a0\13\f\3\f\3")
+        buf.write("\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u00af")
+        buf.write("\n\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\17\5\17")
+        buf.write("\u00ba\n\17\5\17\u00bc\n\17\3\20\3\20\3\20\7\20\u00c1")
+        buf.write("\n\20\f\20\16\20\u00c4\13\20\3\21\3\21\3\21\7\21\u00c9")
+        buf.write("\n\21\f\21\16\21\u00cc\13\21\3\22\3\22\3\22\3\22\3\22")
+        buf.write("\5\22\u00d3\n\22\3\22\5\22\u00d6\n\22\3\23\3\23\3\23\3")
+        buf.write("\23\3\23\3\23\5\23\u00de\n\23\3\24\3\24\3\24\5\24\u00e3")
+        buf.write("\n\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\27\3\27")
+        buf.write("\3\27\3\27\7\27\u00f1\n\27\f\27\16\27\u00f4\13\27\3\27")
+        buf.write("\3\27\5\27\u00f8\n\27\3\30\3\30\3\30\3\30\3\30\3\31\3")
+        buf.write("\31\3\31\3\31\3\32\3\32\5\32\u0105\n\32\3\32\3\32\3\32")
+        buf.write("\3\32\5\32\u010b\n\32\3\32\3\32\3\33\3\33\3\33\5\33\u0112")
+        buf.write("\n\33\3\33\3\33\3\33\5\33\u0117\n\33\3\33\3\33\3\33\5")
+        buf.write("\33\u011c\n\33\3\34\3\34\3\34\7\34\u0121\n\34\f\34\16")
+        buf.write("\34\u0124\13\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35")
+        buf.write("\3\36\3\36\3\36\3\36\3\36\3\36\3\36\2\2\37\2\4\6\b\n\f")
+        buf.write("\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:\2\7")
+        buf.write("\7\2\7\7\13\13\17\17\21\21\30\30\5\2&&,\60\62\63\4\2%")
+        buf.write("%\64\64\4\2**\61\61\3\2\4\6\2\u013d\2?\3\2\2\2\4G\3\2")
+        buf.write("\2\2\6K\3\2\2\2\bT\3\2\2\2\nc\3\2\2\2\fg\3\2\2\2\16y\3")
+        buf.write("\2\2\2\20\u0083\3\2\2\2\22\u0085\3\2\2\2\24\u0096\3\2")
+        buf.write("\2\2\26\u009a\3\2\2\2\30\u00ae\3\2\2\2\32\u00b0\3\2\2")
+        buf.write("\2\34\u00bb\3\2\2\2\36\u00bd\3\2\2\2 \u00c5\3\2\2\2\"")
+        buf.write("\u00d5\3\2\2\2$\u00dd\3\2\2\2&\u00e2\3\2\2\2(\u00e4\3")
+        buf.write("\2\2\2*\u00e9\3\2\2\2,\u00ec\3\2\2\2.\u00f9\3\2\2\2\60")
+        buf.write("\u00fe\3\2\2\2\62\u0102\3\2\2\2\64\u011b\3\2\2\2\66\u011d")
+        buf.write("\3\2\2\28\u0125\3\2\2\2:\u012d\3\2\2\2<>\5\4\3\2=<\3\2")
+        buf.write("\2\2>A\3\2\2\2?=\3\2\2\2?@\3\2\2\2@C\3\2\2\2A?\3\2\2\2")
+        buf.write("BD\5\6\4\2CB\3\2\2\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\3")
+        buf.write("\3\2\2\2GH\7\16\2\2HI\7\30\2\2IJ\7\"\2\2J\5\3\2\2\2KL")
+        buf.write("\7\22\2\2LO\7\30\2\2MN\7\'\2\2NP\7\30\2\2OM\3\2\2\2OP")
+        buf.write("\3\2\2\2PQ\3\2\2\2QR\7\b\2\2RS\5\b\5\2S\7\3\2\2\2TX\7")
+        buf.write("\36\2\2UW\5\n\6\2VU\3\2\2\2WZ\3\2\2\2XV\3\2\2\2XY\3\2")
+        buf.write("\2\2Y^\3\2\2\2ZX\3\2\2\2[]\5\f\7\2\\[\3\2\2\2]`\3\2\2")
+        buf.write("\2^\\\3\2\2\2^_\3\2\2\2_a\3\2\2\2`^\3\2\2\2ab\7\37\2\2")
+        buf.write("b\t\3\2\2\2cd\7\30\2\2de\5\20\t\2ef\7\"\2\2f\13\3\2\2")
+        buf.write("\2gh\7\30\2\2hj\7\34\2\2ik\5\16\b\2ji\3\2\2\2jk\3\2\2")
+        buf.write("\2kl\3\2\2\2lo\7\35\2\2mp\5\20\t\2np\7\24\2\2om\3\2\2")
+        buf.write("\2on\3\2\2\2pt\3\2\2\2qs\5\22\n\2rq\3\2\2\2sv\3\2\2\2")
+        buf.write("tr\3\2\2\2tu\3\2\2\2uw\3\2\2\2vt\3\2\2\2wx\5\26\f\2x\r")
+        buf.write("\3\2\2\2yz\7\30\2\2z\u0080\5\20\t\2{|\7#\2\2|}\7\30\2")
+        buf.write("\2}\177\5\20\t\2~{\3\2\2\2\177\u0082\3\2\2\2\u0080~\3")
+        buf.write("\2\2\2\u0080\u0081\3\2\2\2\u0081\17\3\2\2\2\u0082\u0080")
+        buf.write("\3\2\2\2\u0083\u0084\t\2\2\2\u0084\21\3\2\2\2\u0085\u0086")
+        buf.write("\7\23\2\2\u0086\u008b\7\30\2\2\u0087\u0088\7#\2\2\u0088")
+        buf.write("\u008a\7\30\2\2\u0089\u0087\3\2\2\2\u008a\u008d\3\2\2")
+        buf.write("\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u0091")
+        buf.write("\3\2\2\2\u008d\u008b\3\2\2\2\u008e\u008f\7 \2\2\u008f")
+        buf.write("\u0090\7\31\2\2\u0090\u0092\7!\2\2\u0091\u008e\3\2\2\2")
+        buf.write("\u0091\u0092\3\2\2\2\u0092\u0093\3\2\2\2\u0093\u0094\5")
+        buf.write("\20\t\2\u0094\u0095\7\"\2\2\u0095\23\3\2\2\2\u0096\u0097")
+        buf.write("\5&\24\2\u0097\u0098\7(\2\2\u0098\u0099\5\34\17\2\u0099")
+        buf.write("\25\3\2\2\2\u009a\u009e\7\36\2\2\u009b\u009d\5\30\r\2")
+        buf.write("\u009c\u009b\3\2\2\2\u009d\u00a0\3\2\2\2\u009e\u009c\3")
+        buf.write("\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a1\3\2\2\2\u00a0\u009e")
+        buf.write("\3\2\2\2\u00a1\u00a2\7\37\2\2\u00a2\27\3\2\2\2\u00a3\u00a4")
+        buf.write("\5\24\13\2\u00a4\u00a5\7\"\2\2\u00a5\u00af\3\2\2\2\u00a6")
+        buf.write("\u00af\5,\27\2\u00a7\u00a8\5\64\33\2\u00a8\u00a9\7\"\2")
+        buf.write("\2\u00a9\u00af\3\2\2\2\u00aa\u00af\5\62\32\2\u00ab\u00af")
+        buf.write("\5\60\31\2\u00ac\u00af\58\35\2\u00ad\u00af\5\32\16\2\u00ae")
+        buf.write("\u00a3\3\2\2\2\u00ae\u00a6\3\2\2\2\u00ae\u00a7\3\2\2\2")
+        buf.write("\u00ae\u00aa\3\2\2\2\u00ae\u00ab\3\2\2\2\u00ae\u00ac\3")
+        buf.write("\2\2\2\u00ae\u00ad\3\2\2\2\u00af\31\3\2\2\2\u00b0\u00b1")
+        buf.write("\7\20\2\2\u00b1\u00b2\5\34\17\2\u00b2\u00b3\7\"\2\2\u00b3")
+        buf.write("\33\3\2\2\2\u00b4\u00b5\7)\2\2\u00b5\u00bc\5\36\20\2\u00b6")
+        buf.write("\u00b9\5\36\20\2\u00b7\u00b8\t\3\2\2\u00b8\u00ba\5\36")
+        buf.write("\20\2\u00b9\u00b7\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba\u00bc")
+        buf.write("\3\2\2\2\u00bb\u00b4\3\2\2\2\u00bb\u00b6\3\2\2\2\u00bc")
+        buf.write("\35\3\2\2\2\u00bd\u00c2\5 \21\2\u00be\u00bf\t\4\2\2\u00bf")
+        buf.write("\u00c1\5 \21\2\u00c0\u00be\3\2\2\2\u00c1\u00c4\3\2\2\2")
+        buf.write("\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3\37\3\2")
+        buf.write("\2\2\u00c4\u00c2\3\2\2\2\u00c5\u00ca\5\"\22\2\u00c6\u00c7")
+        buf.write("\t\5\2\2\u00c7\u00c9\5\"\22\2\u00c8\u00c6\3\2\2\2\u00c9")
+        buf.write("\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb\3\2\2\2")
+        buf.write("\u00cb!\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00ce\7\34\2")
+        buf.write("\2\u00ce\u00cf\5\34\17\2\u00cf\u00d0\7\35\2\2\u00d0\u00d6")
+        buf.write("\3\2\2\2\u00d1\u00d3\t\4\2\2\u00d2\u00d1\3\2\2\2\u00d2")
+        buf.write("\u00d3\3\2\2\2\u00d3\u00d4\3\2\2\2\u00d4\u00d6\5$\23\2")
+        buf.write("\u00d5\u00cd\3\2\2\2\u00d5\u00d2\3\2\2\2\u00d6#\3\2\2")
+        buf.write("\2\u00d7\u00de\5&\24\2\u00d8\u00de\7\31\2\2\u00d9\u00de")
+        buf.write("\7\32\2\2\u00da\u00de\7\33\2\2\u00db\u00de\7\27\2\2\u00dc")
+        buf.write("\u00de\5\64\33\2\u00dd\u00d7\3\2\2\2\u00dd\u00d8\3\2\2")
+        buf.write("\2\u00dd\u00d9\3\2\2\2\u00dd\u00da\3\2\2\2\u00dd\u00db")
+        buf.write("\3\2\2\2\u00dd\u00dc\3\2\2\2\u00de%\3\2\2\2\u00df\u00e3")
+        buf.write("\7\30\2\2\u00e0\u00e3\5(\25\2\u00e1\u00e3\5*\26\2\u00e2")
+        buf.write("\u00df\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e2\u00e1\3\2\2\2")
+        buf.write("\u00e3\'\3\2\2\2\u00e4\u00e5\7\30\2\2\u00e5\u00e6\7 \2")
+        buf.write("\2\u00e6\u00e7\5\34\17\2\u00e7\u00e8\7!\2\2\u00e8)\3\2")
+        buf.write("\2\2\u00e9\u00ea\7+\2\2\u00ea\u00eb\7\30\2\2\u00eb+\3")
+        buf.write("\2\2\2\u00ec\u00ed\7\r\2\2\u00ed\u00ee\5\34\17\2\u00ee")
+        buf.write("\u00f2\5\26\f\2\u00ef\u00f1\5.\30\2\u00f0\u00ef\3\2\2")
+        buf.write("\2\u00f1\u00f4\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f2\u00f3")
+        buf.write("\3\2\2\2\u00f3\u00f7\3\2\2\2\u00f4\u00f2\3\2\2\2\u00f5")
+        buf.write("\u00f6\7\t\2\2\u00f6\u00f8\5\26\f\2\u00f7\u00f5\3\2\2")
+        buf.write("\2\u00f7\u00f8\3\2\2\2\u00f8-\3\2\2\2\u00f9\u00fa\7\t")
+        buf.write("\2\2\u00fa\u00fb\7\r\2\2\u00fb\u00fc\5\34\17\2\u00fc\u00fd")
+        buf.write("\5\26\f\2\u00fd/\3\2\2\2\u00fe\u00ff\7\25\2\2\u00ff\u0100")
+        buf.write("\5\34\17\2\u0100\u0101\5\26\f\2\u0101\61\3\2\2\2\u0102")
+        buf.write("\u0104\7\f\2\2\u0103\u0105\5\24\13\2\u0104\u0103\3\2\2")
+        buf.write("\2\u0104\u0105\3\2\2\2\u0105\u0106\3\2\2\2\u0106\u0107")
+        buf.write("\7\"\2\2\u0107\u0108\5\34\17\2\u0108\u010a\7\"\2\2\u0109")
+        buf.write("\u010b\5\24\13\2\u010a\u0109\3\2\2\2\u010a\u010b\3\2\2")
+        buf.write("\2\u010b\u010c\3\2\2\2\u010c\u010d\5\26\f\2\u010d\63\3")
+        buf.write("\2\2\2\u010e\u010f\5&\24\2\u010f\u0110\7$\2\2\u0110\u0112")
+        buf.write("\3\2\2\2\u0111\u010e\3\2\2\2\u0111\u0112\3\2\2\2\u0112")
+        buf.write("\u0113\3\2\2\2\u0113\u0114\5&\24\2\u0114\u0116\7\34\2")
+        buf.write("\2\u0115\u0117\5\66\34\2\u0116\u0115\3\2\2\2\u0116\u0117")
+        buf.write("\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\7\35\2\2\u0119")
+        buf.write("\u011c\3\2\2\2\u011a\u011c\5:\36\2\u011b\u0111\3\2\2\2")
+        buf.write("\u011b\u011a\3\2\2\2\u011c\65\3\2\2\2\u011d\u0122\5\34")
+        buf.write("\17\2\u011e\u011f\7#\2\2\u011f\u0121\5\34\17\2\u0120\u011e")
+        buf.write("\3\2\2\2\u0121\u0124\3\2\2\2\u0122\u0120\3\2\2\2\u0122")
+        buf.write("\u0123\3\2\2\2\u0123\67\3\2\2\2\u0124\u0122\3\2\2\2\u0125")
+        buf.write("\u0126\7\26\2\2\u0126\u0127\7$\2\2\u0127\u0128\7\3\2\2")
+        buf.write("\u0128\u0129\7\34\2\2\u0129\u012a\5\34\17\2\u012a\u012b")
+        buf.write("\7\35\2\2\u012b\u012c\7\"\2\2\u012c9\3\2\2\2\u012d\u012e")
+        buf.write("\7\26\2\2\u012e\u012f\7$\2\2\u012f\u0130\t\6\2\2\u0130")
+        buf.write("\u0131\7\34\2\2\u0131\u0132\7\35\2\2\u0132;\3\2\2\2\37")
+        buf.write("?EOX^jot\u0080\u008b\u0091\u009e\u00ae\u00b9\u00bb\u00c2")
+        buf.write("\u00ca\u00d2\u00d5\u00dd\u00e2\u00f2\u00f7\u0104\u010a")
+        buf.write("\u0111\u0116\u011b\u0122")
         return buf.getvalue()
 
 
@@ -150,25 +157,26 @@ class IdleParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'import'", "';'", "'type'", "'<-'", "'class'", 
-                     "'{'", "'}'", "'('", "')'", "'void'", "','", "'bool'", 
-                     "'int'", "'float'", "'string'", "'var'", "'['", "']'", 
-                     "'='", "'return'", "'+'", "'-'", "'/'", "'*'", "'$'", 
-                     "'if'", "'else'", "'while'", "'for'", "'.'", "'IO.print'", 
-                     "'IO.'", "'readString'", "'readInt'", "'readFloat'", 
-                     "'()'" ]
+    literalNames = [ "<INVALID>", "'print'", "'readString'", "'readInt'", 
+                     "'readFloat'", "'bool'", "'class'", "'else'", "'elseif'", 
+                     "'float'", "'for'", "'if'", "'import'", "'int'", "'return'", 
+                     "'string'", "'type'", "'var'", "'void'", "'while'", 
+                     "'IO'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "'('", "')'", "'{'", "'}'", "'['", "']'", 
+                     "';'", "','", "'.'", "'+'", "'&&'", "'<-'", "'='", 
+                     "'!'", "'/'", "'$'", "'=='", "'>='", "'>'", "'<='", 
+                     "'<'", "'*'", "'!='", "'||'", "'-'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "ID", "INT_LITERAL", "FLOAT_LITERAL", 
-                      "STRING_LITERAL", "RELOP", "WS" ]
+                      "<INVALID>", "BOOL", "CLASS", "ELSE", "ELSEIF", "FLOAT", 
+                      "FOR", "IF", "IMPORT", "INT", "RETURN", "STRING", 
+                      "TYPE", "VAR", "VOID", "WHILE", "IO", "BOOL_LITERAL", 
+                      "ID", "INT_LITERAL", "FLOAT_LITERAL", "STRING_LITERAL", 
+                      "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", 
+                      "RBRACK", "SEMICOLON", "COMMA", "DOT", "ADD", "AND", 
+                      "ARROW", "ASSIGN", "BANG", "DIV", "DSYMBOL", "EQUAL", 
+                      "GE", "GT", "LE", "LT", "MUL", "NOTEQUAL", "OR", "SUB", 
+                      "COMMENT", "LINE_COMMENT", "WS" ]
 
     RULE_fileState = 0
     RULE_imp = 1
@@ -178,17 +186,17 @@ class IdleParser ( Parser ):
     RULE_method = 5
     RULE_methodArguments = 6
     RULE_typeState = 7
-    RULE_block = 8
-    RULE_statement = 9
-    RULE_varsDecl = 10
-    RULE_assignment = 11
-    RULE_varsDeclAssignment = 12
-    RULE_returnState = 13
-    RULE_expression = 14
-    RULE_exp = 15
-    RULE_term = 16
-    RULE_factor = 17
-    RULE_literal = 18
+    RULE_varsDecl = 8
+    RULE_assignment = 9
+    RULE_block = 10
+    RULE_statement = 11
+    RULE_returnState = 12
+    RULE_expression = 13
+    RULE_exp = 14
+    RULE_term = 15
+    RULE_factor = 16
+    RULE_literal = 17
+    RULE_reference = 18
     RULE_arrPos = 19
     RULE_instanceVar = 20
     RULE_condition = 21
@@ -201,9 +209,9 @@ class IdleParser ( Parser ):
     RULE_read = 28
 
     ruleNames =  [ "fileState", "imp", "classState", "classBlock", "attribute", 
-                   "method", "methodArguments", "typeState", "block", "statement", 
-                   "varsDecl", "assignment", "varsDeclAssignment", "returnState", 
-                   "expression", "exp", "term", "factor", "literal", "arrPos", 
+                   "method", "methodArguments", "typeState", "varsDecl", 
+                   "assignment", "block", "statement", "returnState", "expression", 
+                   "exp", "term", "factor", "literal", "reference", "arrPos", 
                    "instanceVar", "condition", "elseIf", "whileLoop", "forLoop", 
                    "call", "callArguments", "printState", "read" ]
 
@@ -212,50 +220,62 @@ class IdleParser ( Parser ):
     T__1=2
     T__2=3
     T__3=4
-    T__4=5
-    T__5=6
-    T__6=7
-    T__7=8
-    T__8=9
-    T__9=10
-    T__10=11
-    T__11=12
-    T__12=13
-    T__13=14
-    T__14=15
-    T__15=16
-    T__16=17
-    T__17=18
-    T__18=19
-    T__19=20
-    T__20=21
-    T__21=22
-    T__22=23
-    T__23=24
-    T__24=25
-    T__25=26
-    T__26=27
-    T__27=28
-    T__28=29
-    T__29=30
-    T__30=31
-    T__31=32
-    T__32=33
-    T__33=34
-    T__34=35
-    T__35=36
-    ID=37
-    INT_LITERAL=38
-    FLOAT_LITERAL=39
-    STRING_LITERAL=40
-    RELOP=41
-    WS=42
+    BOOL=5
+    CLASS=6
+    ELSE=7
+    ELSEIF=8
+    FLOAT=9
+    FOR=10
+    IF=11
+    IMPORT=12
+    INT=13
+    RETURN=14
+    STRING=15
+    TYPE=16
+    VAR=17
+    VOID=18
+    WHILE=19
+    IO=20
+    BOOL_LITERAL=21
+    ID=22
+    INT_LITERAL=23
+    FLOAT_LITERAL=24
+    STRING_LITERAL=25
+    LPAREN=26
+    RPAREN=27
+    LBRACE=28
+    RBRACE=29
+    LBRACK=30
+    RBRACK=31
+    SEMICOLON=32
+    COMMA=33
+    DOT=34
+    ADD=35
+    AND=36
+    ARROW=37
+    ASSIGN=38
+    BANG=39
+    DIV=40
+    DSYMBOL=41
+    EQUAL=42
+    GE=43
+    GT=44
+    LE=45
+    LT=46
+    MUL=47
+    NOTEQUAL=48
+    OR=49
+    SUB=50
+    COMMENT=51
+    LINE_COMMENT=52
+    WS=53
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.7.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
@@ -303,7 +323,7 @@ class IdleParser ( Parser ):
             self.state = 61
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IdleParser.T__0:
+            while _la==IdleParser.IMPORT:
                 self.state = 58
                 self.imp()
                 self.state = 63
@@ -319,7 +339,7 @@ class IdleParser ( Parser ):
                 self.state = 67 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==IdleParser.T__2):
+                if not (_la==IdleParser.TYPE):
                     break
 
         except RecognitionException as re:
@@ -330,14 +350,21 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ImpContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IMPORT(self):
+            return self.getToken(IdleParser.IMPORT, 0)
+
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_imp
@@ -360,11 +387,11 @@ class IdleParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 69
-            self.match(IdleParser.T__0)
+            self.match(IdleParser.IMPORT)
             self.state = 70
             self.match(IdleParser.ID)
             self.state = 71
-            self.match(IdleParser.T__1)
+            self.match(IdleParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -373,11 +400,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ClassStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def TYPE(self):
+            return self.getToken(IdleParser.TYPE, 0)
 
         def ID(self, i:int=None):
             if i is None:
@@ -385,9 +416,15 @@ class IdleParser ( Parser ):
             else:
                 return self.getToken(IdleParser.ID, i)
 
+        def CLASS(self):
+            return self.getToken(IdleParser.CLASS, 0)
+
         def classBlock(self):
             return self.getTypedRuleContext(IdleParser.ClassBlockContext,0)
 
+
+        def ARROW(self):
+            return self.getToken(IdleParser.ARROW, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_classState
@@ -411,21 +448,21 @@ class IdleParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 73
-            self.match(IdleParser.T__2)
+            self.match(IdleParser.TYPE)
             self.state = 74
             self.match(IdleParser.ID)
             self.state = 77
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==IdleParser.T__3:
+            if _la==IdleParser.ARROW:
                 self.state = 75
-                self.match(IdleParser.T__3)
+                self.match(IdleParser.ARROW)
                 self.state = 76
                 self.match(IdleParser.ID)
 
 
             self.state = 79
-            self.match(IdleParser.T__4)
+            self.match(IdleParser.CLASS)
             self.state = 80
             self.classBlock()
         except RecognitionException as re:
@@ -436,11 +473,18 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ClassBlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LBRACE(self):
+            return self.getToken(IdleParser.LBRACE, 0)
+
+        def RBRACE(self):
+            return self.getToken(IdleParser.RBRACE, 0)
 
         def attribute(self, i:int=None):
             if i is None:
@@ -478,31 +522,30 @@ class IdleParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 82
-            self.match(IdleParser.T__5)
-            self.state = 87
+            self.match(IdleParser.LBRACE)
+            self.state = 86
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,3,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 83
+                    self.attribute() 
+                self.state = 88
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,3,self._ctx)
+
+            self.state = 92
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==IdleParser.ID:
-                self.state = 85
-                self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
-                if la_ == 1:
-                    self.state = 83
-                    self.attribute()
-                    pass
-
-                elif la_ == 2:
-                    self.state = 84
-                    self.method()
-                    pass
-
-
                 self.state = 89
+                self.method()
+                self.state = 94
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 90
-            self.match(IdleParser.T__6)
+            self.state = 95
+            self.match(IdleParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -510,6 +553,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class AttributeContext(ParserRuleContext):
 
@@ -523,6 +567,9 @@ class IdleParser ( Parser ):
         def typeState(self):
             return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_attribute
@@ -544,12 +591,12 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_attribute)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 92
+            self.state = 97
             self.match(IdleParser.ID)
-            self.state = 93
+            self.state = 98
             self.typeState()
-            self.state = 94
-            self.match(IdleParser.T__1)
+            self.state = 99
+            self.match(IdleParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -557,6 +604,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class MethodContext(ParserRuleContext):
 
@@ -567,6 +615,12 @@ class IdleParser ( Parser ):
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
 
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
         def block(self):
             return self.getTypedRuleContext(IdleParser.BlockContext,0)
 
@@ -575,8 +629,18 @@ class IdleParser ( Parser ):
             return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
 
 
+        def VOID(self):
+            return self.getToken(IdleParser.VOID, 0)
+
         def methodArguments(self):
             return self.getTypedRuleContext(IdleParser.MethodArgumentsContext,0)
+
+
+        def varsDecl(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(IdleParser.VarsDeclContext)
+            else:
+                return self.getTypedRuleContext(IdleParser.VarsDeclContext,i)
 
 
         def getRuleIndex(self):
@@ -600,35 +664,45 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 96
+            self.state = 101
             self.match(IdleParser.ID)
-            self.state = 97
-            self.match(IdleParser.T__7)
-            self.state = 99
+            self.state = 102
+            self.match(IdleParser.LPAREN)
+            self.state = 104
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==IdleParser.ID:
-                self.state = 98
+                self.state = 103
                 self.methodArguments()
 
 
-            self.state = 101
-            self.match(IdleParser.T__8)
-            self.state = 104
+            self.state = 106
+            self.match(IdleParser.RPAREN)
+            self.state = 109
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [IdleParser.T__11, IdleParser.T__12, IdleParser.T__13, IdleParser.T__14, IdleParser.ID]:
-                self.state = 102
+            if token in [IdleParser.BOOL, IdleParser.FLOAT, IdleParser.INT, IdleParser.STRING, IdleParser.ID]:
+                self.state = 107
                 self.typeState()
                 pass
-            elif token in [IdleParser.T__9]:
-                self.state = 103
-                self.match(IdleParser.T__9)
+            elif token in [IdleParser.VOID]:
+                self.state = 108
+                self.match(IdleParser.VOID)
                 pass
             else:
                 raise NoViableAltException(self)
 
-            self.state = 106
+            self.state = 114
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==IdleParser.VAR:
+                self.state = 111
+                self.varsDecl()
+                self.state = 116
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 117
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -637,6 +711,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class MethodArgumentsContext(ParserRuleContext):
 
@@ -656,6 +731,12 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.TypeStateContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_methodArguments
@@ -678,21 +759,21 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 108
+            self.state = 119
             self.match(IdleParser.ID)
-            self.state = 109
+            self.state = 120
             self.typeState()
-            self.state = 115
+            self.state = 126
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IdleParser.T__10:
-                self.state = 110
-                self.match(IdleParser.T__10)
-                self.state = 111
+            while _la==IdleParser.COMMA:
+                self.state = 121
+                self.match(IdleParser.COMMA)
+                self.state = 122
                 self.match(IdleParser.ID)
-                self.state = 112
+                self.state = 123
                 self.typeState()
-                self.state = 117
+                self.state = 128
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -704,11 +785,24 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TypeStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def BOOL(self):
+            return self.getToken(IdleParser.BOOL, 0)
+
+        def INT(self):
+            return self.getToken(IdleParser.INT, 0)
+
+        def FLOAT(self):
+            return self.getToken(IdleParser.FLOAT, 0)
+
+        def STRING(self):
+            return self.getToken(IdleParser.STRING, 0)
 
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
@@ -734,9 +828,9 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 118
+            self.state = 129
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.T__11) | (1 << IdleParser.T__12) | (1 << IdleParser.T__13) | (1 << IdleParser.T__14) | (1 << IdleParser.ID))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.BOOL) | (1 << IdleParser.FLOAT) | (1 << IdleParser.INT) | (1 << IdleParser.STRING) | (1 << IdleParser.ID))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -749,11 +843,169 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
+    class VarsDeclContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def VAR(self):
+            return self.getToken(IdleParser.VAR, 0)
+
+        def ID(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.ID)
+            else:
+                return self.getToken(IdleParser.ID, i)
+
+        def typeState(self):
+            return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
+
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
+
+        def LBRACK(self):
+            return self.getToken(IdleParser.LBRACK, 0)
+
+        def INT_LITERAL(self):
+            return self.getToken(IdleParser.INT_LITERAL, 0)
+
+        def RBRACK(self):
+            return self.getToken(IdleParser.RBRACK, 0)
+
+        def getRuleIndex(self):
+            return IdleParser.RULE_varsDecl
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarsDecl" ):
+                listener.enterVarsDecl(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarsDecl" ):
+                listener.exitVarsDecl(self)
+
+
+
+
+    def varsDecl(self):
+
+        localctx = IdleParser.VarsDeclContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_varsDecl)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 131
+            self.match(IdleParser.VAR)
+            self.state = 132
+            self.match(IdleParser.ID)
+            self.state = 137
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==IdleParser.COMMA:
+                self.state = 133
+                self.match(IdleParser.COMMA)
+                self.state = 134
+                self.match(IdleParser.ID)
+                self.state = 139
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 143
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==IdleParser.LBRACK:
+                self.state = 140
+                self.match(IdleParser.LBRACK)
+                self.state = 141
+                self.match(IdleParser.INT_LITERAL)
+                self.state = 142
+                self.match(IdleParser.RBRACK)
+
+
+            self.state = 145
+            self.typeState()
+            self.state = 146
+            self.match(IdleParser.SEMICOLON)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class AssignmentContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def reference(self):
+            return self.getTypedRuleContext(IdleParser.ReferenceContext,0)
+
+
+        def ASSIGN(self):
+            return self.getToken(IdleParser.ASSIGN, 0)
+
+        def expression(self):
+            return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
+
+
+        def getRuleIndex(self):
+            return IdleParser.RULE_assignment
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssignment" ):
+                listener.enterAssignment(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssignment" ):
+                listener.exitAssignment(self)
+
+
+
+
+    def assignment(self):
+
+        localctx = IdleParser.AssignmentContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 18, self.RULE_assignment)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 148
+            self.reference()
+            self.state = 149
+            self.match(IdleParser.ASSIGN)
+            self.state = 150
+            self.expression()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
     class BlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LBRACE(self):
+            return self.getToken(IdleParser.LBRACE, 0)
+
+        def RBRACE(self):
+            return self.getToken(IdleParser.RBRACE, 0)
 
         def statement(self, i:int=None):
             if i is None:
@@ -779,26 +1031,24 @@ class IdleParser ( Parser ):
     def block(self):
 
         localctx = IdleParser.BlockContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_block)
+        self.enterRule(localctx, 20, self.RULE_block)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 120
-            self.match(IdleParser.T__5)
-            self.state = 122 
+            self.state = 152
+            self.match(IdleParser.LBRACE)
+            self.state = 156
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while True:
-                self.state = 121
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.FOR) | (1 << IdleParser.IF) | (1 << IdleParser.RETURN) | (1 << IdleParser.WHILE) | (1 << IdleParser.IO) | (1 << IdleParser.ID) | (1 << IdleParser.DSYMBOL))) != 0):
+                self.state = 153
                 self.statement()
-                self.state = 124 
+                self.state = 158
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.T__15) | (1 << IdleParser.T__19) | (1 << IdleParser.T__24) | (1 << IdleParser.T__25) | (1 << IdleParser.T__27) | (1 << IdleParser.T__28) | (1 << IdleParser.T__30) | (1 << IdleParser.T__31) | (1 << IdleParser.ID))) != 0)):
-                    break
 
-            self.state = 126
-            self.match(IdleParser.T__6)
+            self.state = 159
+            self.match(IdleParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -807,23 +1057,19 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def varsDecl(self):
-            return self.getTypedRuleContext(IdleParser.VarsDeclContext,0)
-
-
         def assignment(self):
             return self.getTypedRuleContext(IdleParser.AssignmentContext,0)
 
 
-        def varsDeclAssignment(self):
-            return self.getTypedRuleContext(IdleParser.VarsDeclAssignmentContext,0)
-
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def condition(self):
             return self.getTypedRuleContext(IdleParser.ConditionContext,0)
@@ -843,10 +1089,6 @@ class IdleParser ( Parser ):
 
         def printState(self):
             return self.getTypedRuleContext(IdleParser.PrintStateContext,0)
-
-
-        def read(self):
-            return self.getTypedRuleContext(IdleParser.ReadContext,0)
 
 
         def returnState(self):
@@ -870,70 +1112,54 @@ class IdleParser ( Parser ):
     def statement(self):
 
         localctx = IdleParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_statement)
+        self.enterRule(localctx, 22, self.RULE_statement)
         try:
-            self.state = 140
+            self.state = 172
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 128
-                self.varsDecl()
+                self.state = 161
+                self.assignment()
+                self.state = 162
+                self.match(IdleParser.SEMICOLON)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 129
-                self.assignment()
+                self.state = 164
+                self.condition()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 130
-                self.varsDeclAssignment()
+                self.state = 165
+                self.call()
+                self.state = 166
+                self.match(IdleParser.SEMICOLON)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 131
-                self.condition()
+                self.state = 168
+                self.forLoop()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 132
-                self.call()
-                self.state = 133
-                self.match(IdleParser.T__1)
+                self.state = 169
+                self.whileLoop()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 135
-                self.forLoop()
+                self.state = 170
+                self.printState()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 136
-                self.whileLoop()
-                pass
-
-            elif la_ == 8:
-                self.enterOuterAlt(localctx, 8)
-                self.state = 137
-                self.printState()
-                pass
-
-            elif la_ == 9:
-                self.enterOuterAlt(localctx, 9)
-                self.state = 138
-                self.read()
-                pass
-
-            elif la_ == 10:
-                self.enterOuterAlt(localctx, 10)
-                self.state = 139
+                self.state = 171
                 self.returnState()
                 pass
 
@@ -946,210 +1172,6 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class VarsDeclContext(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def ID(self, i:int=None):
-            if i is None:
-                return self.getTokens(IdleParser.ID)
-            else:
-                return self.getToken(IdleParser.ID, i)
-
-        def typeState(self):
-            return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
-
-
-        def INT_LITERAL(self):
-            return self.getToken(IdleParser.INT_LITERAL, 0)
-
-        def getRuleIndex(self):
-            return IdleParser.RULE_varsDecl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVarsDecl" ):
-                listener.enterVarsDecl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVarsDecl" ):
-                listener.exitVarsDecl(self)
-
-
-
-
-    def varsDecl(self):
-
-        localctx = IdleParser.VarsDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_varsDecl)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 142
-            self.match(IdleParser.T__15)
-            self.state = 143
-            self.match(IdleParser.ID)
-            self.state = 148
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==IdleParser.T__10:
-                self.state = 144
-                self.match(IdleParser.T__10)
-                self.state = 145
-                self.match(IdleParser.ID)
-                self.state = 150
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 154
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==IdleParser.T__16:
-                self.state = 151
-                self.match(IdleParser.T__16)
-                self.state = 152
-                self.match(IdleParser.INT_LITERAL)
-                self.state = 153
-                self.match(IdleParser.T__17)
-
-
-            self.state = 156
-            self.typeState()
-            self.state = 157
-            self.match(IdleParser.T__1)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-    class AssignmentContext(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def expression(self):
-            return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
-
-
-        def instanceVar(self):
-            return self.getTypedRuleContext(IdleParser.InstanceVarContext,0)
-
-
-        def arrPos(self):
-            return self.getTypedRuleContext(IdleParser.ArrPosContext,0)
-
-
-        def ID(self):
-            return self.getToken(IdleParser.ID, 0)
-
-        def getRuleIndex(self):
-            return IdleParser.RULE_assignment
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssignment" ):
-                listener.enterAssignment(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssignment" ):
-                listener.exitAssignment(self)
-
-
-
-
-    def assignment(self):
-
-        localctx = IdleParser.AssignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_assignment)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 162
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
-            if la_ == 1:
-                self.state = 159
-                self.instanceVar()
-                pass
-
-            elif la_ == 2:
-                self.state = 160
-                self.arrPos()
-                pass
-
-            elif la_ == 3:
-                self.state = 161
-                self.match(IdleParser.ID)
-                pass
-
-
-            self.state = 164
-            self.match(IdleParser.T__18)
-            self.state = 165
-            self.expression()
-            self.state = 166
-            self.match(IdleParser.T__1)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-    class VarsDeclAssignmentContext(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def ID(self):
-            return self.getToken(IdleParser.ID, 0)
-
-        def expression(self):
-            return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
-
-
-        def getRuleIndex(self):
-            return IdleParser.RULE_varsDeclAssignment
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVarsDeclAssignment" ):
-                listener.enterVarsDeclAssignment(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVarsDeclAssignment" ):
-                listener.exitVarsDeclAssignment(self)
-
-
-
-
-    def varsDeclAssignment(self):
-
-        localctx = IdleParser.VarsDeclAssignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_varsDeclAssignment)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 168
-            self.match(IdleParser.T__15)
-            self.state = 169
-            self.match(IdleParser.ID)
-            self.state = 170
-            self.match(IdleParser.T__18)
-            self.state = 171
-            self.expression()
-            self.state = 172
-            self.match(IdleParser.T__1)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
 
     class ReturnStateContext(ParserRuleContext):
 
@@ -1157,9 +1179,15 @@ class IdleParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def RETURN(self):
+            return self.getToken(IdleParser.RETURN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_returnState
@@ -1178,15 +1206,15 @@ class IdleParser ( Parser ):
     def returnState(self):
 
         localctx = IdleParser.ReturnStateContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_returnState)
+        self.enterRule(localctx, 24, self.RULE_returnState)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 174
-            self.match(IdleParser.T__19)
+            self.match(IdleParser.RETURN)
             self.state = 175
             self.expression()
             self.state = 176
-            self.match(IdleParser.T__1)
+            self.match(IdleParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1195,11 +1223,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def BANG(self):
+            return self.getToken(IdleParser.BANG, 0)
 
         def exp(self, i:int=None):
             if i is None:
@@ -1208,11 +1240,29 @@ class IdleParser ( Parser ):
                 return self.getTypedRuleContext(IdleParser.ExpContext,i)
 
 
-        def RELOP(self):
-            return self.getToken(IdleParser.RELOP, 0)
+        def LT(self):
+            return self.getToken(IdleParser.LT, 0)
 
-        def STRING_LITERAL(self):
-            return self.getToken(IdleParser.STRING_LITERAL, 0)
+        def GT(self):
+            return self.getToken(IdleParser.GT, 0)
+
+        def LE(self):
+            return self.getToken(IdleParser.LE, 0)
+
+        def GE(self):
+            return self.getToken(IdleParser.GE, 0)
+
+        def EQUAL(self):
+            return self.getToken(IdleParser.EQUAL, 0)
+
+        def NOTEQUAL(self):
+            return self.getToken(IdleParser.NOTEQUAL, 0)
+
+        def AND(self):
+            return self.getToken(IdleParser.AND, 0)
+
+        def OR(self):
+            return self.getToken(IdleParser.OR, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_expression
@@ -1231,31 +1281,38 @@ class IdleParser ( Parser ):
     def expression(self):
 
         localctx = IdleParser.ExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_expression)
+        self.enterRule(localctx, 26, self.RULE_expression)
         self._la = 0 # Token type
         try:
-            self.state = 184
+            self.state = 185
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [IdleParser.T__7, IdleParser.T__20, IdleParser.T__21, IdleParser.T__24, IdleParser.ID, IdleParser.INT_LITERAL, IdleParser.FLOAT_LITERAL]:
+            if token in [IdleParser.BANG]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 178
+                self.match(IdleParser.BANG)
+                self.state = 179
                 self.exp()
-                self.state = 181
+                pass
+            elif token in [IdleParser.IO, IdleParser.BOOL_LITERAL, IdleParser.ID, IdleParser.INT_LITERAL, IdleParser.FLOAT_LITERAL, IdleParser.STRING_LITERAL, IdleParser.LPAREN, IdleParser.ADD, IdleParser.DSYMBOL, IdleParser.SUB]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 180
+                self.exp()
+                self.state = 183
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==IdleParser.RELOP:
-                    self.state = 179
-                    self.match(IdleParser.RELOP)
-                    self.state = 180
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.AND) | (1 << IdleParser.EQUAL) | (1 << IdleParser.GE) | (1 << IdleParser.GT) | (1 << IdleParser.LE) | (1 << IdleParser.LT) | (1 << IdleParser.NOTEQUAL) | (1 << IdleParser.OR))) != 0):
+                    self.state = 181
+                    _la = self._input.LA(1)
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.AND) | (1 << IdleParser.EQUAL) | (1 << IdleParser.GE) | (1 << IdleParser.GT) | (1 << IdleParser.LE) | (1 << IdleParser.LT) | (1 << IdleParser.NOTEQUAL) | (1 << IdleParser.OR))) != 0)):
+                        self._errHandler.recoverInline(self)
+                    else:
+                        self._errHandler.reportMatch(self)
+                        self.consume()
+                    self.state = 182
                     self.exp()
 
 
-                pass
-            elif token in [IdleParser.STRING_LITERAL]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 183
-                self.match(IdleParser.STRING_LITERAL)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1267,6 +1324,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class ExpContext(ParserRuleContext):
 
@@ -1280,6 +1338,18 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.TermContext,i)
 
+
+        def ADD(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.ADD)
+            else:
+                return self.getToken(IdleParser.ADD, i)
+
+        def SUB(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.SUB)
+            else:
+                return self.getToken(IdleParser.SUB, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_exp
@@ -1298,26 +1368,26 @@ class IdleParser ( Parser ):
     def exp(self):
 
         localctx = IdleParser.ExpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_exp)
+        self.enterRule(localctx, 28, self.RULE_exp)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 186
+            self.state = 187
             self.term()
-            self.state = 191
+            self.state = 192
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IdleParser.T__20 or _la==IdleParser.T__21:
-                self.state = 187
+            while _la==IdleParser.ADD or _la==IdleParser.SUB:
+                self.state = 188
                 _la = self._input.LA(1)
-                if not(_la==IdleParser.T__20 or _la==IdleParser.T__21):
+                if not(_la==IdleParser.ADD or _la==IdleParser.SUB):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 188
+                self.state = 189
                 self.term()
-                self.state = 193
+                self.state = 194
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1328,6 +1398,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class TermContext(ParserRuleContext):
 
@@ -1341,6 +1412,18 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.FactorContext,i)
 
+
+        def DIV(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.DIV)
+            else:
+                return self.getToken(IdleParser.DIV, i)
+
+        def MUL(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.MUL)
+            else:
+                return self.getToken(IdleParser.MUL, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_term
@@ -1359,26 +1442,26 @@ class IdleParser ( Parser ):
     def term(self):
 
         localctx = IdleParser.TermContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_term)
+        self.enterRule(localctx, 30, self.RULE_term)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 194
+            self.state = 195
             self.factor()
-            self.state = 199
+            self.state = 200
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IdleParser.T__22 or _la==IdleParser.T__23:
-                self.state = 195
+            while _la==IdleParser.DIV or _la==IdleParser.MUL:
+                self.state = 196
                 _la = self._input.LA(1)
-                if not(_la==IdleParser.T__22 or _la==IdleParser.T__23):
+                if not(_la==IdleParser.DIV or _la==IdleParser.MUL):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 196
+                self.state = 197
                 self.factor()
-                self.state = 201
+                self.state = 202
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1390,19 +1473,32 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class FactorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
 
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
         def literal(self):
             return self.getTypedRuleContext(IdleParser.LiteralContext,0)
 
+
+        def ADD(self):
+            return self.getToken(IdleParser.ADD, 0)
+
+        def SUB(self):
+            return self.getToken(IdleParser.SUB, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_factor
@@ -1421,37 +1517,37 @@ class IdleParser ( Parser ):
     def factor(self):
 
         localctx = IdleParser.FactorContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_factor)
+        self.enterRule(localctx, 32, self.RULE_factor)
         self._la = 0 # Token type
         try:
-            self.state = 210
+            self.state = 211
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [IdleParser.T__7]:
+            if token in [IdleParser.LPAREN]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 202
-                self.match(IdleParser.T__7)
                 self.state = 203
-                self.expression()
+                self.match(IdleParser.LPAREN)
                 self.state = 204
-                self.match(IdleParser.T__8)
+                self.expression()
+                self.state = 205
+                self.match(IdleParser.RPAREN)
                 pass
-            elif token in [IdleParser.T__20, IdleParser.T__21, IdleParser.T__24, IdleParser.ID, IdleParser.INT_LITERAL, IdleParser.FLOAT_LITERAL]:
+            elif token in [IdleParser.IO, IdleParser.BOOL_LITERAL, IdleParser.ID, IdleParser.INT_LITERAL, IdleParser.FLOAT_LITERAL, IdleParser.STRING_LITERAL, IdleParser.ADD, IdleParser.DSYMBOL, IdleParser.SUB]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 207
+                self.state = 208
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==IdleParser.T__20 or _la==IdleParser.T__21:
-                    self.state = 206
+                if _la==IdleParser.ADD or _la==IdleParser.SUB:
+                    self.state = 207
                     _la = self._input.LA(1)
-                    if not(_la==IdleParser.T__20 or _la==IdleParser.T__21):
+                    if not(_la==IdleParser.ADD or _la==IdleParser.SUB):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
 
 
-                self.state = 209
+                self.state = 210
                 self.literal()
                 pass
             else:
@@ -1465,14 +1561,16 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class LiteralContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self):
-            return self.getToken(IdleParser.ID, 0)
+        def reference(self):
+            return self.getTypedRuleContext(IdleParser.ReferenceContext,0)
+
 
         def INT_LITERAL(self):
             return self.getToken(IdleParser.INT_LITERAL, 0)
@@ -1480,13 +1578,11 @@ class IdleParser ( Parser ):
         def FLOAT_LITERAL(self):
             return self.getToken(IdleParser.FLOAT_LITERAL, 0)
 
-        def arrPos(self):
-            return self.getTypedRuleContext(IdleParser.ArrPosContext,0)
+        def STRING_LITERAL(self):
+            return self.getToken(IdleParser.STRING_LITERAL, 0)
 
-
-        def instanceVar(self):
-            return self.getTypedRuleContext(IdleParser.InstanceVarContext,0)
-
+        def BOOL_LITERAL(self):
+            return self.getToken(IdleParser.BOOL_LITERAL, 0)
 
         def call(self):
             return self.getTypedRuleContext(IdleParser.CallContext,0)
@@ -1509,44 +1605,44 @@ class IdleParser ( Parser ):
     def literal(self):
 
         localctx = IdleParser.LiteralContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_literal)
+        self.enterRule(localctx, 34, self.RULE_literal)
         try:
-            self.state = 218
+            self.state = 219
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 212
-                self.match(IdleParser.ID)
+                self.state = 213
+                self.reference()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 213
+                self.state = 214
                 self.match(IdleParser.INT_LITERAL)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 214
+                self.state = 215
                 self.match(IdleParser.FLOAT_LITERAL)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 215
-                self.arrPos()
+                self.state = 216
+                self.match(IdleParser.STRING_LITERAL)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 216
-                self.instanceVar()
+                self.state = 217
+                self.match(IdleParser.BOOL_LITERAL)
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 217
+                self.state = 218
                 self.call()
                 pass
 
@@ -1559,6 +1655,74 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
+    class ReferenceContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ID(self):
+            return self.getToken(IdleParser.ID, 0)
+
+        def arrPos(self):
+            return self.getTypedRuleContext(IdleParser.ArrPosContext,0)
+
+
+        def instanceVar(self):
+            return self.getTypedRuleContext(IdleParser.InstanceVarContext,0)
+
+
+        def getRuleIndex(self):
+            return IdleParser.RULE_reference
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterReference" ):
+                listener.enterReference(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitReference" ):
+                listener.exitReference(self)
+
+
+
+
+    def reference(self):
+
+        localctx = IdleParser.ReferenceContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 36, self.RULE_reference)
+        try:
+            self.state = 224
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 221
+                self.match(IdleParser.ID)
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 222
+                self.arrPos()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 223
+                self.instanceVar()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
     class ArrPosContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1568,8 +1732,15 @@ class IdleParser ( Parser ):
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
 
-        def INT_LITERAL(self):
-            return self.getToken(IdleParser.INT_LITERAL, 0)
+        def LBRACK(self):
+            return self.getToken(IdleParser.LBRACK, 0)
+
+        def expression(self):
+            return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
+
+
+        def RBRACK(self):
+            return self.getToken(IdleParser.RBRACK, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_arrPos
@@ -1591,14 +1762,14 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_arrPos)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 220
+            self.state = 226
             self.match(IdleParser.ID)
-            self.state = 221
-            self.match(IdleParser.T__16)
-            self.state = 222
-            self.match(IdleParser.INT_LITERAL)
-            self.state = 223
-            self.match(IdleParser.T__17)
+            self.state = 227
+            self.match(IdleParser.LBRACK)
+            self.state = 228
+            self.expression()
+            self.state = 229
+            self.match(IdleParser.RBRACK)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1607,11 +1778,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class InstanceVarContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def DSYMBOL(self):
+            return self.getToken(IdleParser.DSYMBOL, 0)
 
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
@@ -1636,9 +1811,9 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_instanceVar)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 225
-            self.match(IdleParser.T__24)
-            self.state = 226
+            self.state = 231
+            self.match(IdleParser.DSYMBOL)
+            self.state = 232
             self.match(IdleParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -1648,11 +1823,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ConditionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def IF(self):
+            return self.getToken(IdleParser.IF, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1671,6 +1850,9 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.ElseIfContext,i)
 
+
+        def ELSE(self):
+            return self.getToken(IdleParser.ELSE, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_condition
@@ -1693,30 +1875,30 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 228
-            self.match(IdleParser.T__25)
-            self.state = 229
-            self.expression()
-            self.state = 230
-            self.block()
             self.state = 234
+            self.match(IdleParser.IF)
+            self.state = 235
+            self.expression()
+            self.state = 236
+            self.block()
+            self.state = 240
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 231
+                    self.state = 237
                     self.elseIf() 
-                self.state = 236
+                self.state = 242
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
 
-            self.state = 239
+            self.state = 245
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==IdleParser.T__26:
-                self.state = 237
-                self.match(IdleParser.T__26)
-                self.state = 238
+            if _la==IdleParser.ELSE:
+                self.state = 243
+                self.match(IdleParser.ELSE)
+                self.state = 244
                 self.block()
 
 
@@ -1728,11 +1910,18 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ElseIfContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def ELSE(self):
+            return self.getToken(IdleParser.ELSE, 0)
+
+        def IF(self):
+            return self.getToken(IdleParser.IF, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1762,13 +1951,13 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 44, self.RULE_elseIf)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 241
-            self.match(IdleParser.T__26)
-            self.state = 242
-            self.match(IdleParser.T__25)
-            self.state = 243
+            self.state = 247
+            self.match(IdleParser.ELSE)
+            self.state = 248
+            self.match(IdleParser.IF)
+            self.state = 249
             self.expression()
-            self.state = 244
+            self.state = 250
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1778,11 +1967,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class WhileLoopContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def WHILE(self):
+            return self.getToken(IdleParser.WHILE, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1812,11 +2005,11 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 46, self.RULE_whileLoop)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 246
-            self.match(IdleParser.T__27)
-            self.state = 247
+            self.state = 252
+            self.match(IdleParser.WHILE)
+            self.state = 253
             self.expression()
-            self.state = 248
+            self.state = 254
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1826,29 +2019,35 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ForLoopContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expression(self, i:int=None):
+        def FOR(self):
+            return self.getToken(IdleParser.FOR, 0)
+
+        def SEMICOLON(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(IdleParser.ExpressionContext)
+                return self.getTokens(IdleParser.SEMICOLON)
             else:
-                return self.getTypedRuleContext(IdleParser.ExpressionContext,i)
+                return self.getToken(IdleParser.SEMICOLON, i)
+
+        def expression(self):
+            return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
 
         def block(self):
             return self.getTypedRuleContext(IdleParser.BlockContext,0)
 
 
-        def varsDeclAssignment(self):
-            return self.getTypedRuleContext(IdleParser.VarsDeclAssignmentContext,0)
-
-
-        def assignment(self):
-            return self.getTypedRuleContext(IdleParser.AssignmentContext,0)
+        def assignment(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(IdleParser.AssignmentContext)
+            else:
+                return self.getTypedRuleContext(IdleParser.AssignmentContext,i)
 
 
         def getRuleIndex(self):
@@ -1872,38 +2071,31 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 250
-            self.match(IdleParser.T__28)
-            self.state = 253
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [IdleParser.T__15]:
-                self.state = 251
-                self.varsDeclAssignment()
-                pass
-            elif token in [IdleParser.T__24, IdleParser.ID]:
-                self.state = 252
-                self.assignment()
-                pass
-            elif token in [IdleParser.T__1]:
-                pass
-            else:
-                pass
-            self.state = 255
-            self.match(IdleParser.T__1)
             self.state = 256
-            self.expression()
-            self.state = 257
-            self.match(IdleParser.T__1)
-            self.state = 259
+            self.match(IdleParser.FOR)
+            self.state = 258
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.T__7) | (1 << IdleParser.T__20) | (1 << IdleParser.T__21) | (1 << IdleParser.T__24) | (1 << IdleParser.ID) | (1 << IdleParser.INT_LITERAL) | (1 << IdleParser.FLOAT_LITERAL) | (1 << IdleParser.STRING_LITERAL))) != 0):
-                self.state = 258
-                self.expression()
+            if _la==IdleParser.ID or _la==IdleParser.DSYMBOL:
+                self.state = 257
+                self.assignment()
 
 
+            self.state = 260
+            self.match(IdleParser.SEMICOLON)
             self.state = 261
+            self.expression()
+            self.state = 262
+            self.match(IdleParser.SEMICOLON)
+            self.state = 264
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==IdleParser.ID or _la==IdleParser.DSYMBOL:
+                self.state = 263
+                self.assignment()
+
+
+            self.state = 266
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -1913,20 +2105,35 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CallContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self, i:int=None):
+        def reference(self, i:int=None):
             if i is None:
-                return self.getTokens(IdleParser.ID)
+                return self.getTypedRuleContexts(IdleParser.ReferenceContext)
             else:
-                return self.getToken(IdleParser.ID, i)
+                return self.getTypedRuleContext(IdleParser.ReferenceContext,i)
+
+
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
 
         def callArguments(self):
             return self.getTypedRuleContext(IdleParser.CallArgumentsContext,0)
+
+
+        def read(self):
+            return self.getTypedRuleContext(IdleParser.ReadContext,0)
 
 
         def getRuleIndex(self):
@@ -1949,31 +2156,44 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_call)
         self._la = 0 # Token type
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 265
+            self.state = 281
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
-            if la_ == 1:
-                self.state = 263
-                self.match(IdleParser.ID)
-                self.state = 264
-                self.match(IdleParser.T__29)
+            token = self._input.LA(1)
+            if token in [IdleParser.ID, IdleParser.DSYMBOL]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 271
+                self._errHandler.sync(self)
+                la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
+                if la_ == 1:
+                    self.state = 268
+                    self.reference()
+                    self.state = 269
+                    self.match(IdleParser.DOT)
 
 
-            self.state = 267
-            self.match(IdleParser.ID)
-            self.state = 268
-            self.match(IdleParser.T__7)
-            self.state = 270
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==IdleParser.ID:
-                self.state = 269
-                self.callArguments()
+                self.state = 273
+                self.reference()
+                self.state = 274
+                self.match(IdleParser.LPAREN)
+                self.state = 276
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.IO) | (1 << IdleParser.BOOL_LITERAL) | (1 << IdleParser.ID) | (1 << IdleParser.INT_LITERAL) | (1 << IdleParser.FLOAT_LITERAL) | (1 << IdleParser.STRING_LITERAL) | (1 << IdleParser.LPAREN) | (1 << IdleParser.ADD) | (1 << IdleParser.BANG) | (1 << IdleParser.DSYMBOL) | (1 << IdleParser.SUB))) != 0):
+                    self.state = 275
+                    self.callArguments()
 
 
-            self.state = 272
-            self.match(IdleParser.T__8)
+                self.state = 278
+                self.match(IdleParser.RPAREN)
+                pass
+            elif token in [IdleParser.IO]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 280
+                self.read()
+                pass
+            else:
+                raise NoViableAltException(self)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1982,17 +2202,25 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CallArgumentsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self, i:int=None):
+        def expression(self, i:int=None):
             if i is None:
-                return self.getTokens(IdleParser.ID)
+                return self.getTypedRuleContexts(IdleParser.ExpressionContext)
             else:
-                return self.getToken(IdleParser.ID, i)
+                return self.getTypedRuleContext(IdleParser.ExpressionContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_callArguments
@@ -2015,17 +2243,17 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 274
-            self.match(IdleParser.ID)
-            self.state = 279
+            self.state = 283
+            self.expression()
+            self.state = 288
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IdleParser.T__10:
-                self.state = 275
-                self.match(IdleParser.T__10)
-                self.state = 276
-                self.match(IdleParser.ID)
-                self.state = 281
+            while _la==IdleParser.COMMA:
+                self.state = 284
+                self.match(IdleParser.COMMA)
+                self.state = 285
+                self.expression()
+                self.state = 290
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2037,15 +2265,31 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class PrintStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IO(self):
+            return self.getToken(IdleParser.IO, 0)
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
+
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_printState
@@ -2067,16 +2311,20 @@ class IdleParser ( Parser ):
         self.enterRule(localctx, 54, self.RULE_printState)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 282
-            self.match(IdleParser.T__30)
-            self.state = 283
-            self.match(IdleParser.T__7)
-            self.state = 284
+            self.state = 291
+            self.match(IdleParser.IO)
+            self.state = 292
+            self.match(IdleParser.DOT)
+            self.state = 293
+            self.match(IdleParser.T__0)
+            self.state = 294
+            self.match(IdleParser.LPAREN)
+            self.state = 295
             self.expression()
-            self.state = 285
-            self.match(IdleParser.T__8)
-            self.state = 286
-            self.match(IdleParser.T__1)
+            self.state = 296
+            self.match(IdleParser.RPAREN)
+            self.state = 297
+            self.match(IdleParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2085,12 +2333,24 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ReadContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IO(self):
+            return self.getToken(IdleParser.IO, 0)
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
+
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_read
@@ -2113,19 +2373,21 @@ class IdleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 288
-            self.match(IdleParser.T__31)
-            self.state = 289
+            self.state = 299
+            self.match(IdleParser.IO)
+            self.state = 300
+            self.match(IdleParser.DOT)
+            self.state = 301
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.T__32) | (1 << IdleParser.T__33) | (1 << IdleParser.T__34))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IdleParser.T__1) | (1 << IdleParser.T__2) | (1 << IdleParser.T__3))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 290
-            self.match(IdleParser.T__35)
-            self.state = 291
-            self.match(IdleParser.T__1)
+            self.state = 302
+            self.match(IdleParser.LPAREN)
+            self.state = 303
+            self.match(IdleParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

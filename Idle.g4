@@ -28,7 +28,7 @@ IO:					'IO';
 
 // Literals
 BOOL_LITERAL: 'true' | 'false';
-ID: [a-z][a-zA-Z0-9_]*;
+ID: [a-zA-Z][a-zA-Z0-9_]*;
 INT_LITERAL: [0-9]+;
 FLOAT_LITERAL: [0-9]+ '.' [0-9]+;
 STRING_LITERAL: '"'.*? '"';
@@ -85,7 +85,7 @@ attribute
 	: ID typeState ';';
 
 method
-	: ID '(' methodArguments? ')' (typeState | 'void') varsDecl? block;
+	: ID '(' methodArguments? ')' (typeState | 'void') varsDecl* block;
 
 methodArguments
 	: ID typeState (',' ID typeState)*;
@@ -97,28 +97,26 @@ varsDecl
 	: 'var' ID (',' ID)* ('[' INT_LITERAL ']')? typeState ';';
 
 assignment
-	: <assoc=right> (instanceVar | arrPos | ID) '=' (expression | STRING_LITERAL) ';';
+	: <assoc=right> reference '=' expression;
 
 block
 	: '{' statement* '}';
 
 statement
-	: assignment
+	: assignment ';'
 	| condition
 	| call ';'
 	| forLoop
 	| whileLoop
 	| printState
-	| read
 	| returnState;
-
 
 returnState
 	: 'return' expression ';';
 
 expression
 	: <assoc=right> '!' exp
-	| exp (( '<' | '>' | '<=' | '>=' | '==' | '!=') exp)?;
+	| exp (( '<' | '>' | '<=' | '>=' | '==' | '!=' | '&&' | '||') exp)?;
 
 exp
 	: term (('+' | '-') term)*;
@@ -130,12 +128,17 @@ factor
 	: '(' expression ')' | ('+' | '-')? literal;
 
 literal
-	: ID
+	: reference
 	| INT_LITERAL
 	| FLOAT_LITERAL
-	| arrPos
-	| instanceVar
+	| STRING_LITERAL
+	| BOOL_LITERAL
 	| call;
+
+reference
+	: ID
+	| arrPos
+	| instanceVar;
 
 arrPos
 	: ID '[' expression ']';
@@ -153,16 +156,17 @@ whileLoop
 	: 'while' expression block;
 
 forLoop
-	: 'for' assignment? ';' expression ';' expression? block;
+	: 'for' assignment? ';' expression ';' assignment? block;
 
 call
-	: (ID '.')? ID '(' callArguments? ')';
+	: (reference '.')? reference '(' callArguments? ')'
+	| read;
 
 callArguments
 	: expression (',' expression)*;
 
 printState
-	: 'IO.print' '(' expression ')' ';';
+	: 'IO' '.' 'print' '(' expression ')' ';';
 
 read
-	: 'IO.' ('readString' | 'readInt' | 'readFloat') '(' ')' ';';
+	: 'IO' '.' ('readString' | 'readInt' | 'readFloat') '(' ')';
