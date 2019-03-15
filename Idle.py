@@ -2,6 +2,7 @@ from antlr4 import *
 from grammar.IdleLexer import IdleLexer
 from grammar.IdleListener import IdleListener
 from grammar.IdleParser import IdleParser
+from scopes import ClassScope, Scope, Func
 import sys
 
 def main(argv):
