@@ -1,2 +1,5 @@
 .antlr/
 .DS_STORE
+.vscode/
+__pycache__/
+env/

@@ -23,17 +23,22 @@ type Dog <- Animal class {
 }
 
 type Main class {
+    Test() String {
+        return "";
+    }
+
     Main() void
     var name string;
     var dogs [5]Dog;
     var sum int;
     var i int;
     {
-
         IO.print("Enter name: ");
         name = IO.readString();
         mydog = Dog(name, "Chihuahua");
         mydog.Bark();
+
+        Test();
 
         for i = 0; i < dogs.size(); i = i + 1 {
             IO.print(dogs[i].getName());
