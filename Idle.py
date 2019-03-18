@@ -2,7 +2,6 @@ from antlr4 import *
 from grammar.IdleLexer import IdleLexer
 from grammar.IdleListener import IdleListener
 from grammar.IdleParser import IdleParser
-from scopes import ClassScope, Scope, Func
 import sys
 
 def main(argv):
@@ -20,7 +19,12 @@ def main(argv):
     parser = IdleParser(stream)
     tree = parser.fileState()
 
-    if(parser.getNumberOfSyntaxErrors()):
+    errors = parser.icomp.compiler_errors
+    if(len(errors) > 0):
+        for error in errors:
+            print(error)
+        print("Please fix errors.")
+    elif(parser.getNumberOfSyntaxErrors()):
         print("Please fix errors.")
     else:
         print("Parsed succesfully!")

@@ -1,9 +1,12 @@
-# Generated from Idle.g4 by ANTLR 4.7.2
+# Generated from grammar/Idle.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .IdleParser import IdleParser
 else:
     from IdleParser import IdleParser
+
+from IdleCompiler import IdleCompiler
+
 
 # This class defines a complete listener for a parse tree produced by IdleParser.
 class IdleListener(ParseTreeListener):

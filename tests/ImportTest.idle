@@ -1,0 +1,9 @@
+import IdleLangSample;
+
+type Other class {
+    test string;
+}
+
+type Dog class {
+    test string;
+}

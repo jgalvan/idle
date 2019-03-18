@@ -1,5 +1,3 @@
-import Test;
-
 type Animal class {
     name string;
     age int;

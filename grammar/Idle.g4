@@ -6,6 +6,10 @@
 
 grammar Idle;
 
+@parser::header {
+from IdleCompiler import IdleCompiler
+}
+
 /* TOKENS */
 
 // Keywords
@@ -69,31 +73,31 @@ WS:                 [ \t\r\n\u000C]+ -> skip;
 /* RULES */
 
 fileState
-	: imp* classState+;
+	: {self.icomp = IdleCompiler()} imp* classState+;
 
 imp
-	: 'import' ID ';';
+	: 'import' ID ';' {self.icomp.import_file($ID.text)};
 
 classState
-	: 'type' ID ('<-' ID)? 'class' classBlock;
+	: 'type' class_name=ID ('<-' parent_name=ID)? 'class' {self.icomp.add_class($class_name.text, $class_name.line)} classBlock ;
 
 classBlock
 	: '{' attribute* method* '}';
 
 attribute
-	: ID typeState ';';
+	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
 
 method
-	: ID '(' methodArguments? ')' (typeState | 'void') varsDecl* block;
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState | 'void') varsDecl* block {self.icomp.end_scope()};
 
 methodArguments
-	: ID typeState (',' ID typeState)*;
+	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState)*;
 
 typeState
-	: 'bool' | 'int' | 'float' | 'string' | ID;
+	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text)};
 
 varsDecl
-	: 'var' ID (',' ID)* ('[' INT_LITERAL ']')? typeState ';';
+	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* ('[' INT_LITERAL ']')? typeState ';';
 
 assignment
 	: <assoc=right> reference '=' expression;
