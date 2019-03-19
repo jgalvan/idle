@@ -13,7 +13,7 @@ type Dog <- Animal class {
 
     Bark() bool {
         if $age > 1 {
-            io.Print("Wooof");
+            IO.print(GetName());
             return true;
         }
         return false;
@@ -27,6 +27,7 @@ type Main class {
 
     Main() void
     var name string;
+    var mydog Dog;
     var dogs [5]Dog;
     var sum int;
     var i int;
@@ -35,7 +36,6 @@ type Main class {
         name = IO.readString();
         mydog = Dog(name, "Chihuahua");
         mydog.Bark();
-
         Test();
 
         for i = 0; i < dogs.size(); i = i + 1 {

@@ -57,7 +57,7 @@ class IdleCompiler:
             else:
                 self.__classes[class_name] = class_obj
 
-    def add_class(self, class_name, line_num):
+    def add_class(self, class_name, line_num, parent_name=None):
         """Adds a class to symbol table.
         
         If duplicate class name is found, it still saves it but with a UUID to allow 
@@ -70,7 +70,7 @@ class IdleCompiler:
             class_name = class_name + uuid4().hex
         
         # Add to class table and update current_class and current_scope
-        new_class = ClassScope(class_name)
+        new_class = ClassScope(class_name, parent_name)
         self.__classes[class_name] = new_class
         self.__current_class = new_class
         self.__current_scope = new_class
@@ -95,6 +95,17 @@ class IdleCompiler:
         """Called after adding function, updates last function's return type."""
 
         self.__current_class.update_func_return_type(type_name)
+
+    def check_func_exists(self, func_name, line_num):
+        """Checks if a function is available for use in current scope."""
+        current_class = self.__current_class
+        while True:
+            if current_class.contains_func(func_name):
+                return
+            if not(current_class.parent_class):
+                break
+            current_class = self.classes[current_class.parent_class]
+        self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
     
     def add_var(self, var_name, line_num):
         """Adds variable to current scope. Does not allow duplicates.
@@ -123,5 +134,16 @@ class IdleCompiler:
     def check_var_exists(self, var_name, line_num):
         """Checks if variable is available for use in current scope."""
 
-        if self.__current_scope.var_in_scope(var_name):
+        if not(self.__current_scope.var_in_scope(var_name)):
             self.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+
+    def check_instance_var_exists(self, var_name, line_num):
+        """Checks if an instance variable is available for use in current scope."""
+        current_class = self.__current_class
+        while True:
+            if current_class.var_in_scope(var_name):
+                return
+            if not(current_class.parent_class):
+                break
+            current_class = self.classes[current_class.parent_class]
+        self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))

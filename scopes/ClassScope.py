@@ -8,9 +8,10 @@ class ClassScope(Scope):
     Apart from the inherited scope attributes, it contains a group of functions.
     """
 
-    def __init__(self, name):
+    def __init__(self, name, parent_class):
         self.__functions = dict()
         self.__current_function = None
+        self.parent_class = parent_class
         
         Scope.__init__(self, name)
 
