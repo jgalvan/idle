@@ -39,7 +39,7 @@ type Main class {
         Test();
 
         for i = 0; i < dogs.size(); i = i + 1 {
-            IO.print(dogs[i].getName());
+            IO.print(dogs[i].GetName());
         }
 
         sum = 0;

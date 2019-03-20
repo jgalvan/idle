@@ -106,14 +106,8 @@ class IdleCompiler:
     def check_func_exists(self, func_name, line_num):
         """Checks if a function is available for use in current scope."""
         
-        current_class = self.__current_class
-        
-        while current_class:
-            if current_class.contains_func(func_name):
-                return
-            current_class = current_class.parent_class
-        
-        self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
+        if not self.__current_class.contains_func(func_name):
+            self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
     
     def add_var(self, var_name, line_num):
         """Adds variable to current scope. Does not allow duplicates.
@@ -144,6 +138,8 @@ class IdleCompiler:
 
         if not(self.__current_scope.var_in_scope(var_name)):
             self.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+        
+        return self.__current_scope.find_var(var_name)
 
     def check_instance_var_exists(self, var_name, line_num):
         """Checks if an instance variable is available for use in current scope."""
@@ -151,7 +147,25 @@ class IdleCompiler:
         current_class = self.__current_class
         while current_class:
             if current_class.var_in_scope(var_name):
-                return
+                return current_class.find_var(var_name)
             current_class = current_class.parent_class
         
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
+
+    def check_obj_func_exists(self, var_ref, func_name, line_num):
+        """Checks if a function exists within the class of var_ref
+        
+        Assumes undeclared variable error has already been thrown if var_ref doesn't exist.
+        """
+
+        if var_ref:
+            type_name = var_ref.var_type
+            primitive_data_types = ['bool', 'int', 'float', 'string']
+
+            if type_name in primitive_data_types:
+                self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+            else:
+                class_obj = self.__classes[type_name]
+
+                if not class_obj.contains_func(func_name):
+                    self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))

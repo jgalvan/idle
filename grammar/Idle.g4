@@ -138,16 +138,16 @@ literal
 	| BOOL_LITERAL
 	| call;
 
-reference
+reference returns [attr_ref]
 	: ID {self.icomp.check_var_exists($ID.text, $ID.line)}
-	| arrPos
-	| instanceVar;
+	| arrPos {$attr_ref = $arrPos.attr_ref}
+	| instanceVar {$attr_ref = $instanceVar.attr_ref};
 
-arrPos
-	: ID {self.icomp.check_var_exists($ID.text, $ID.line)} '[' expression ']';
+arrPos returns [attr_ref]
+	: ID {$attr_ref = self.icomp.check_var_exists($ID.text, $ID.line)} '[' expression ']';
 
-instanceVar
-	: '$' ID {self.icomp.check_instance_var_exists($ID.text, $ID.line)};
+instanceVar returns [attr_ref]
+	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)};
 
 condition
 	: 'if' expression block elseIf* ('else' block)?;
@@ -162,7 +162,8 @@ forLoop
 	: 'for' assignment? ';' expression ';' assignment? block;
 
 call
-	: (reference '.')? ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')'
+	: reference '.' ID {self.icomp.check_obj_func_exists($reference.attr_ref, $ID.text, $ID.line)} '(' callArguments? ')'
+	| ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')'
 	| read;
 
 callArguments
