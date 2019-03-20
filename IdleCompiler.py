@@ -68,9 +68,16 @@ class IdleCompiler:
         if class_name in self.__classes:
             self.__compiler_errors.append("line %i: Duplicate class '%s'" % (line_num, class_name))
             class_name = class_name + uuid4().hex
+
+        # Check parent existence
+        if parent_name and parent_name not in self.__classes:
+            self.__compiler_errors.append("line %i: Parent class '%s' not found." % (line_num, parent_name))
+            parent_class = None
+        else:
+            parent_class = self.__classes.get(parent_name, None)
         
         # Add to class table and update current_class and current_scope
-        new_class = ClassScope(class_name, parent_name)
+        new_class = ClassScope(class_name, parent_class)
         self.__classes[class_name] = new_class
         self.__current_class = new_class
         self.__current_scope = new_class
@@ -98,13 +105,14 @@ class IdleCompiler:
 
     def check_func_exists(self, func_name, line_num):
         """Checks if a function is available for use in current scope."""
+        
         current_class = self.__current_class
-        while True:
+        
+        while current_class:
             if current_class.contains_func(func_name):
                 return
-            if not(current_class.parent_class):
-                break
-            current_class = self.classes[current_class.parent_class]
+            current_class = current_class.parent_class
+        
         self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
     
     def add_var(self, var_name, line_num):
@@ -139,11 +147,11 @@ class IdleCompiler:
 
     def check_instance_var_exists(self, var_name, line_num):
         """Checks if an instance variable is available for use in current scope."""
+        
         current_class = self.__current_class
-        while True:
+        while current_class:
             if current_class.var_in_scope(var_name):
                 return
-            if not(current_class.parent_class):
-                break
-            current_class = self.classes[current_class.parent_class]
+            current_class = current_class.parent_class
+        
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))

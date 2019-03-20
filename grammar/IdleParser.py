@@ -1,4 +1,4 @@
-# Generated from grammar/Idle.g4 by ANTLR 4.7.1
+# Generated from grammar/Idle.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -7,6 +7,7 @@ import sys
 
 
 from IdleCompiler import IdleCompiler
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -281,9 +282,10 @@ class IdleParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.7.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
@@ -359,6 +361,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ImpContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -366,8 +369,14 @@ class IdleParser ( Parser ):
             self.parser = parser
             self._ID = None # Token
 
+        def IMPORT(self):
+            return self.getToken(IdleParser.IMPORT, 0)
+
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_imp
@@ -404,6 +413,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ClassStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -411,6 +421,12 @@ class IdleParser ( Parser ):
             self.parser = parser
             self.class_name = None # Token
             self.parent_name = None # Token
+
+        def TYPE(self):
+            return self.getToken(IdleParser.TYPE, 0)
+
+        def CLASS(self):
+            return self.getToken(IdleParser.CLASS, 0)
 
         def classBlock(self):
             return self.getTypedRuleContext(IdleParser.ClassBlockContext,0)
@@ -421,6 +437,9 @@ class IdleParser ( Parser ):
                 return self.getTokens(IdleParser.ID)
             else:
                 return self.getToken(IdleParser.ID, i)
+
+        def ARROW(self):
+            return self.getToken(IdleParser.ARROW, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_classState
@@ -470,11 +489,18 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ClassBlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LBRACE(self):
+            return self.getToken(IdleParser.LBRACE, 0)
+
+        def RBRACE(self):
+            return self.getToken(IdleParser.RBRACE, 0)
 
         def attribute(self, i:int=None):
             if i is None:
@@ -544,6 +570,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AttributeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -557,6 +584,9 @@ class IdleParser ( Parser ):
         def typeState(self):
             return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_attribute
@@ -593,6 +623,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class MethodContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -603,6 +634,12 @@ class IdleParser ( Parser ):
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
 
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
         def block(self):
             return self.getTypedRuleContext(IdleParser.BlockContext,0)
 
@@ -610,6 +647,9 @@ class IdleParser ( Parser ):
         def typeState(self):
             return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
 
+
+        def VOID(self):
+            return self.getToken(IdleParser.VOID, 0)
 
         def methodArguments(self):
             return self.getTypedRuleContext(IdleParser.MethodArgumentsContext,0)
@@ -693,6 +733,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class MethodArgumentsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -712,6 +753,12 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.TypeStateContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_methodArguments
@@ -762,12 +809,25 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TypeStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type_name = None # Token
+
+        def BOOL(self):
+            return self.getToken(IdleParser.BOOL, 0)
+
+        def INT(self):
+            return self.getToken(IdleParser.INT, 0)
+
+        def FLOAT(self):
+            return self.getToken(IdleParser.FLOAT, 0)
+
+        def STRING(self):
+            return self.getToken(IdleParser.STRING, 0)
 
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
@@ -810,12 +870,16 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class VarsDeclContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
             self._ID = None # Token
+
+        def VAR(self):
+            return self.getToken(IdleParser.VAR, 0)
 
         def ID(self, i:int=None):
             if i is None:
@@ -827,8 +891,23 @@ class IdleParser ( Parser ):
             return self.getTypedRuleContext(IdleParser.TypeStateContext,0)
 
 
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
+
+        def LBRACK(self):
+            return self.getToken(IdleParser.LBRACK, 0)
+
         def INT_LITERAL(self):
             return self.getToken(IdleParser.INT_LITERAL, 0)
+
+        def RBRACK(self):
+            return self.getToken(IdleParser.RBRACK, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_varsDecl
@@ -893,6 +972,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AssignmentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -902,6 +982,9 @@ class IdleParser ( Parser ):
         def reference(self):
             return self.getTypedRuleContext(IdleParser.ReferenceContext,0)
 
+
+        def ASSIGN(self):
+            return self.getToken(IdleParser.ASSIGN, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -941,11 +1024,18 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class BlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LBRACE(self):
+            return self.getToken(IdleParser.LBRACE, 0)
+
+        def RBRACE(self):
+            return self.getToken(IdleParser.RBRACE, 0)
 
         def statement(self, i:int=None):
             if i is None:
@@ -997,6 +1087,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1006,6 +1097,9 @@ class IdleParser ( Parser ):
         def assignment(self):
             return self.getTypedRuleContext(IdleParser.AssignmentContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def condition(self):
             return self.getTypedRuleContext(IdleParser.ConditionContext,0)
@@ -1124,15 +1218,22 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ReturnStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def RETURN(self):
+            return self.getToken(IdleParser.RETURN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_returnState
@@ -1168,11 +1269,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def BANG(self):
+            return self.getToken(IdleParser.BANG, 0)
 
         def exp(self, i:int=None):
             if i is None:
@@ -1180,6 +1285,30 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.ExpContext,i)
 
+
+        def LT(self):
+            return self.getToken(IdleParser.LT, 0)
+
+        def GT(self):
+            return self.getToken(IdleParser.GT, 0)
+
+        def LE(self):
+            return self.getToken(IdleParser.LE, 0)
+
+        def GE(self):
+            return self.getToken(IdleParser.GE, 0)
+
+        def EQUAL(self):
+            return self.getToken(IdleParser.EQUAL, 0)
+
+        def NOTEQUAL(self):
+            return self.getToken(IdleParser.NOTEQUAL, 0)
+
+        def AND(self):
+            return self.getToken(IdleParser.AND, 0)
+
+        def OR(self):
+            return self.getToken(IdleParser.OR, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_expression
@@ -1242,6 +1371,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1254,6 +1384,18 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.TermContext,i)
 
+
+        def ADD(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.ADD)
+            else:
+                return self.getToken(IdleParser.ADD, i)
+
+        def SUB(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.SUB)
+            else:
+                return self.getToken(IdleParser.SUB, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_exp
@@ -1303,6 +1445,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TermContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1315,6 +1458,18 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.FactorContext,i)
 
+
+        def DIV(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.DIV)
+            else:
+                return self.getToken(IdleParser.DIV, i)
+
+        def MUL(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.MUL)
+            else:
+                return self.getToken(IdleParser.MUL, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_term
@@ -1364,19 +1519,32 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class FactorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
 
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
         def literal(self):
             return self.getTypedRuleContext(IdleParser.LiteralContext,0)
 
+
+        def ADD(self):
+            return self.getToken(IdleParser.ADD, 0)
+
+        def SUB(self):
+            return self.getToken(IdleParser.SUB, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_factor
@@ -1438,6 +1606,7 @@ class IdleParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class LiteralContext(ParserRuleContext):
 
@@ -1532,6 +1701,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ReferenceContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1600,6 +1770,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ArrPosContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1610,9 +1781,15 @@ class IdleParser ( Parser ):
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
 
+        def LBRACK(self):
+            return self.getToken(IdleParser.LBRACK, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
+
+        def RBRACK(self):
+            return self.getToken(IdleParser.RBRACK, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_arrPos
@@ -1651,12 +1828,16 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class InstanceVarContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
             self._ID = None # Token
+
+        def DSYMBOL(self):
+            return self.getToken(IdleParser.DSYMBOL, 0)
 
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
@@ -1694,11 +1875,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ConditionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def IF(self):
+            return self.getToken(IdleParser.IF, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1717,6 +1902,9 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.ElseIfContext,i)
 
+
+        def ELSE(self):
+            return self.getToken(IdleParser.ELSE, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_condition
@@ -1774,11 +1962,18 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ElseIfContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def ELSE(self):
+            return self.getToken(IdleParser.ELSE, 0)
+
+        def IF(self):
+            return self.getToken(IdleParser.IF, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1824,11 +2019,15 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class WhileLoopContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def WHILE(self):
+            return self.getToken(IdleParser.WHILE, 0)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1872,11 +2071,21 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ForLoopContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def FOR(self):
+            return self.getToken(IdleParser.FOR, 0)
+
+        def SEMICOLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.SEMICOLON)
+            else:
+                return self.getToken(IdleParser.SEMICOLON, i)
 
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
@@ -1948,6 +2157,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CallContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1958,9 +2168,18 @@ class IdleParser ( Parser ):
         def ID(self):
             return self.getToken(IdleParser.ID, 0)
 
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
         def reference(self):
             return self.getTypedRuleContext(IdleParser.ReferenceContext,0)
 
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
 
         def callArguments(self):
             return self.getTypedRuleContext(IdleParser.CallArgumentsContext,0)
@@ -2037,6 +2256,7 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CallArgumentsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2049,6 +2269,12 @@ class IdleParser ( Parser ):
             else:
                 return self.getTypedRuleContext(IdleParser.ExpressionContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(IdleParser.COMMA)
+            else:
+                return self.getToken(IdleParser.COMMA, i)
 
         def getRuleIndex(self):
             return IdleParser.RULE_callArguments
@@ -2093,15 +2319,31 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class PrintStateContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IO(self):
+            return self.getToken(IdleParser.IO, 0)
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
+
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
         def expression(self):
             return self.getTypedRuleContext(IdleParser.ExpressionContext,0)
 
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(IdleParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_printState
@@ -2145,12 +2387,24 @@ class IdleParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ReadContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IO(self):
+            return self.getToken(IdleParser.IO, 0)
+
+        def DOT(self):
+            return self.getToken(IdleParser.DOT, 0)
+
+        def LPAREN(self):
+            return self.getToken(IdleParser.LPAREN, 0)
+
+        def RPAREN(self):
+            return self.getToken(IdleParser.RPAREN, 0)
 
         def getRuleIndex(self):
             return IdleParser.RULE_read

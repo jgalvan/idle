@@ -11,9 +11,13 @@ class ClassScope(Scope):
     def __init__(self, name, parent_class):
         self.__functions = dict()
         self.__current_function = None
-        self.parent_class = parent_class
+        self.__parent_class = parent_class
         
         Scope.__init__(self, name)
+
+    @property
+    def parent_class(self):
+        return self.__parent_class
 
     def add_func(self, name):
         """Adds a function to the class. Assumes function does not exist."""
