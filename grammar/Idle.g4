@@ -112,9 +112,7 @@ statement
 	| forLoop
 	| whileLoop
 	| printState
-	| returnState
-	| printState
-	| read;
+	| returnState;
 
 returnState
 	: 'return' expression ';';
