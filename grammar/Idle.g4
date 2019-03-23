@@ -79,7 +79,7 @@ imp
 	: 'import' ID ';' {self.icomp.import_file($ID.text)};
 
 classState
-	: 'type' class_name=ID ('<-' parent_name=ID)? 'class' {self.icomp.add_class($class_name.text, $class_name.line)} classBlock ;
+	: 'type' class_name=ID ('<-' parent_name=ID)? 'class' {self.icomp.add_class($class_name.text, $class_name.line, $parent_name.text)} classBlock ;
 
 classBlock
 	: '{' attribute* method* '}';
@@ -112,7 +112,9 @@ statement
 	| forLoop
 	| whileLoop
 	| printState
-	| returnState;
+	| returnState
+	| printState
+	| read;
 
 returnState
 	: 'return' expression ';';
@@ -139,15 +141,15 @@ literal
 	| call;
 
 reference
-	: ID
+	: ID {self.icomp.check_var_exists($ID.text, $ID.line)}
 	| arrPos
 	| instanceVar;
 
 arrPos
-	: ID '[' expression ']';
+	: ID {self.icomp.check_var_exists($ID.text, $ID.line)} '[' expression ']';
 
 instanceVar
-	: '$' ID;
+	: '$' ID {self.icomp.check_instance_var_exists($ID.text, $ID.line)};
 
 condition
 	: 'if' expression block elseIf* ('else' block)?;
@@ -162,7 +164,7 @@ forLoop
 	: 'for' assignment? ';' expression ';' assignment? block;
 
 call
-	: (reference '.')? ID '(' callArguments? ')'
+	: (reference '.')? ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')'
 	| read;
 
 callArguments

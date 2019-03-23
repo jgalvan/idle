@@ -54,17 +54,13 @@ class Scope():
         
         Variable may have been declared in scope or any of the parents.
         """
-
-        if name in self.__variables:
+        return self.find_var(name) != None
             return True
-        elif self.__parent:
-            return self.__parent.find_var(name)
         else:
             return False
 
     def find_var(self, name) -> Variable:
         """Looks for variable in scope or parents and returns None if not found."""
-
         if name in self.__variables:
             return self.__variables[name]
         elif self.__parent:
