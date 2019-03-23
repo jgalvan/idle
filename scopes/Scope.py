@@ -54,7 +54,7 @@ class Scope():
         
         Variable may have been declared in scope or any of the parents.
         """
-        if self.find_var(name):
+        return self.find_var(name) != None
             return True
         else:
             return False
