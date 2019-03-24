@@ -275,4 +275,4 @@ class SemanticCube:
 
         }
 
-        return cube[(oper, left_op, right_op)]
+        return cube[(oper, left_op, right_op)] or DataType.ERROR
