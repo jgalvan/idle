@@ -101,3 +101,17 @@ class IdleInterRepr:
 
         self.__quads.append(('=', oper, None, var))
         return True
+
+    def read(self, read_type):
+        result = self.__temporals.next(read_type)
+
+        if read_type == DataType.INT:
+            self.__quads.append(('READINT', None, None, result))
+
+        if read_type == DataType.FLOAT:
+            self.__quads.append(('READFLOAT', None, None, result))
+        
+        if read_type == DataType.STRING:
+            self.__quads.append(('READSTRING', None, None, result))
+        
+        self.__operands_stack.push(result)

@@ -4,6 +4,6 @@ type Main class {
     var b int;
     var c bool;
     {
-        c = (a+b)*a > a*b;
+        c = a*IO.readString();
     }
 }

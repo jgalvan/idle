@@ -240,21 +240,25 @@ class IdleCompiler:
 
             if not self.__interp.assign(var):
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+                self.__should_gen_quads = False
 
     def quad_check_relop(self, line_num):
         if self.__should_gen_quads:
             if not self.__interp.check_relop():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+                self.__should_gen_quads = False
     
     def quad_check_addsub(self, line_num):
         if self.__should_gen_quads:
             if not self.__interp.check_addsub():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+                self.__should_gen_quads = False
 
     def quad_check_divmult(self, line_num):
         if self.__should_gen_quads:
             if not self.__interp.check_divmult():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+                self.__should_gen_quads = False
 
     def quad_open_parenthesis(self):
         if self.__should_gen_quads:
@@ -263,6 +267,11 @@ class IdleCompiler:
     def quad_close_parenthesis(self):
         if self.__should_gen_quads:
             self.__interp.close_parenthesis()
+
+    def quad_read(self, read_type):
+        if self.__should_gen_quads:
+            read_type = DataType(read_type)
+            self.__interp.read(read_type)
 
     def printQuads(self):
         print(self.__interp.quads)

@@ -175,4 +175,8 @@ printState
 	: 'IO' '.' 'print' '(' expression ')' ';';
 
 read
-	: 'IO' '.' ('readString' | 'readInt' | 'readFloat') '(' ')';
+	: 'IO' '.' 
+		('readString' {self.icomp.quad_read('string')} 
+		| 'readInt' {self.icomp.quad_read('int')}
+		| 'readFloat' {self.icomp.quad_read('float')}) 
+		'(' ')';
