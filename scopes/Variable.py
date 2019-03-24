@@ -22,3 +22,6 @@ class Variable():
     @property
     def access_modifier(self):
         return self.__access_modifier
+
+    def change_type(self, var_type):
+        self.__var_type = var_type
