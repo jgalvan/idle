@@ -94,7 +94,7 @@ methodArguments
 	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState)*;
 
 typeState
-	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text)};
+	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text, $type_name.line)};
 
 varsDecl
 	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* ('[' INT_LITERAL ']')? typeState ';';

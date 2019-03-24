@@ -21,7 +21,7 @@ type Dog <- Animal class {
 }
 
 type Main class {
-    Test() String {
+    Test() string {
         return "";
     }
 

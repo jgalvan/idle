@@ -1,6 +1,7 @@
 from scopes.ClassScope import ClassScope
 from uuid import uuid4
 from antlr4 import *
+from utils.DataType import DataType
 import grammar.IdleLexer
 
 class IdleCompiler:
@@ -120,11 +121,14 @@ class IdleCompiler:
         else:
             self.__current_scope.add_var(var_name)
 
-    def commit_vars(self, type_name):
-        """Commits previously added variables.
+    def commit_vars(self, type_name, line_num):
+        """Checks type exists and commits previously added variables.
         
         To be called after calling 'add_var' and when variable type is known.
         """
+
+        if not DataType.exists(type_name) and type_name not in self.__classes:
+            self.__compiler_errors.append("line %i: Type '%s' does not exist." % (line_num, type_name))
 
         self.__current_scope.commit_vars(type_name)
     

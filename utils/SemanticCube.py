@@ -1,13 +1,4 @@
-from enum import Enum
-
-class DataType(Enum):
-    """Enum to represent options for data types"""
-
-    INT = "int"
-    FLOAT = "float"
-    BOOL = "bool"
-    STRING = "string"
-    ERROR = "error"
+from DataType import DataType
 
 class SemanticCube:
     """Represents arithmetic and boolean operation return types."""

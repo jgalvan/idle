@@ -864,7 +864,7 @@ class IdleParser ( Parser ):
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.icomp.commit_vars((None if localctx.type_name is None else localctx.type_name.text))
+            self.icomp.commit_vars((None if localctx.type_name is None else localctx.type_name.text), (0 if localctx.type_name is None else localctx.type_name.line))
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
