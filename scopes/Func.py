@@ -28,4 +28,3 @@ class Func(Scope):
     
     def add_arg(self, arg_name):
         self.__arguments.append(self.find_var(arg_name))
-        print("added argument ", arg_name)

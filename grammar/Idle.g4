@@ -88,7 +88,7 @@ attribute
 	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
 
 method
-	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState | 'void') varsDecl* block {self.icomp.end_scope()}
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState {self.icomp.add_func_return_type($typeState.text)} | 'void') varsDecl* block {self.icomp.end_scope()}
 	| ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' varsDecl* block {self.icomp.end_scope()};
 
 methodArguments

@@ -101,6 +101,11 @@ class IdleCompiler:
         # Add function to class and update current_scope
         self.__current_class.add_func(func_name)
         self.__current_scope = self.__current_class.find_func(func_name)
+    
+    def add_func_return_type(self, return_type):
+        """Adds the return type for a function.
+        """
+        self.__current_scope.return_type = return_type
 
     def add_constructor(self, func_name, line_num):
         """Adds a constructor to symbol table of the last added class.
@@ -115,12 +120,13 @@ class IdleCompiler:
 
         # Check existence
         if self.__current_class.contains_func(func_name):
-            self.__compiler_errors.append("line %i: Duplicate method name '%s'" % (line_num, func_name))
+            self.__compiler_errors.append("line %i: Duplicate constructors in '%s'" % (line_num, func_name))
             func_name = func_name + uuid4().hex
         
         # Add function to class and update current_scope
         self.__current_class.add_func(func_name)
         self.__current_scope = self.__current_class.find_func(func_name)
+        self.__current_scope.return_type = func_name
     
     def update_func_type(self, type_name):
         """Called after adding function, updates last function's return type."""
