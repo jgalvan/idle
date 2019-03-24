@@ -89,6 +89,30 @@ class IdleCompiler:
         the compiling process to continue.
         """
 
+        if self.__current_class.name == func_name:
+            self.__compiler_errors.append("line %i: Method name can't be the same as the class name '%s'" % (line_num, func_name))
+            func_name = func_name + uuid4().hex
+
+        # Check existence
+        if self.__current_class.contains_func(func_name):
+            self.__compiler_errors.append("line %i: Duplicate method name '%s'" % (line_num, func_name))
+            func_name = func_name + uuid4().hex
+        
+        # Add function to class and update current_scope
+        self.__current_class.add_func(func_name)
+        self.__current_scope = self.__current_class.find_func(func_name)
+
+    def add_constructor(self, func_name, line_num):
+        """Adds a constructor to symbol table of the last added class.
+        
+        If a constructor has already been defined, it still saves it but with a UUID to allow 
+        the compiling process to continue.
+        """
+
+        if self.__current_class.name != func_name:
+            self.__compiler_errors.append("line %i: Missing return type for method '%s'" % (line_num, func_name))
+            func_name = func_name + uuid4().hex
+
         # Check existence
         if self.__current_class.contains_func(func_name):
             self.__compiler_errors.append("line %i: Duplicate method name '%s'" % (line_num, func_name))
@@ -108,6 +132,12 @@ class IdleCompiler:
         
         if not self.__current_class.contains_func(func_name):
             self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
+
+    def check_class_exists(self, class_name, line_num):
+        """Checks if a class is available for use in current scope."""
+        
+        if not class_name in self.classes:
+            self.__compiler_errors.append("line %i: Constructor for undefined class '%s'" % (line_num, class_name))
     
     def add_var(self, var_name, line_num):
         """Adds variable to current scope. Does not allow duplicates.
@@ -119,6 +149,11 @@ class IdleCompiler:
             self.__compiler_errors.append("line %i: Duplicate var '%s'" % (line_num, var_name))
         else:
             self.__current_scope.add_var(var_name)
+    
+    def add_arg(self, arg_name):
+        """Adds a variable as an argument for the current function.
+        """
+        self.__current_scope.add_arg(arg_name)
 
     def commit_vars(self, type_name):
         """Commits previously added variables.

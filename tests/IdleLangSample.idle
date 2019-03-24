@@ -11,7 +11,7 @@ type Animal class {
 type Dog <- Animal class {
     breed string;
 
-    Bark() bool {
+    Bark(woof string) bool {
         if $age > 1 {
             IO.print(GetName());
             return true;
@@ -25,7 +25,7 @@ type Main class {
         return "";
     }
 
-    Main() void
+    main() void
     var name string;
     var mydog Dog;
     var dogs [5]Dog;
@@ -34,7 +34,7 @@ type Main class {
     {
         IO.print("Enter name: ");
         name = IO.readString();
-        mydog = Dog(name, "Chihuahua");
+        mydog = new Animal(name, "Chihuahua");
         mydog.Bark();
         Test();
 

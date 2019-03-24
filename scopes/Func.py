@@ -10,7 +10,7 @@ class Func(Scope):
     def __init__(self, parent: Scope, name, access_modifier:AccessModifier=AccessModifier.public):
         self.__return_type = None
         self.__access_modifier = access_modifier
-
+        self.__arguments = []
         Scope.__init__(self, name, parent)
     
     @property
@@ -25,3 +25,7 @@ class Func(Scope):
             return_type = return_type
         else:
             print("Internal error: Return type already set for %s" % return_type)
+    
+    def add_arg(self, arg_name):
+        self.__arguments.append(self.find_var(arg_name))
+        print("added argument ", arg_name)
