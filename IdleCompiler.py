@@ -3,6 +3,7 @@ from uuid import uuid4
 from antlr4 import *
 from utils.DataType import DataType
 import grammar.IdleLexer
+from IdleInterRepr import IdleInterRepr
 
 class IdleCompiler:
     """Class used to control compilation process."""
@@ -12,6 +13,8 @@ class IdleCompiler:
         self.__current_class = None
         self.__compiler_errors = []
         self.__current_scope = None
+        self.__interp = IdleInterRepr()
+        self.__should_gen_quads = True
 
     @property
     def compiler_errors(self):
@@ -104,8 +107,11 @@ class IdleCompiler:
         self.__current_scope = self.__current_class.find_func(func_name)
     
     def add_func_return_type(self, return_type):
-        """Adds the return type for a function.
-        """
+        """Called after adding function, updates last function's return type."""
+
+        if DataType.exists(type_name):
+            type_name = DataType(type_name)
+        
         self.__current_scope.return_type = return_type
 
     def add_constructor(self, func_name, line_num):
@@ -128,11 +134,6 @@ class IdleCompiler:
         self.__current_class.add_func(func_name)
         self.__current_scope = self.__current_class.find_func(func_name)
         self.__current_scope.return_type = func_name
-    
-    def update_func_type(self, type_name):
-        """Called after adding function, updates last function's return type."""
-
-        self.__current_class.update_func_return_type(type_name)
 
     def check_func_exists(self, func_name, line_num):
         """Checks if a function is available for use in current scope."""
@@ -168,7 +169,9 @@ class IdleCompiler:
         To be called after calling 'add_var' and when variable type is known.
         """
 
-        if not DataType.exists(type_name) and type_name not in self.__classes:
+        if DataType.exists(type_name):
+            type_name = DataType(type_name)
+        elif type_name not in self.__classes:
             self.__compiler_errors.append("line %i: Type '%s' does not exist." % (line_num, type_name))
 
         self.__current_scope.commit_vars(type_name)
@@ -183,6 +186,7 @@ class IdleCompiler:
 
         if not(self.__current_scope.var_in_scope(var_name)):
             self.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+            self.__should_gen_quads = False
         
         return self.__current_scope.find_var(var_name)
 
@@ -195,6 +199,7 @@ class IdleCompiler:
                 return current_class.find_var(var_name)
             current_class = current_class.parent_class
         
+        self.__should_gen_quads = False
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
 
     def check_obj_func_exists(self, var_ref, func_name, line_num):
@@ -214,3 +219,50 @@ class IdleCompiler:
 
                 if not class_obj.contains_func(func_name):
                     self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+
+    def reset_new_line(self):
+        if not self.__should_gen_quads:
+            self.__should_gen_quads = True
+            self.__interp = IdleInterRepr()
+
+    def quad_add_var(self, var_name):
+        if self.__should_gen_quads:
+            var = self.__current_scope.find_var(var_name)
+            self.__interp.add_var(var)
+    
+    def quad_add_oper(self, oper):
+        if self.__should_gen_quads:
+            self.__interp.add_operator(oper)
+
+    def quad_assign(self, var_name, line_num):
+        if self.__should_gen_quads:
+            var = self.__current_scope.find_var(var_name)
+
+            if not self.__interp.assign(var):
+                self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+
+    def quad_check_relop(self, line_num):
+        if self.__should_gen_quads:
+            if not self.__interp.check_relop():
+                self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+    
+    def quad_check_addsub(self, line_num):
+        if self.__should_gen_quads:
+            if not self.__interp.check_addsub():
+                self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+
+    def quad_check_divmult(self, line_num):
+        if self.__should_gen_quads:
+            if not self.__interp.check_divmult():
+                self.__compiler_errors.append("line %i: Type mismatch" % line_num)
+
+    def quad_open_parenthesis(self):
+        if self.__should_gen_quads:
+            self.__interp.open_parenthesis()
+        
+    def quad_close_parenthesis(self):
+        if self.__should_gen_quads:
+            self.__interp.close_parenthesis()
+
+    def printQuads(self):
+        print(self.__interp.quads)

@@ -73,7 +73,7 @@ WS:                 [ \t\r\n\u000C]+ -> skip;
 /* RULES */
 
 fileState
-	: {self.icomp = IdleCompiler()} imp* classState+;
+	: {self.icomp = IdleCompiler()} imp* classState+ {self.icomp.printQuads()};
 
 imp
 	: 'import' ID ';' {self.icomp.import_file($ID.text)};
@@ -101,10 +101,10 @@ varsDecl
 	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* ('[' INT_LITERAL ']')? typeState ';';
 
 assignment
-	: <assoc=right> reference '=' expression;
+	: <assoc=right> reference '=' expression {self.icomp.quad_assign($reference.text, $reference.start.line)};
 
 block
-	: '{' statement* '}';
+	: '{' (statement {self.icomp.reset_new_line()})* '}';
 
 statement
 	: assignment ';'
@@ -120,19 +120,19 @@ returnState
 
 expression
 	: <assoc=right> '!' exp
-	| exp (( '<' | '>' | '<=' | '>=' | '==' | '!=' | '&&' | '||') exp)?;
+	| exp (operator=( '<' | '>' | '<=' | '>=' | '==' | '!=' | '&&' | '||') {self.icomp.quad_add_oper($operator.text)} exp {self.icomp.quad_check_relop($exp.start.line)} )?;
 
 exp
-	: term (('+' | '-') term)*;
+	: term {self.icomp.quad_check_addsub($term.start.line)} (operator=('+' | '-'){self.icomp.quad_add_oper($operator.text)} term {self.icomp.quad_check_addsub($term.start.line)})*;
 
 term
-	: factor (('/' | '*') factor)*;
+	: factor {self.icomp.quad_check_divmult($factor.start.line)} (operator=('/' | '*'){self.icomp.quad_add_oper($operator.text)} factor {self.icomp.quad_check_divmult($factor.start.line)})*;
 
 factor
-	: '(' expression ')' | ('+' | '-')? literal;
+	: '(' {self.icomp.quad_open_parenthesis()} expression ')' {self.icomp.quad_close_parenthesis()} | ('+' | '-')? literal;
 
 literal
-	: reference
+	: reference {self.icomp.quad_add_var($reference.text)}
 	| INT_LITERAL
 	| FLOAT_LITERAL
 	| STRING_LITERAL

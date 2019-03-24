@@ -1,0 +1,9 @@
+type Main class {
+    main() void
+    var a int;
+    var b int;
+    var c bool;
+    {
+        c = (a+b)*a > a*b;
+    }
+}

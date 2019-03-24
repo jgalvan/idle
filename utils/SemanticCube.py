@@ -1,4 +1,4 @@
-from DataType import DataType
+from .DataType import DataType
 
 class SemanticCube:
     """Represents arithmetic and boolean operation return types."""
@@ -266,4 +266,4 @@ class SemanticCube:
 
         }
 
-        return cube[(oper, left_op, right_op)] or DataType.ERROR
+        return cube.get((oper, left_op, right_op), DataType.ERROR)
