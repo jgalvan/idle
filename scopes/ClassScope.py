@@ -11,9 +11,13 @@ class ClassScope(Scope):
     def __init__(self, name, parent_class):
         self.__functions = dict()
         self.__current_function = None
-        self.parent_class = parent_class
+        self.__parent_class = parent_class
         
         Scope.__init__(self, name)
+
+    @property
+    def parent_class(self):
+        return self.__parent_class
 
     def add_func(self, name):
         """Adds a function to the class. Assumes function does not exist."""
@@ -33,12 +37,14 @@ class ClassScope(Scope):
     def contains_func(self, name) -> bool:
         """Checks existence of function in class."""
 
-        return name in self.__functions
+        return self.find_func(name) != None
     
     def find_func(self, name) -> Func:
         """Looks for function in class and returns None if not found."""
 
         if name in self.__functions:
             return self.__functions[name]
+        elif self.__parent_class:
+            return self.__parent_class.find_func(name)
         else:
             return None
