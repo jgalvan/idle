@@ -88,10 +88,11 @@ attribute
 	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
 
 method
-	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState | 'void') varsDecl* block {self.icomp.end_scope()};
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState {self.icomp.add_func_return_type($typeState.text)} | 'void') varsDecl* block {self.icomp.end_scope()}
+	| ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' varsDecl* block {self.icomp.end_scope()};
 
 methodArguments
-	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState)*;
+	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)} (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)})*;
 
 typeState
 	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text, $type_name.line)};
@@ -164,7 +165,8 @@ forLoop
 call
 	: reference '.' ID {self.icomp.check_obj_func_exists($reference.attr_ref, $ID.text, $ID.line)} '(' callArguments? ')'
 	| ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')'
-	| read;
+	| read
+	| 'new' ID {self.icomp.check_class_exists($ID.text, $ID.line)} '(' callArguments? ')';
 
 callArguments
 	: expression (',' expression)*;
