@@ -4,6 +4,7 @@ type Main class {
     var b int;
     var c bool;
     {
-        c = a*IO.readString();
+        c = a > b;
+        IO.print(c);
     }
 }

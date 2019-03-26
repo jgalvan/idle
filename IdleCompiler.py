@@ -221,20 +221,31 @@ class IdleCompiler:
                     self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
 
     def reset_new_line(self):
+        """If there was previously an error, resets quads to be able to continue compilation.
+        
+        To be called at end of statement.
+        """
+
         if not self.__should_gen_quads:
             self.__should_gen_quads = True
             self.__interp = IdleInterRepr()
 
     def quad_add_var(self, var_name):
+        """Looks for var and adds to quads"""
+
         if self.__should_gen_quads:
             var = self.__current_scope.find_var(var_name)
             self.__interp.add_var(var)
     
     def quad_add_oper(self, oper):
+        """Adds operator to quads"""
+
         if self.__should_gen_quads:
             self.__interp.add_operator(oper)
 
     def quad_assign(self, var_name, line_num):
+        """Adds quad for assignment and reports type mismatch."""
+
         if self.__should_gen_quads:
             var = self.__current_scope.find_var(var_name)
 
@@ -243,35 +254,53 @@ class IdleCompiler:
                 self.__should_gen_quads = False
 
     def quad_check_relop(self, line_num):
+        """Checks operation and reports type mismatch."""
+        
         if self.__should_gen_quads:
             if not self.__interp.check_relop():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
                 self.__should_gen_quads = False
     
     def quad_check_addsub(self, line_num):
+        """Checks operation and reports type mismatch."""
+
         if self.__should_gen_quads:
             if not self.__interp.check_addsub():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
                 self.__should_gen_quads = False
 
     def quad_check_divmult(self, line_num):
+        """Checks operation and reports type mismatch."""
+
         if self.__should_gen_quads:
             if not self.__interp.check_divmult():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
                 self.__should_gen_quads = False
 
     def quad_open_parenthesis(self):
+        """To be called when opening parenthesis in expression."""
+
         if self.__should_gen_quads:
             self.__interp.open_parenthesis()
         
     def quad_close_parenthesis(self):
+        """To be called when closing parenthesis in expression."""
+
         if self.__should_gen_quads:
             self.__interp.close_parenthesis()
 
     def quad_read(self, read_type):
+        """Adds quad for read"""
+
         if self.__should_gen_quads:
             read_type = DataType(read_type)
             self.__interp.read(read_type)
+
+    def quad_print_st(self):
+        """Adds quad for read"""
+
+        if self.__should_gen_quads:
+            self.__interp.print_st()
 
     def printQuads(self):
         print(self.__interp.quads)

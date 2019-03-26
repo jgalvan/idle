@@ -115,3 +115,7 @@ class IdleInterRepr:
             self.__quads.append(('READSTRING', None, None, result))
         
         self.__operands_stack.push(result)
+
+    def print_st(self):
+        oper = self.__operands_stack.pop()
+        self.__quads.append(('PRINT', oper, None, None))

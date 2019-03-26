@@ -172,7 +172,7 @@ callArguments
 	: expression (',' expression)*;
 
 printState
-	: 'IO' '.' 'print' '(' expression ')' ';';
+	: 'IO' '.' 'print' '(' expression ')' ';' {self.icomp.quad_print_st()};
 
 read
 	: 'IO' '.' 
