@@ -302,5 +302,19 @@ class IdleCompiler:
         if self.__should_gen_quads:
             self.__interp.print_st()
 
+    def quad_start_while(self):
+        if self.__should_gen_quads:
+            self.__interp.start_while()
+
+    def quad_end_while_expr(self, line_num):
+        if self.__should_gen_quads and not self.__interp.end_while_expr():
+            self.__compiler_errors.append("line %i: Type mismatch. Expecting bool in while expression." % line_num)
+            self.__should_gen_quads = False
+
+    def quad_end_while(self):
+        if self.__should_gen_quads:
+            self.__interp.end_while()
+
     def printQuads(self):
-        print(self.__interp.quads)
+        for i in range(0,(len(self.__interp.quads))):
+            print(i, self.__interp.quads[i])

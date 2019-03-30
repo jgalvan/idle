@@ -1,0 +1,13 @@
+type Main class {
+    main() void
+    var a int;
+    var b int;
+    {
+        while(a > a*b) {
+            a = a + b;
+            while(a < b) {
+                b = b * b;
+            }
+        }
+    }
+}

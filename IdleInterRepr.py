@@ -34,6 +34,7 @@ class IdleInterRepr:
         self.__operands_stack = Stack()
         self.__operators_stack = Stack()
         self.__quads = []
+        self.__jump_stack = Stack()
 
     @property
     def quads(self):
@@ -56,7 +57,7 @@ class IdleInterRepr:
             return False
 
         result = self.__temporals.next(result_type)
-        self.__quads.append((operator, left_oper, right_oper, result))
+        self.__quads.append((operator, left_oper.name, right_oper.name, result.name))
         self.__operands_stack.push(result)
 
         if Temporal.is_temp(left_oper):
@@ -99,23 +100,49 @@ class IdleInterRepr:
         if oper.var_type != var.var_type:
             return False
 
-        self.__quads.append(('=', oper, None, var))
+        self.__quads.append(('=', oper.name, None, var.name))
         return True
 
     def read(self, read_type):
         result = self.__temporals.next(read_type)
 
         if read_type == DataType.INT:
-            self.__quads.append(('READINT', None, None, result))
+            self.__quads.append(('READINT', None, None, result.name))
 
         if read_type == DataType.FLOAT:
-            self.__quads.append(('READFLOAT', None, None, result))
+            self.__quads.append(('READFLOAT', None, None, result.name))
         
         if read_type == DataType.STRING:
-            self.__quads.append(('READSTRING', None, None, result))
+            self.__quads.append(('READSTRING', None, None, result.name))
         
         self.__operands_stack.push(result)
 
     def print_st(self):
         oper = self.__operands_stack.pop()
-        self.__quads.append(('PRINT', oper, None, None))
+        self.__quads.append(('PRINT', oper.name, None, None))
+
+    def start_while(self):
+        self.__jump_stack.push(len(self.__quads))
+    
+    def end_while_expr(self) -> bool:
+        expr_result = self.__operands_stack.pop()
+
+        if expr_result.var_type != DataType.BOOL:
+            return False
+
+        self.__quads.append(('GOTOF', expr_result.name, None, None))
+        self.__jump_stack.push(len(self.__quads)-1)
+
+        return True
+    
+    def end_while(self):
+        expr_end = self.__jump_stack.pop()
+        while_start = self.__jump_stack.pop()
+
+        # Add GOTO to loop back to while start
+        self.__quads.append(('GOTO', None, None, while_start))
+
+        # Update GOTOF jump address after expression
+        expr_end_quad = list(self.__quads[expr_end])
+        expr_end_quad[3] = len(self.__quads)
+        self.__quads[expr_end] = tuple(expr_end_quad)
