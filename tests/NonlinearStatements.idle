@@ -2,12 +2,18 @@ type Main class {
     main() void
     var a int;
     var b int;
+    var i int;
     {
-        while(a > a*b) {
+        while a > a*b {
             a = a + b;
             while(a < b) {
                 b = b * b;
             }
+        }
+
+        for i = a; i < a; i = i+a {
+            b = a *b;
+            IO.print(a);
         }
     }
 }
