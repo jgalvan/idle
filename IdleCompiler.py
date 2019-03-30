@@ -303,15 +303,19 @@ class IdleCompiler:
             self.__interp.print_st()
 
     def quad_start_while(self):
+        """Adds pending jump, to be called before loop expression."""
         if self.__should_gen_quads:
             self.__interp.start_while()
 
     def quad_end_while_expr(self, line_num):
+        """Adds loop jump if false to be solved when loop ends."""
+
         if self.__should_gen_quads and not self.__interp.end_while_expr():
             self.__compiler_errors.append("line %i: Type mismatch. Expecting bool in while expression." % line_num)
             self.__should_gen_quads = False
 
     def quad_end_while(self):
+        """Adds jump to loop back and completes loop end quad."""
         if self.__should_gen_quads:
             self.__interp.end_while()
 
