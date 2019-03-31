@@ -146,3 +146,18 @@ class IdleInterRepr:
         expr_end_quad = list(self.__quads[expr_end])
         expr_end_quad[3] = len(self.__quads)
         self.__quads[expr_end] = tuple(expr_end_quad)
+
+    def start_for_assign(self):
+        # Save current quad list into temporal space and reset quads
+        self.__temp_quads = self.__quads
+        self.__quads = []
+    
+    def end_for_assign(self):
+        # Switch quad list with the temporal quads generated from the for assignment
+        quads = self.__temp_quads
+        self.__temp_quads = self.__quads
+        self.__quads = quads
+    
+    def end_for_block(self):
+        # Add temporal quads from assignment to end of block
+        self.__quads.extend(self.__temp_quads)

@@ -304,6 +304,7 @@ class IdleCompiler:
 
     def quad_start_while(self):
         """Adds pending jump, to be called before loop expression."""
+
         if self.__should_gen_quads:
             self.__interp.start_while()
 
@@ -316,8 +317,27 @@ class IdleCompiler:
 
     def quad_end_while(self):
         """Adds jump to loop back and completes loop end quad."""
+
         if self.__should_gen_quads:
             self.__interp.end_while()
+    
+    def quad_start_for_assign(self):
+        """Starts temporal quad generation to append at end of for loop."""
+
+        if self.__should_gen_quads:
+            self.__interp.start_for_assign()
+
+    def quad_end_for_assign(self):
+        """Ends temporal quad generation to append at end of for loop."""
+
+        if self.__should_gen_quads:
+            self.__interp.end_for_assign()
+    
+    def quad_end_for_block(self):
+        """Appends temporal assignment quads to end of for loop."""
+
+        if self.__should_gen_quads:
+            self.__interp.end_for_block()
 
     def printQuads(self):
         for i in range(0,(len(self.__interp.quads))):
