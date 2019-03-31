@@ -210,9 +210,8 @@ class IdleCompiler:
 
         if var_ref:
             type_name = var_ref.var_type
-            primitive_data_types = ['bool', 'int', 'float', 'string']
 
-            if type_name in primitive_data_types:
+            if DataType.exists(type_name):
                 self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
             else:
                 class_obj = self.__classes[type_name]

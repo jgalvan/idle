@@ -1,6 +1,7 @@
 from utils.Stack import Stack
 from utils.SemanticCube import SemanticCube
 from utils.DataType import DataType
+from utils.OperationCode import OperationCode
 from scopes.Variable import Variable
 
 class Temporal:
@@ -44,7 +45,7 @@ class IdleInterRepr:
         self.__operands_stack.push(var)
     
     def add_operator(self, operator):
-        self.__operators_stack.push(operator)
+        self.__operators_stack.push(OperationCode(operator))
 
     def __resolve_oper(self) -> bool:
         right_oper = self.__operands_stack.pop()
@@ -57,7 +58,7 @@ class IdleInterRepr:
             return False
 
         result = self.__temporals.next(result_type)
-        self.__quads.append((operator, left_oper.name, right_oper.name, result.name))
+        self.__quads.append((operator.to_code(), left_oper.name, right_oper.name, result.name))
         self.__operands_stack.push(result)
 
         if Temporal.is_temp(left_oper):
@@ -69,27 +70,25 @@ class IdleInterRepr:
         return True
 
     def check_addsub(self) -> bool:
-        if self.__operators_stack.peek() == '+' or self.__operators_stack.peek() == '-':
+        if OperationCode.is_add_sub(self.__operators_stack.peek()):
             return self.__resolve_oper()
         
         return True
     
     def check_divmult(self) -> bool:
-        if self.__operators_stack.peek() == '*' or self.__operators_stack.peek() == '/':
+        if OperationCode.is_div_mult(self.__operators_stack.peek()):
             return self.__resolve_oper()
 
         return True
 
     def check_relop(self) -> bool:
-        relops = ['<', '>', '<=', '>=', '==', '!=', '&&', '||']
-
-        if self.__operators_stack.peek() in relops:
+        if OperationCode.is_relop(self.__operators_stack.peek()):
             return self.__resolve_oper()
 
         return True
 
     def open_parenthesis(self):
-        self.__operators_stack.push('PAREN')
+        self.__operators_stack.push(OperationCode.FAKEBOTTOM)
     
     def close_parenthesis(self):
         self.__operators_stack.pop()
@@ -100,26 +99,26 @@ class IdleInterRepr:
         if oper.var_type != var.var_type:
             return False
 
-        self.__quads.append(('=', oper.name, None, var.name))
+        self.__quads.append((OperationCode.ASSIGN.to_code(), oper.name, None, var.name))
         return True
 
     def read(self, read_type):
         result = self.__temporals.next(read_type)
 
         if read_type == DataType.INT:
-            self.__quads.append(('READINT', None, None, result.name))
+            self.__quads.append((OperationCode.READINT.to_code(), None, None, result.name))
 
         if read_type == DataType.FLOAT:
-            self.__quads.append(('READFLOAT', None, None, result.name))
+            self.__quads.append((OperationCode.READFLOAT.to_code(), None, None, result.name))
         
         if read_type == DataType.STRING:
-            self.__quads.append(('READSTRING', None, None, result.name))
+            self.__quads.append((OperationCode.READSTRING.to_code(), None, None, result.name))
         
         self.__operands_stack.push(result)
 
     def print_st(self):
         oper = self.__operands_stack.pop()
-        self.__quads.append(('PRINT', oper.name, None, None))
+        self.__quads.append((OperationCode.PRINT.to_code(), oper.name, None, None))
 
     def start_while(self):
         self.__jump_stack.push(len(self.__quads))
@@ -130,7 +129,7 @@ class IdleInterRepr:
         if expr_result.var_type != DataType.BOOL:
             return False
 
-        self.__quads.append(('GOTOF', expr_result.name, None, None))
+        self.__quads.append((OperationCode.GOTOF.to_code(), expr_result.name, None, None))
         self.__jump_stack.push(len(self.__quads)-1)
 
         return True
@@ -140,7 +139,7 @@ class IdleInterRepr:
         while_start = self.__jump_stack.pop()
 
         # Add GOTO to loop back to while start
-        self.__quads.append(('GOTO', None, None, while_start))
+        self.__quads.append((OperationCode.GOTO.to_code(), None, None, while_start))
 
         # Update GOTOF jump address after expression
         expr_end_quad = list(self.__quads[expr_end])

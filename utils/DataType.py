@@ -10,7 +10,9 @@ class DataType(Enum):
     ERROR = "error"
 
     @staticmethod
-    def exists(name) -> bool:
+    def exists(name: str) -> bool:
+        """Checks if data type is primitive data type."""
+
         for dtype in DataType.__members__.values():
             if name == dtype.value:
                 return True
