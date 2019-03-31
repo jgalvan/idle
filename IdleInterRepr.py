@@ -167,7 +167,7 @@ class IdleInterRepr:
         if expr_result.var_type != DataType.BOOL:
             return False
 
-        self.__quads.append(('GOTOF', expr_result.name, None, None))
+        self.__quads.append((OperationCode.GOTOF.to_code(), expr_result.name, None, None))
         false_jumps = Stack()
         false_jumps.push(len(self.__quads)-1)
         self.__jump_stack.push(false_jumps)
@@ -190,7 +190,7 @@ class IdleInterRepr:
         self.__jump_stack.push(goto_false_jumps)
 
     def add_else(self):
-        self.__quads.append(('GOTO', None, None, None))
+        self.__quads.append((OperationCode.GOTO.to_code(), None, None, None))
         false_jumps = self.__jump_stack.pop()
         false_jump = false_jumps.pop()
 
