@@ -2,6 +2,8 @@ type Main class {
     main() void
     var a int;
     var b int;
+    var c int;
+    var d int;
     var i int;
     {
         while a > a*b {
@@ -14,6 +16,17 @@ type Main class {
         for i = a; i < a; i = i+a {
             b = a *b;
             IO.print(a);
+        }
+
+        if a >= b {
+            a = b;
+            if a == b {
+                IO.print(a);
+            } else {
+                IO.print(b);
+            }
+        } else if a > c {
+            a = c;
         }
     }
 }

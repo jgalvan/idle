@@ -339,6 +339,27 @@ class IdleCompiler:
         if self.__should_gen_quads:
             self.__interp.end_for_block()
 
+    def quad_end_if_expr(self, line_num):
+        """Adds conditional jump when expression evaluates to false."""
+        if self.__should_gen_quads and not self.__interp.end_if_expr():
+            self.__compiler_errors.append("line %i: Type mismatch. Expecting bool in if expression." % line_num)
+            self.__should_gen_quads = False
+
+    def quad_fill_if_end_jumps(self):
+        """Fills jumps to the end of the if block block."""
+        if self.__should_gen_quads:
+            self.__interp.fill_if_end_jumps()
+    
+    def quad_start_else_ifs(self):
+        """Generates a stack that will be used to store the quads that will jump to the end of the if block."""
+        if self.__should_gen_quads:
+            self.__interp.start_else_ifs()
+
+    def quad_add_else(self):
+        """Fills the GOTOF from the previous if/elseif and adds a GOTO to the end of the if block."""
+        if self.__should_gen_quads:
+            self.__interp.add_else()
+
     def printQuads(self):
         for i in range(0,(len(self.__interp.quads))):
             print(i, self.__interp.quads[i])

@@ -209,12 +209,30 @@ class IdleListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by IdleParser#elseIfs.
+    def enterElseIfs(self, ctx:IdleParser.ElseIfsContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#elseIfs.
+    def exitElseIfs(self, ctx:IdleParser.ElseIfsContext):
+        pass
+
+
     # Enter a parse tree produced by IdleParser#elseIf.
     def enterElseIf(self, ctx:IdleParser.ElseIfContext):
         pass
 
     # Exit a parse tree produced by IdleParser#elseIf.
     def exitElseIf(self, ctx:IdleParser.ElseIfContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#finalElse.
+    def enterFinalElse(self, ctx:IdleParser.FinalElseContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#finalElse.
+    def exitFinalElse(self, ctx:IdleParser.FinalElseContext):
         pass
 
 

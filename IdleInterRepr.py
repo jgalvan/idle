@@ -161,3 +161,47 @@ class IdleInterRepr:
     def end_for_block(self):
         # Add temporal quads from assignment to end of block
         self.__quads.extend(self.__temp_quads)
+
+    def end_if_expr(self) -> bool:
+        expr_result = self.__operands_stack.pop()
+
+        if expr_result.var_type != DataType.BOOL:
+            return False
+
+        self.__quads.append(('GOTOF', expr_result.name, None, None))
+        false_jumps = Stack()
+        false_jumps.push(len(self.__quads)-1)
+        self.__jump_stack.push(false_jumps)
+
+        return True
+
+    def fill_if_end_jumps(self):
+        fill_jumps = self.__jump_stack.pop()
+        while not fill_jumps.isEmpty():
+            expr_end = fill_jumps.pop()
+            # Update GOTOF jump address after expression
+            expr_end_quad = list(self.__quads[expr_end])
+            expr_end_quad[3] = len(self.__quads)
+            self.__quads[expr_end] = tuple(expr_end_quad)
+
+    def start_else_ifs(self):
+        goto_end_jumps = Stack()
+        goto_false_jumps = self.__jump_stack.pop()
+        self.__jump_stack.push(goto_end_jumps)
+        self.__jump_stack.push(goto_false_jumps)
+
+    def add_else(self):
+        self.__quads.append(('GOTO', None, None, None))
+        false_jumps = self.__jump_stack.pop()
+        false_jump = false_jumps.pop()
+
+        # Add quad to stack of quads that should jump to the end of if
+        goto_end_jumps = self.__jump_stack.pop()
+        goto_end_jumps.push(len(self.__quads)-1)
+        self.__jump_stack.push(goto_end_jumps)
+
+        # Update GOTOF jump address from previous if / else if
+        expr_false_jump = list(self.__quads[false_jump])
+        expr_false_jump[3] = len(self.__quads)
+        self.__quads[false_jump] = tuple(expr_false_jump)
+    

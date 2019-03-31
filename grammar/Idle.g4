@@ -151,10 +151,18 @@ instanceVar returns [attr_ref]
 	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)};
 
 condition
-	: 'if' expression block elseIf* ('else' block)?;
+	: 'if' expression {self.icomp.quad_end_if_expr($expression.start.line)} block ({self.icomp.quad_start_else_ifs()} elseIfs)? {self.icomp.quad_fill_if_end_jumps()};
+
+elseIfs
+	:  elseIf+ {self.icomp.quad_fill_if_end_jumps()}
+	| finalElse
+	| elseIf+ finalElse;
 
 elseIf
-	: 'else' 'if' expression block;
+	: 'else' 'if' {self.icomp.quad_add_else()} expression {self.icomp.quad_end_if_expr($expression.start.line)} block;
+
+finalElse
+	: 'else' {self.icomp.quad_add_else()} block;
 
 whileLoop
 	: 'while' {self.icomp.quad_start_while()} expression {self.icomp.quad_end_while_expr($expression.start.line)} block {self.icomp.quad_end_while()};
