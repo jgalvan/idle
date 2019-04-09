@@ -238,7 +238,7 @@ class IdleInterRepr:
         return (True, None)
 
     def add_func_gosub(self):
-        func_called = self.__func_calls_stack.pop()
+        func_called = self.__func_calls_stack.peek()
 
         if func_called:
             # If function has return value, save return in temporal
@@ -255,6 +255,14 @@ class IdleInterRepr:
                 return (False, func_called.name, len(func_called.arguments), param_counter)
                 
         return (True, None)
+
+    def check_not_void(self, check: bool):
+        func_called = self.__func_calls_stack.pop()
+        
+        if check and func_called.return_type == None:
+            return False
+        
+        return True
 
     def add_func_return(self, expected_return_type: DataType) -> bool:
         return_val = None

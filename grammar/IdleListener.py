@@ -65,6 +65,42 @@ class IdleListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by IdleParser#nonVoidMethod.
+    def enterNonVoidMethod(self, ctx:IdleParser.NonVoidMethodContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#nonVoidMethod.
+    def exitNonVoidMethod(self, ctx:IdleParser.NonVoidMethodContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#voidMethod.
+    def enterVoidMethod(self, ctx:IdleParser.VoidMethodContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#voidMethod.
+    def exitVoidMethod(self, ctx:IdleParser.VoidMethodContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#constructor.
+    def enterConstructor(self, ctx:IdleParser.ConstructorContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#constructor.
+    def exitConstructor(self, ctx:IdleParser.ConstructorContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#nonVoidBlock.
+    def enterNonVoidBlock(self, ctx:IdleParser.NonVoidBlockContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#nonVoidBlock.
+    def exitNonVoidBlock(self, ctx:IdleParser.NonVoidBlockContext):
+        pass
+
+
     # Enter a parse tree produced by IdleParser#methodArguments.
     def enterMethodArguments(self, ctx:IdleParser.MethodArgumentsContext):
         pass
@@ -251,6 +287,15 @@ class IdleListener(ParseTreeListener):
 
     # Exit a parse tree produced by IdleParser#forLoop.
     def exitForLoop(self, ctx:IdleParser.ForLoopContext):
+        pass
+
+
+    # Enter a parse tree produced by IdleParser#expressionCall.
+    def enterExpressionCall(self, ctx:IdleParser.ExpressionCallContext):
+        pass
+
+    # Exit a parse tree produced by IdleParser#expressionCall.
+    def exitExpressionCall(self, ctx:IdleParser.ExpressionCallContext):
         pass
 
 

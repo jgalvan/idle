@@ -5,14 +5,18 @@ type Main class {
     }
 
     returnFunc(a string) string
+    var b int;
+    var c int;
     {
-        return a;
+        if b > c {
+            return a;
+        }
     }
     
     main() void
     var ret_val string;
     {
         ret_val = returnFunc(ret_val);
-        printFunc(returnFunc(returnFunc(ret_val)));
+        printFunc(returnFunc(ret_val));
     }
 }

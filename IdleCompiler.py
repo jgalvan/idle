@@ -390,8 +390,11 @@ class IdleCompiler:
         """Adds quad for return statement."""
 
         if self.__should_gen_quads and not self.__interp.add_func_return(self.__current_scope.return_type):
-            self.__compiler_errors.append("line %i: Type mismatch. Function return type should be %s." % 
-                (line_num, self.__current_scope.return_type))
+            if self.__current_scope.return_type != None:
+                self.__compiler_errors.append("line %i: Type mismatch. Function return type should be %s." % 
+                    (line_num, self.__current_scope.return_type))
+            else:
+                self.__compiler_errors.append("line %i: Type mismatch. Function is void, should not return anything." % line_num)
 
     def quad_add_endproc(self, line_num):
         """Defines the end of a function. Expects to be called at end of block."""
@@ -399,6 +402,14 @@ class IdleCompiler:
         if self.__should_gen_quads and not self.__interp.add_endproc(self.__current_scope.return_type):
             self.__compiler_errors.append("line %i: Missing return statement. Function return type should be %s." % 
                 (line_num, self.__current_scope.return_type))
+
+    def check_not_void(self, line_num, check):
+        """Checks that a function called within an expression is not void"""
+
+        if self.__should_gen_quads:
+            if not self.__interp.check_not_void(check):
+                self.__compiler_errors.append("line %i: Expecting expression with value, but called void function instead." % line_num)
+                self.__should_gen_quads = False
 
     def printQuads(self):
         for i in range(0,(len(self.__interp.quads))):

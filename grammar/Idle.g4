@@ -88,8 +88,21 @@ attribute
 	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
 
 method
-	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' (typeState {self.icomp.add_func_return_type($typeState.text)} | 'void') varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()}
-	| ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
+	: nonVoidMethod
+	| voidMethod
+	| constructor;
+
+nonVoidMethod
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' typeState {self.icomp.add_func_return_type($typeState.text)} varsDecl* nonVoidBlock {self.icomp.quad_add_endproc($nonVoidBlock.stop.line)} {self.icomp.end_scope()};
+
+voidMethod
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' 'void' varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()};
+
+constructor
+	: ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
+
+nonVoidBlock
+	: '{' (statement {self.icomp.reset_new_line()} )* returnState '}';
 
 methodArguments
 	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)} (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)})*;
@@ -109,7 +122,7 @@ block
 statement
 	: assignment ';'
 	| condition
-	| call ';'
+	| call ';' {self.icomp.check_not_void($call.stop.line, check=False)}
 	| forLoop
 	| whileLoop
 	| printState
@@ -137,7 +150,7 @@ literal
 	| FLOAT_LITERAL
 	| STRING_LITERAL
 	| BOOL_LITERAL
-	| call;
+	| expressionCall;
 
 reference returns [attr_ref]
 	: ID {self.icomp.check_var_exists($ID.text, $ID.line)}
@@ -172,6 +185,9 @@ forLoop
 			expression {self.icomp.quad_end_while_expr($expression.start.line)} ';' 
 			{self.icomp.quad_start_for_assign()} assignment? {self.icomp.quad_end_for_assign()}
 			block {self.icomp.quad_end_for_block()} {self.icomp.quad_end_while()};
+
+expressionCall
+	: call {self.icomp.check_not_void($call.stop.line, check=True)};
 
 call
 	: reference '.' ID {self.icomp.check_obj_func_exists($reference.attr_ref, $ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
