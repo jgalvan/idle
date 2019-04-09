@@ -4,6 +4,7 @@ from antlr4 import *
 from utils.DataType import DataType
 import grammar.IdleLexer
 from IdleInterRepr import IdleInterRepr
+from scopes.CompilationMemory import CompilationMemory
 
 class IdleCompiler:
     """Class used to control compilation process."""
@@ -235,6 +236,13 @@ class IdleCompiler:
         if not self.__should_gen_quads:
             self.__should_gen_quads = True
             self.__interp = IdleInterRepr()
+
+    def add_constant(self, value, var_type):
+        var_type = DataType(var_type)
+        const_var = CompilationMemory.get_constant(value, var_type)
+
+        if self.__should_gen_quads:
+            self.__interp.add_var(const_var)
 
     def quad_add_var(self, var_name):
         """Looks for var and adds to quads"""

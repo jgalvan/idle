@@ -1,16 +1,21 @@
 type Main class {
     printFunc(a string) void
+    var c float;
+    var b float;
     {
         IO.print(a);
+        b = 1*b;
+        b = 1*b;
     }
 
     returnFunc(a string) string
     var b int;
-    var c int;
+    var c float;
     {
-        if b > c {
+        if b > c + 1 {
             return a;
         }
+        return a;
     }
     
     main() void

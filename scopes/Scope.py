@@ -1,4 +1,5 @@
 from .Variable import *
+from .CompilationMemory import CompilationMemory
 
 class Scope():
     """Represents a scope in the language.
@@ -15,6 +16,11 @@ class Scope():
         self.__variables = dict()
         self.__pending_variables = []
 
+        if parent == None:
+            self.__compilation_memory = CompilationMemory()
+        else:
+            self.__compilation_memory = self.__parent.compilation_memory
+
     @property
     def name(self):
         return self.__name
@@ -22,6 +28,10 @@ class Scope():
     @property
     def parent(self):
         return self.__parent
+
+    @property
+    def compilation_memory(self):
+        return self.__compilation_memory
     
     def add_var(self, var_name):
         """Adds a variable to be commited. Assummes variable does not exist.
@@ -39,7 +49,8 @@ class Scope():
         """
 
         for var_name in self.__pending_variables:
-            current_var = Variable(var_name, type_name)
+            address = self.__compilation_memory.get_next_address(type_name)
+            current_var = Variable(var_name, type_name, address)
             self.__variables[var_name] = current_var
         
         self.__pending_variables.clear()

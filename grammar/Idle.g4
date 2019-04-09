@@ -146,10 +146,10 @@ factor
 
 literal
 	: reference {self.icomp.quad_add_var($reference.text)}
-	| INT_LITERAL
-	| FLOAT_LITERAL
-	| STRING_LITERAL
-	| BOOL_LITERAL
+	| INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int')}
+	| FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float')}
+	| STRING_LITERAL {self.icomp.add_constant($STRING_LITERAL.text, 'string')}
+	| BOOL_LITERAL {self.icomp.add_constant($BOOL_LITERAL.text, 'bool')}
 	| expressionCall;
 
 reference returns [attr_ref]
