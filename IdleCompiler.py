@@ -109,8 +109,8 @@ class IdleCompiler:
     def add_func_return_type(self, return_type):
         """Called after adding function, updates last function's return type."""
 
-        if DataType.exists(type_name):
-            type_name = DataType(type_name)
+        if DataType.exists(return_type):
+            return_type = DataType(return_type)
         
         self.__current_scope.return_type = return_type
 
@@ -138,7 +138,10 @@ class IdleCompiler:
     def check_func_exists(self, func_name, line_num):
         """Checks if a function is available for use in current scope."""
         
-        if not self.__current_class.contains_func(func_name):
+        class_func = self.__current_class.find_func(func_name)
+        if class_func != None:
+            self.__interp.add_func_era(class_func)
+        else:
             self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
 
     def check_class_exists(self, class_name, line_num):
@@ -161,6 +164,7 @@ class IdleCompiler:
     def add_arg(self, arg_name):
         """Adds a variable as an argument for the current function.
         """
+        
         self.__current_scope.add_arg(arg_name)
 
     def commit_vars(self, type_name, line_num):
@@ -215,10 +219,13 @@ class IdleCompiler:
                 self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
             else:
                 class_obj = self.__classes[type_name]
+                class_func = class_obj.find(func_name)
 
-                if not class_obj.contains_func(func_name):
+                if class_func != None:
+                    self.__interp.add_func_era(class_func, var_ref)
+                else:
                     self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
-
+                    
     def reset_new_line(self):
         """If there was previously an error, resets quads to be able to continue compilation.
         
@@ -351,13 +358,47 @@ class IdleCompiler:
     
     def quad_start_else_ifs(self):
         """Generates a stack that will be used to store the quads that will jump to the end of the if block."""
+        
         if self.__should_gen_quads:
             self.__interp.start_else_ifs()
 
     def quad_add_else(self):
         """Fills the GOTOF from the previous if/elseif and adds a GOTO to the end of the if block."""
+
         if self.__should_gen_quads:
             self.__interp.add_else()
+
+    def quad_add_func_param(self, line_num):
+        """To be called for each argument when calling a function. Checks number of parameters and type matching."""
+
+        if self.__should_gen_quads:
+            quad_result = self.__interp.add_func_param()
+            if not quad_result[0]:
+                self.__compiler_errors.append("line %i: Type mismatch. Expecting type %s for parameter %s." % 
+                        (line_num, quad_result[2], quad_result[1]))
+
+    def quad_add_func_gosub(self, line_num):
+        """Adds quad for jumping to function when called. Expects to be called at end of function call."""
+
+        if self.__should_gen_quads:
+            quad_result = self.__interp.add_func_gosub()
+            if not quad_result[0]:
+                self.__compiler_errors.append("line %i: Wrong number of arguments for function %s, expecting %i but received %i." % 
+                    (line_num, quad_result[1], quad_result[2], quad_result[3]))
+
+    def quad_add_func_return(self, line_num):
+        """Adds quad for return statement."""
+
+        if self.__should_gen_quads and not self.__interp.add_func_return(self.__current_scope.return_type):
+            self.__compiler_errors.append("line %i: Type mismatch. Function return type should be %s." % 
+                (line_num, self.__current_scope.return_type))
+
+    def quad_add_endproc(self, line_num):
+        """Defines the end of a function. Expects to be called at end of block."""
+
+        if self.__should_gen_quads and not self.__interp.add_endproc(self.__current_scope.return_type):
+            self.__compiler_errors.append("line %i: Missing return statement. Function return type should be %s." % 
+                (line_num, self.__current_scope.return_type))
 
     def printQuads(self):
         for i in range(0,(len(self.__interp.quads))):

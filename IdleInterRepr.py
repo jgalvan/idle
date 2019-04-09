@@ -3,6 +3,7 @@ from utils.SemanticCube import SemanticCube
 from utils.DataType import DataType
 from utils.OperationCode import OperationCode
 from scopes.Variable import Variable
+from scopes.Func import Func
 
 class Temporal:
     TEMP_PREFIX = "__temp__"
@@ -29,6 +30,8 @@ class Temporal:
     def free_up(self, var):
         self.__available.append(var)
 
+# TODO: Change var.name to var.address
+
 class IdleInterRepr:
     def __init__(self):
         self.__temporals = Temporal()
@@ -36,6 +39,8 @@ class IdleInterRepr:
         self.__operators_stack = Stack()
         self.__quads = []
         self.__jump_stack = Stack()
+        self.__func_calls_stack = Stack()
+        self.__param_counter_stack = Stack()
 
     @property
     def quads(self):
@@ -204,3 +209,80 @@ class IdleInterRepr:
         expr_false_jump[3] = len(self.__quads)
         self.__quads[false_jump] = tuple(expr_false_jump)
     
+    def add_func_era(self, func_called: Func, obj_var: Variable = None):
+        if obj_var != None:
+            # If call belongs to object, add object reference to change instance contexts
+            self.__quads.append((OperationCode.ERA, func_called.name, obj_var.name, None))
+        else:
+            self.__quads.append((OperationCode.ERA, func_called.name, None, None))
+        
+        self.__func_calls_stack.push(func_called)
+        self.__param_counter_stack.push(0)
+    
+    def add_func_param(self):
+        func_called = self.__func_calls_stack.peek()
+        origin_var = self.__operands_stack.pop()
+        param_counter = self.__param_counter_stack.pop()
+        self.__param_counter_stack.push(param_counter + 1)
+
+        # More arguments given than requested
+        if param_counter >= len(func_called.arguments):
+            return (True, None) # Ignore, later will be caught on add_func_gosub
+        
+        # Check parameter type matching
+        destination_var = func_called.arguments[param_counter]
+        if origin_var.var_type != destination_var.var_type:
+            return (False, destination_var.name, destination_var.var_type)
+
+        self.__quads.append((OperationCode.PARAM, origin_var.name, None, destination_var.name))
+        return (True, None)
+
+    def add_func_gosub(self):
+        func_called = self.__func_calls_stack.pop()
+
+        if func_called:
+            # If function has return value, save return in temporal
+            if func_called.return_type != None:
+                result = self.__temporals.next(func_called.return_type)
+                self.__quads.append((OperationCode.GOSUB, func_called.name, None, result.name))
+                self.__operands_stack.push(result)
+            else:
+                self.__quads.append((OperationCode.GOSUB, func_called.name, None, None))
+            
+            # Check number of parameters
+            param_counter = self.__param_counter_stack.pop()
+            if param_counter != len(func_called.arguments):
+                return (False, func_called.name, len(func_called.arguments), param_counter)
+                
+        return (True, None)
+
+    def add_func_return(self, expected_return_type: DataType) -> bool:
+        return_val = None
+        return_type = None
+
+        if not self.__operands_stack.isEmpty():
+            return_var = self.__operands_stack.pop()
+            return_val = return_var.name
+            return_type = return_var.var_type
+        
+        if expected_return_type != None:
+            # Quad appended even on error to avoid also reporting 'missing return statement' on add_endproc
+            self.__quads.append((OperationCode.RETURN, return_val, None, None))
+
+        if return_type != expected_return_type:
+            return False
+
+        return True
+    
+    def add_endproc(self, expected_return_type: DataType) -> bool:
+        self.__quads.append((OperationCode.ENDPROC, None, None, None))
+
+        # Assumes last quad should be return statement
+        if expected_return_type != None:
+            try:
+                if self.__quads[-2][0] != OperationCode.RETURN:
+                    return False
+            except IndexError:
+                return False
+        
+        return True

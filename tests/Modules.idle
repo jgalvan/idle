@@ -1,0 +1,18 @@
+type Main class {
+    printFunc(a string) void
+    {
+        IO.print(a);
+    }
+
+    returnFunc(a string) string
+    {
+        return a;
+    }
+    
+    main() void
+    var ret_val string;
+    {
+        ret_val = returnFunc(ret_val);
+        printFunc(returnFunc(returnFunc(ret_val)));
+    }
+}

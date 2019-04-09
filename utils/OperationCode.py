@@ -35,6 +35,14 @@ class OperationCode(Enum):
     GOTOF = 'GOTOF'
     GOTOT = 'GOTOT'
 
+    # Function calls
+    ERA = 'ERA'
+    PARAM = 'PARAM'
+    GOSUB = 'GOSUB'
+    RETURN = 'RETURN'
+    ENDPROC = 'ENDPROC'
+
+
     @staticmethod
     def from_code(code: int) -> 'OperationCode':
         """Retrieves a specific operation in OperationCode from its integer code."""

@@ -22,9 +22,13 @@ class Func(Scope):
         """Sets return_type and prevents from being set more than once."""
 
         if self.__return_type == None:
-            return_type = return_type
+            self.__return_type = return_type
         else:
             print("Internal error: Return type already set for %s" % return_type)
+
+    @property
+    def arguments(self):
+        return self.__arguments
     
     def add_arg(self, arg_name):
         self.__arguments.append(self.find_var(arg_name))
