@@ -1,6 +1,7 @@
 from scopes.CompilationMemory import CompilationMemory
 from utils.DataType import DataType
 from utils.Stack import Stack
+import copy
 
 class Memory():
     CONSTANTS = []
@@ -37,8 +38,9 @@ class Memory():
 
         while internal_address >= len(value_store):
             value_store.append(None)
-
-        value_store[internal_address] = value
+        
+        # Cambiaria si se implementa por referencia
+        value_store[internal_address] = copy.deepcopy(value)
 
     def get_value(self, address):
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]

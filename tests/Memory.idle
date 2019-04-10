@@ -35,6 +35,11 @@ type Main class {
         teststring = $name;
     }
 
+    test2(o2 Other) void
+    {
+        o2.test();
+    }
+
     main() void
     var otherstring string;
     var i float;
@@ -48,5 +53,7 @@ type Main class {
         o.test3();
         o.test2();
         o.test4(i);
+        test2(o);
+        o.test3();
     }
 }
