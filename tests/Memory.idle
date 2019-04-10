@@ -40,6 +40,11 @@ type Main class {
         o2.test();
     }
 
+    test3() string
+    {
+        return "test";
+    }
+
     main() void
     var otherstring string;
     var i float;
@@ -55,5 +60,6 @@ type Main class {
         o.test4(i);
         test2(o);
         o.test3();
+        $name = test3();
     }
 }

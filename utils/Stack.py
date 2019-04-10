@@ -18,5 +18,11 @@ class Stack:
         else:
             return None
 
+    def peek_next_to_last(self):
+        if self.size() > 1:
+            return self.items[len(self.items)-2]
+        else:
+            return None
+
     def size(self):
         return len(self.items)

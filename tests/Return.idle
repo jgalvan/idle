@@ -1,0 +1,18 @@
+type Other class {
+    test() string
+    {
+        return "test";
+    }
+}
+
+type Main class {
+    name string;
+
+    main() void
+    var a string;
+    var o Other;
+    {
+        $name = o.test();
+        a = $name;
+    }
+}

@@ -68,6 +68,10 @@ class LocalMemory(Memory):
         self.__temporal_memory = Memory()
         self.__instruction_counter = instruction_counter
     
+    @property
+    def last_instruction(self):
+        return self.__instruction_counter - 1
+
     def set_value(self, value, address):
         if address % 10 == CompilationMemory.TEMP_ID:
             self.__temporal_memory.set_value(value, address)
@@ -114,6 +118,18 @@ class ClassMemory(Memory):
 
     def send_param(self, value, address):
         self.__next_func.peek().set_value(value, address)
+
+    def can_return(self):
+        return self.__func_memory_stack.size() > 1
+
+    def curr_func_last_instruction(self):
+        return self.__func_memory_stack.peek().last_instruction
+
+    def prev_func_last_instruction(self):
+        return self.__func_memory_stack.peek_next_to_last().last_instruction
+
+    def return_value(self, value, address):
+        self.__func_memory_stack.peek_next_to_last().set_value(value, address)
     
     def goto_next_func(self):
         self.__func_memory_stack.push(self.__next_func.pop())
