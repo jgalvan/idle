@@ -31,17 +31,20 @@ class Memory():
         internal_address = self.get_internal_address(address)
         value_store = self.get_value_store(address)
 
-        if internal_address >= len(value_store):
-            value_store.append(value)
-        else:
-            value_store[internal_address] = value
+        while internal_address > len(value_store):
+            value_store.append(None)
+
+        value_store.append(value)
 
     def get_value(self, address):
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
         internal_address = self.get_internal_address(address)
         value_store = self.get_value_store(address)
 
-        if internal_address >= len(value_store):
-            value_store.append(self.__defaults[var_type])
+        while internal_address >= len(value_store):
+            value_store.append(None)
 
-        return value_store[self.get_internal_address(address)]
+        if value_store[internal_address] == None:
+            value_store[internal_address] = self.__defaults[var_type]
+
+        return value_store[internal_address]
