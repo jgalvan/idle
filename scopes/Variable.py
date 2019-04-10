@@ -32,4 +32,4 @@ class Variable():
         self.__var_type = var_type
 
     def __str__(self):
-        return "(%s, %s, %s)" % (self.__name, self.__var_type, self.__access_modifier)
+        return "(%s, %s, %s, %s)" % (self.__name, self.__var_type, self.__address, self.__access_modifier)

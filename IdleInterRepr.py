@@ -78,8 +78,9 @@ class IdleInterRepr:
     def close_parenthesis(self):
         self.__operators_stack.pop()
 
-    def assign(self, var) -> bool:
+    def assign(self) -> bool:
         oper = self.__operands_stack.pop()
+        var = self.__operands_stack.pop()
 
         if oper.var_type != var.var_type:
             return False

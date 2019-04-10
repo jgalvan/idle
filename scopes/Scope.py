@@ -17,9 +17,9 @@ class Scope():
         self.__pending_variables = []
 
         if parent == None:
-            self.__compilation_memory = CompilationMemory()
+            self.compilation_memory = CompilationMemory()
         else:
-            self.__compilation_memory = self.__parent.compilation_memory
+            self.compilation_memory = self.__parent.compilation_memory
 
     @property
     def name(self):
@@ -30,8 +30,8 @@ class Scope():
         return self.__parent
 
     @property
-    def compilation_memory(self):
-        return self.__compilation_memory
+    def variables(self):
+        return self.__variables
     
     def add_var(self, var_name):
         """Adds a variable to be commited. Assummes variable does not exist.
@@ -49,7 +49,7 @@ class Scope():
         """
 
         for var_name in self.__pending_variables:
-            address = self.__compilation_memory.get_next_address(type_name)
+            address = self.compilation_memory.get_next_address(type_name)
             current_var = Variable(var_name, type_name, address)
             self.__variables[var_name] = current_var
         

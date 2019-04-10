@@ -1,4 +1,7 @@
 type Main class {
+    name string;
+    age int;
+
     printFunc(a string) void
     var c float;
     var b float;
@@ -21,7 +24,8 @@ type Main class {
     main() void
     var ret_val string;
     {
-        ret_val = returnFunc(ret_val);
+        ret_val = "hello";
+        $name = returnFunc(ret_val);
         printFunc(returnFunc(ret_val));
     }
 }

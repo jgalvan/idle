@@ -114,7 +114,7 @@ varsDecl
 	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* ('[' INT_LITERAL ']')? typeState ';';
 
 assignment
-	: <assoc=right> reference '=' expression {self.icomp.quad_assign($reference.text, $reference.start.line)};
+	: <assoc=right> reference '=' expression {self.icomp.quad_assign($reference.start.line)};
 
 block
 	: '{' (statement {self.icomp.reset_new_line()})* '}';
@@ -145,7 +145,7 @@ factor
 	: '(' {self.icomp.quad_open_parenthesis()} expression ')' {self.icomp.quad_close_parenthesis()} | ('+' | '-')? literal;
 
 literal
-	: reference {self.icomp.quad_add_var($reference.text)}
+	: reference
 	| INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int')}
 	| FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float')}
 	| STRING_LITERAL {self.icomp.add_constant($STRING_LITERAL.text, 'string')}

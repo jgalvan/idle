@@ -19,6 +19,14 @@ class CompilationMemory():
         'Other': 5
     }
 
+    VAR_TYPE_FROM_CODE = {
+        1: DataType.INT,
+        2: DataType.FLOAT,
+        3: DataType.BOOL,
+        4: DataType.STRING,
+        5: 'Other'
+    }
+
     def __init__(self):
         self.int_counter = 0
         self.float_counter = 0

@@ -7,11 +7,11 @@ class Func(Scope):
     Access modifiers are not currently fully supported.
     """
 
-    def __init__(self, parent: Scope, name, access_modifier:AccessModifier=AccessModifier.public):
+    def __init__(self, name, access_modifier:AccessModifier=AccessModifier.public):
         self.__return_type = None
         self.__access_modifier = access_modifier
         self.__arguments = []
-        Scope.__init__(self, name, parent)
+        Scope.__init__(self, name)
     
     @property
     def return_type(self):

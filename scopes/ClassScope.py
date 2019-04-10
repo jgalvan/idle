@@ -1,5 +1,7 @@
 from .Scope import Scope, AccessModifier
 from .Func import Func
+from .CompilationMemory import CompilationMemory
+import copy
 
 # Represents a 
 class ClassScope(Scope):
@@ -8,12 +10,17 @@ class ClassScope(Scope):
     Apart from the inherited scope attributes, it contains a group of functions.
     """
 
-    def __init__(self, name, parent_class):
+    def __init__(self, name, parent_class = None):
         self.__functions = dict()
         self.__current_function = None
         self.__parent_class = parent_class
         
         Scope.__init__(self, name)
+
+        if self.__parent_class != None:
+            self.compilation_memory = copy.deepcopy(self.__parent_class.compilation_memory)
+
+        self.compilation_memory.scope_type = CompilationMemory.INSTANCE_ID
 
     @property
     def parent_class(self):
@@ -22,7 +29,7 @@ class ClassScope(Scope):
     def add_func(self, name):
         """Adds a function to the class. Assumes function does not exist."""
 
-        func = Func(self, name)
+        func = Func(name)
         self.__current_function = func
         self.__functions.update({name: func})
     
@@ -46,5 +53,15 @@ class ClassScope(Scope):
             return self.__functions[name]
         elif self.__parent_class:
             return self.__parent_class.find_func(name)
+        else:
+            return None
+
+    def find_instance_var(self, name):
+        """Looks for variable in class or parents and returns None if not found."""
+        
+        if name in self.variables:
+            return self.variables[name]
+        elif self.__parent_class:
+            return self.__parent_class.find_instance_var(name)
         else:
             return None

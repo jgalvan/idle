@@ -193,16 +193,18 @@ class IdleCompiler:
             self.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
             self.__should_gen_quads = False
         
-        return self.__current_scope.find_var(var_name)
+        var = self.__current_scope.find_var(var_name)
+        self.quad_add_var(var)
+        return var
 
     def check_instance_var_exists(self, var_name, line_num):
         """Checks if an instance variable is available for use in current scope."""
         
-        current_class = self.__current_class
-        while current_class:
-            if current_class.var_in_scope(var_name):
-                return current_class.find_var(var_name)
-            current_class = current_class.parent_class
+        var = self.__current_class.find_instance_var(var_name)
+        if var != None:
+            print(var)
+            self.quad_add_var(var)
+            return var
         
         self.__should_gen_quads = False
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
@@ -244,11 +246,10 @@ class IdleCompiler:
         if self.__should_gen_quads:
             self.__interp.add_var(const_var)
 
-    def quad_add_var(self, var_name):
+    def quad_add_var(self, var):
         """Looks for var and adds to quads"""
 
         if self.__should_gen_quads:
-            var = self.__current_scope.find_var(var_name)
             self.__interp.add_var(var)
     
     def quad_add_oper(self, oper):
@@ -257,13 +258,11 @@ class IdleCompiler:
         if self.__should_gen_quads:
             self.__interp.add_operator(oper)
 
-    def quad_assign(self, var_name, line_num):
+    def quad_assign(self, line_num):
         """Adds quad for assignment and reports type mismatch."""
 
         if self.__should_gen_quads:
-            var = self.__current_scope.find_var(var_name)
-
-            if not self.__interp.assign(var):
+            if not self.__interp.assign():
                 self.__compiler_errors.append("line %i: Type mismatch" % line_num)
                 self.__should_gen_quads = False
 
