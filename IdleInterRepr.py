@@ -202,9 +202,9 @@ class IdleInterRepr:
     def add_func_era(self, func_called: Func, obj_var: Variable = None):
         if obj_var != None:
             # If call belongs to object, add object reference to change instance contexts
-            self.__quads.append((OperationCode.ERA, func_called.name, obj_var.address, None))
+            self.__quads.append((OperationCode.ERA, func_called.func_start, obj_var.address, None))
         else:
-            self.__quads.append((OperationCode.ERA, func_called.name, None, None))
+            self.__quads.append((OperationCode.ERA, func_called.func_start, None, None))
         
         self.__func_calls_stack.push(func_called)
         self.__param_counter_stack.push(0)
