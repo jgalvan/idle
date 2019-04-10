@@ -3,7 +3,19 @@ type Other class {
 
     test() void 
     {
+        $name = "hi";
+    }
+
+    test2() void
+    var a string;
+    {
         $name = "bye";
+    }
+
+    test3() void
+    var a string;
+    {
+        a = $name;
     }
 }
 
@@ -26,5 +38,8 @@ type Main class {
         i = 5.0;
         o.test();
         i = 6.0;
+        o.test3();
+        o.test2();
+        o.test3();
     }
 }
