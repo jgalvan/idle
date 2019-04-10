@@ -190,7 +190,7 @@ expressionCall
 	: call {self.icomp.check_not_void($call.stop.line, check=True)};
 
 call
-	: reference '.' ID {self.icomp.check_obj_func_exists($reference.attr_ref, $ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
+	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
 	| ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
 	| read
 	| 'new' ID {self.icomp.check_class_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};

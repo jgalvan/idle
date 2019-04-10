@@ -165,6 +165,7 @@ class IdleCompiler:
             self.__interp.add_func_era(class_func)
         else:
             self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
+            self.__should_gen_quads = False
 
     def check_class_exists(self, class_name, line_num):
         """Checks if a class is available for use in current scope."""
@@ -229,25 +230,25 @@ class IdleCompiler:
         self.__should_gen_quads = False
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
 
-    def check_obj_func_exists(self, var_ref, func_name, line_num):
+    def check_obj_func_exists(self, func_name, line_num):
         """Checks if a function exists within the class of var_ref
         
         Assumes undeclared variable error has already been thrown if var_ref doesn't exist.
         """
 
-        if var_ref:
-            type_name = var_ref.var_type
+        var_ref = self.__interp.get_last_var()
+        type_name = var_ref.var_type
 
-            if DataType.exists(type_name):
-                self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+        if DataType.exists(type_name):
+            self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+        else:
+            class_obj = self.__classes[type_name]
+            class_func = class_obj.find_func(func_name)
+
+            if class_func != None:
+                self.__interp.add_func_era(class_func, var_ref)
             else:
-                class_obj = self.__classes[type_name]
-                class_func = class_obj.find(func_name)
-
-                if class_func != None:
-                    self.__interp.add_func_era(class_func, var_ref)
-                else:
-                    self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+                self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
                     
     def reset_new_line(self):
         """If there was previously an error, resets quads to be able to continue compilation.
