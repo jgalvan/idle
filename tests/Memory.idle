@@ -17,6 +17,13 @@ type Other class {
     {
         a = $name;
     }
+
+    test4(i float) void
+    var b float;
+    {
+        b = i;
+        i = 7.0;
+    }
 }
 
 type Main class {
@@ -40,6 +47,6 @@ type Main class {
         i = 6.0;
         o.test3();
         o.test2();
-        o.test3();
+        o.test4(i);
     }
 }
