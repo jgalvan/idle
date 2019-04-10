@@ -25,6 +25,7 @@ class IdleVirtualMachine():
             OperationCode.ERA: self.run_era,
             OperationCode.PARAM: self.run_param,
             OperationCode.GOSUB: self.run_gosub,
+            OperationCode.RETURN: self.run_return,
             OperationCode.ENDPROC: self.run_endproc
         }
 
@@ -85,6 +86,20 @@ class IdleVirtualMachine():
         if not self.__next_class_stack.isEmpty():
             self.__memory_stack.push(self.__next_class_stack.pop())
         self.current_memory.goto_next_func()
+
+    def run_return(self, quad):
+        value = self.current_memory.get_value(quad[1])
+
+        # If there is another function in stack, it means it will return to that function within class
+        if self.current_memory.can_return():
+            counter = self.current_memory.prev_func_last_instruction()
+            address = self.__quadruples[counter][3]
+            self.current_memory.return_value(value, address)
+        else: # Return of object function call
+            prev_class = self.__memory_stack.peek_next_to_last()
+            counter = prev_class.curr_func_last_instruction()
+            address = self.__quadruples[counter][3]
+            prev_class.set_value(value, address)
     
     def run_endproc(self, quad):
         self.current_memory.end_func()
