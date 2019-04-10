@@ -20,12 +20,11 @@ class IdleInterRepr:
     def quads(self):
         return self.__quads
 
-    # TODO: Agregar a maquina virtual
     def constant_quads(self):
         const_quads = []
 
         for key,value in CompilationMemory.CONSTANTS.items():
-            const_quads.append((OperationCode.ASSIGN, key, None, None, value.addresss))
+            const_quads.append((OperationCode.ASSIGN, key, None, value.address))
 
         return const_quads
     

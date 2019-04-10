@@ -25,6 +25,14 @@ class IdleCompiler:
     def classes(self):
         return self.__classes
 
+    @property
+    def quads(self):
+        return self.__interp.quads
+    
+    @property
+    def const_quads(self):
+        return self.__interp.constant_quads()
+
     def import_file(self, file_name):
         """Imports a file by starting another nested compilation."""
 

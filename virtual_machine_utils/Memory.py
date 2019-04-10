@@ -24,6 +24,8 @@ class Memory():
         return address//100 - 1
     
     def get_value_store(self, address):
+        if address % 10 == 1:
+            return Memory.CONSTANTS
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
         return self.__values[var_type]
 

@@ -2,6 +2,7 @@ from antlr4 import *
 from grammar.IdleLexer import IdleLexer
 from grammar.IdleListener import IdleListener
 from grammar.IdleParser import IdleParser
+from IdleVirtualMachine import IdleVirtualMachine
 import sys
 
 def main(argv):
@@ -37,6 +38,8 @@ def main(argv):
         print("Please fix errors.")
     else:
         print("Parsed succesfully!")
+        virtual_machine = IdleVirtualMachine(parser.icomp.const_quads, parser.icomp.quads)
+        virtual_machine.run()
 
 if __name__ == '__main__':
     main(sys.argv)
