@@ -242,13 +242,16 @@ class IdleCompiler:
         if DataType.exists(type_name):
             self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
         else:
-            class_obj = self.__classes[type_name]
-            class_func = class_obj.find_func(func_name)
+            class_obj = self.__classes.get(type_name, None)
+            
+            if class_obj != None:
+                class_func = class_obj.find_func(func_name)
 
-            if class_func != None:
+            if class_obj != None and class_func != None:
                 self.__interp.add_func_era(class_func, var_ref)
             else:
                 self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+                self.__should_gen_quads = False
                     
     def reset_new_line(self):
         """If there was previously an error, resets quads to be able to continue compilation.
