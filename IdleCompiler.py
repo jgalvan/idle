@@ -210,7 +210,6 @@ class IdleCompiler:
         
         var = self.__current_class.find_instance_var(var_name)
         if var != None:
-            print(var)
             self.quad_add_var(var)
             return var
         

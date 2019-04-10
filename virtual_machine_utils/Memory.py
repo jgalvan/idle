@@ -54,3 +54,6 @@ class Memory():
                 value_store[internal_address] = self.__defaults[var_type]
 
         return value_store[internal_address]
+
+    def __str__(self):
+        return (str(self.__values))

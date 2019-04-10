@@ -1,0 +1,12 @@
+type Main class {
+    name string;
+
+    main() void
+    var otherstring string;
+    var i float;
+    {
+        $name = "hello";
+        otherstring = $name;
+        i = 5.0;
+    }
+}
