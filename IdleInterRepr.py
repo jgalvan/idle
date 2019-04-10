@@ -28,6 +28,14 @@ class IdleInterRepr:
 
         return const_quads
     
+    def add_goto_main(self):
+        self.quads.append((OperationCode.GOTO, None, None, None))
+
+    def set_main(self, main_func: Func):
+        start = list(self.__quads[0])
+        start[3] = main_func.func_start
+        self.__quads[0] = tuple(start)
+    
     def add_var(self, var):
         self.__operands_stack.push(var)
     
@@ -273,7 +281,7 @@ class IdleInterRepr:
             try:
                 if self.__quads[-2][0] != OperationCode.RETURN:
                     return False
-            except IndexError:
+            except IndexError: # Happens when method is blank
                 return False
         
         return True

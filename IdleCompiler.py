@@ -17,6 +17,9 @@ class IdleCompiler:
         self.__interp = IdleInterRepr()
         self.__should_gen_quads = True
 
+        # Generate first quad, jump to main()
+        self.__interp.add_goto_main()
+
     @property
     def compiler_errors(self):
         return self.__compiler_errors
@@ -32,6 +35,14 @@ class IdleCompiler:
     @property
     def const_quads(self):
         return self.__interp.constant_quads()
+    
+    def set_main(self):
+        if self.__should_gen_quads:
+            main_func = self.__current_class.find_func('main')
+            if main_func != None:
+                self.__interp.set_main(main_func)
+            else:
+                self.__compiler_errors.append("Main method not found.")
 
     def import_file(self, file_name):
         """Imports a file by starting another nested compilation."""
@@ -114,6 +125,7 @@ class IdleCompiler:
         # Add function to class and update current_scope
         self.__current_class.add_func(func_name)
         self.__current_scope = self.__current_class.find_func(func_name)
+        self.__current_scope.set_func_start(len(self.__interp.quads))
     
     def add_func_return_type(self, return_type):
         """Called after adding function, updates last function's return type."""
@@ -143,6 +155,7 @@ class IdleCompiler:
         self.__current_class.add_func(func_name)
         self.__current_scope = self.__current_class.find_func(func_name)
         self.__current_scope.return_type = func_name
+        self.__current_scope.set_func_start(len(self.__interp.quads))
 
     def check_func_exists(self, func_name, line_num):
         """Checks if a function is available for use in current scope."""

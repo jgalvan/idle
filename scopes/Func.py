@@ -11,6 +11,7 @@ class Func(Scope):
         self.__return_type = None
         self.__access_modifier = access_modifier
         self.__arguments = []
+        self.__func_start = -1
         Scope.__init__(self, name)
     
     @property
@@ -29,6 +30,13 @@ class Func(Scope):
     @property
     def arguments(self):
         return self.__arguments
+
+    @property
+    def func_start(self):
+        return self.__func_start
     
     def add_arg(self, arg_name):
         self.__arguments.append(self.find_var(arg_name))
+
+    def set_func_start(self, start):
+        self.__func_start = start
