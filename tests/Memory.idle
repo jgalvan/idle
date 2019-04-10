@@ -1,3 +1,12 @@
+type Other class {
+    name string;
+
+    test() void 
+    {
+        $name = "bye";
+    }
+}
+
 type Main class {
     name string;
 
@@ -10,10 +19,12 @@ type Main class {
     main() void
     var otherstring string;
     var i float;
+    var o Other;
     {
         $name = "hello";
-        otherstring = $name;
         test();
         i = 5.0;
+        o.test();
+        i = 6.0;
     }
 }

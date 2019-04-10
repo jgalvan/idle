@@ -27,6 +27,11 @@ class IdleInterRepr:
             const_quads.append((OperationCode.ASSIGN, key, None, value.address))
 
         return const_quads
+
+    def get_last_var(self):
+        """Returns top of operands stack. Expects to be called only when calling function within object."""
+
+        return self.__operands_stack.pop()
     
     def add_goto_main(self):
         self.quads.append((OperationCode.GOTO, None, None, None))
