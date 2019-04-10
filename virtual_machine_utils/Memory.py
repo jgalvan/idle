@@ -17,7 +17,8 @@ class Memory():
             DataType.INT: 0,
             DataType.FLOAT: 0.0,
             DataType.BOOL: False,
-            DataType.STRING: ""
+            DataType.STRING: "",
+            'Other': None
         }
     
     def get_internal_address(self, address):
@@ -47,6 +48,9 @@ class Memory():
             value_store.append(None)
 
         if value_store[internal_address] == None:
-            value_store[internal_address] = self.__defaults[var_type]
+            if var_type == 'Other':
+                value_store[internal_address] = Memory()
+            else:
+                value_store[internal_address] = self.__defaults[var_type]
 
         return value_store[internal_address]
