@@ -109,6 +109,9 @@ class ClassMemory(Memory):
 
     def era_func(self, func_start):
         self.__next_func.push(LocalMemory(func_start))
+
+    def send_param(self, value, address):
+        self.__next_func.peek().set_value(value, address)
     
     def goto_next_func(self):
         self.__func_memory_stack.push(self.__next_func.pop())
