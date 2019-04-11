@@ -40,7 +40,10 @@ class IdleVirtualMachine():
             OperationCode.LE: self.run_le,
             OperationCode.EQUAL: self.run_equal,
             OperationCode.NOTEQUAL: self.run_not_equal,
-            OperationCode.PRINT: self.run_print
+            OperationCode.PRINT: self.run_print,
+            OperationCode.READFLOAT: self.run_read_float,
+            OperationCode.READINT: self.run_read_int,
+            OperationCode.READSTRING: self.run_read_string
         }
 
         self.init_consts()
@@ -189,4 +192,24 @@ class IdleVirtualMachine():
         if isinstance(op1, bool):
             op1 = str(op1).lower()
         print(op1)
+
+    def run_read_float(self, quad):
+        op1 = input()
+        if isinstance(op1, int):
+            op1 = float(op1)
+        elif not isinstance(op1, float):
+            print("Runtime Error: Expected float.")
+            exit()
+        self.current_memory.set_value(op1, quad[3])
+
+    def run_read_int(self, quad):
+        op1 = input()
+        if not isinstance(op1, int):
+            print("Runtime Error: Expected int.")
+            exit()
+        self.current_memory.set_value(op1, quad[3])
+
+    def run_read_string(self, quad):
+        op1 = str(input())
+        self.current_memory.set_value(op1, quad[3])
         

@@ -273,7 +273,6 @@ class IdleInterRepr:
             # Quad appended even on error to avoid also reporting 'missing return statement' on add_endproc
             self.__quads.append((OperationCode.RETURN, return_val, None, None))
 
-        print(return_var.name, return_type, expected_return_type)
         if return_type != expected_return_type:
             print(self.__quads)
             return False
