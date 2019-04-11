@@ -13,6 +13,7 @@ type Main class {
     main() void
     var ret_val string;
     {
+
         IO.print("Enter name: ");
         $name = IO.readString();
         IO.print("Enter age: ");
@@ -24,7 +25,6 @@ type Main class {
         } else {
             IO.print("No soy adulto.");
         }
-        
         
     }
 }
