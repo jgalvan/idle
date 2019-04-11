@@ -12,7 +12,7 @@
 
 ## Usage
 
-To compile grammar and run the idle, run the following command in your terminal:
+To compile grammar and run idle, run the following command in your terminal:
 ```bash
 $ ./idle <file-name>
 ```
