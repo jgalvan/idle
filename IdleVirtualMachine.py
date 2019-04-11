@@ -195,17 +195,19 @@ class IdleVirtualMachine():
 
     def run_read_float(self, quad):
         op1 = input()
-        if isinstance(op1, int):
+        try:
             op1 = float(op1)
-        elif not isinstance(op1, float):
+        except ValueError:
             print("Runtime Error: Expected float.")
             exit()
         self.current_memory.set_value(op1, quad[3])
 
     def run_read_int(self, quad):
         op1 = input()
-        if not isinstance(op1, int):
-            print("Runtime Error: Expected int.")
+        try:
+            op1 = int(op1)
+        except ValueError:
+            print("Runtime Error: Expected float.")
             exit()
         self.current_memory.set_value(op1, quad[3])
 
