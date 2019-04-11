@@ -23,7 +23,7 @@ class SemanticCube:
             (OperationCode.SUB, DataType.INT, DataType.BOOL): DataType.ERROR,
             (OperationCode.SUB, DataType.INT, DataType.STRING): DataType.ERROR,
 
-            (OperationCode.DIV, DataType.INT, DataType.INT): DataType.FLOAT,
+            (OperationCode.DIV, DataType.INT, DataType.INT): DataType.INT,
             (OperationCode.DIV, DataType.INT, DataType.FLOAT): DataType.FLOAT,
             (OperationCode.DIV, DataType.INT, DataType.BOOL): DataType.ERROR,
             (OperationCode.DIV, DataType.INT, DataType.STRING): DataType.ERROR,

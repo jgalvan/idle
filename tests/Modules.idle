@@ -3,29 +3,29 @@ type Main class {
     age int;
 
     printFunc(a string) void
-    var c float;
-    var b float;
     {
         IO.print(a);
-        b = 1*b;
-        b = 1*b;
     }
 
-    returnFunc(a string) string
-    var b int;
-    var c float;
+    isAdult() bool
     {
-        if b > c + 1 {
-            return a;
+        if $age >= 18 {
+            IO.print("entro");
+            return true;
         }
-        return a;
+        return false;
     }
     
     main() void
     var ret_val string;
     {
-        ret_val = "hello";
-        $name = returnFunc(ret_val);
-        printFunc(returnFunc(ret_val));
+        $name = "luis";
+        $age = 18;
+        IO.print(4/5.0);
+        if isAdult() {
+            IO.print("Si es adulto.");
+        }
+        
+        printFunc($name);
     }
 }

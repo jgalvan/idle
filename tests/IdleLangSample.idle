@@ -5,48 +5,63 @@ type Animal class {
     GetName() string {
         return $name;
     }
-}
 
+    SetName(name string) void {
+        $name = name;
+    }
+}
 
 type Dog <- Animal class {
     breed string;
 
-    Bark(woof string) bool {
+    bark(woof string) bool {
+        IO.print(GetName());
         if $age > 1 {
-            IO.print(GetName());
+            IO.print("I'm older than 1");
             return true;
         }
+        IO.print("I'm 1 or younger");
         return false;
+    }
+
+    setAge(age int) void {
+        $age = age;
+    }
+
+    Dog(name string, breed string)
+    var mydog Dog;
+    {
+        IO.print("Corri");
+        mydog.SetName(name);
+        IO.print(mydog.GetName());
+        return mydog;
     }
 }
 
 type Main class {
-    Test() string {
-        return "";
-    }
 
     main() void
     var name string;
     var mydog Dog;
-    var dogs [5]Dog;
     var sum int;
     var i int;
     {
         IO.print("Enter name: ");
-        name = IO.readString();
-        mydog = new Animal(name, "Chihuahua");
-        mydog.Bark();
-        Test();
+        name = "Firulais";
+        //mydog = new Dog(name, "Chihuahua");
+        mydog.SetName(name);
+        IO.print(mydog.GetName());
+        mydog.bark("puta madre");
+        mydog.setAge(4);
+        mydog.bark("puta otra vez");
 
-        for i = 0; i < dogs.size(); i = i + 1 {
-            IO.print(dogs[i].GetName());
-        }
 
+/*
         sum = 0;
         for i = 0; i < 10; i = i + 1 {
             sum = sum + i;
         }
-        IO.print(sum);
+        //IO.print(sum);
 
         while true && false {
             // do stuff
@@ -60,6 +75,6 @@ type Main class {
         }
         else {
             // do stuff
-        }
+        }*/
     }
 }

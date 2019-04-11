@@ -4,7 +4,12 @@ from utils.Stack import Stack
 import copy
 
 class Memory():
-    CONSTANTS = []
+    CONSTANTS = {
+        DataType.INT: [],
+        DataType.FLOAT: [],
+        DataType.BOOL: [],
+        DataType.STRING: [],
+    }
 
     def __init__(self):
         self.__values = {
@@ -27,9 +32,9 @@ class Memory():
         return address//100 - 1
     
     def get_value_store(self, address):
-        if address % 10 == 1:
-            return Memory.CONSTANTS
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
+        if address % 10 == 1:
+            return Memory.CONSTANTS[var_type]
         return self.__values[var_type]
 
     def set_value(self, value, address):

@@ -2,7 +2,13 @@ from .Variable import *
 from utils.DataType import DataType
 
 class CompilationMemory():
-    CONSTANTS = dict()
+    CONSTANTS = {
+        DataType.INT: dict(),
+        DataType.FLOAT: dict(),
+        DataType.BOOL: dict(),
+        DataType.STRING: dict(),
+    }
+
     
     # SCOPE TYPE
     CONSTANT_ID = 1
@@ -37,10 +43,12 @@ class CompilationMemory():
 
     @staticmethod
     def get_constant(value, var_type: DataType) -> Variable:
-        var = CompilationMemory.CONSTANTS.get(value, None)
+        const_dict = CompilationMemory.CONSTANTS.get(var_type)
+        
+        var = const_dict.get(value, None)
 
         if var == None:
-            address = len(CompilationMemory.CONSTANTS) + 1
+            address = len(const_dict) + 1
             address = address*10 + CompilationMemory.VAR_TYPE.get(var_type, CompilationMemory.VAR_TYPE['Other'])
             address = address*10 + CompilationMemory.CONSTANT_ID
 
@@ -48,7 +56,7 @@ class CompilationMemory():
                 value = CompilationMemory.clean_string_const(value)
 
             var = Variable(value, var_type, address)
-            CompilationMemory.CONSTANTS.update({value: var})
+            const_dict.update({value: var})
 
         return var
 

@@ -265,6 +265,14 @@ class IdleCompiler:
 
     def add_constant(self, value, var_type):
         var_type = DataType(var_type)
+
+        if var_type == DataType.BOOL:
+            value = True if value == 'true' else False
+        elif var_type == DataType.FLOAT:
+            value = float(value)
+        elif var_type == DataType.INT:
+            value = int(value)
+
         const_var = CompilationMemory.get_constant(value, var_type)
 
         if self.__should_gen_quads:
