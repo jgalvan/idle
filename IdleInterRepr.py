@@ -212,6 +212,13 @@ class IdleInterRepr:
         if obj_var != None:
             # If call belongs to object, add object reference to change instance contexts
             self.__quads.append((OperationCode.ERA, func_called.func_start, obj_var.address, None))
+        elif func_called.name == func_called.return_type:
+            temp = self.__temporals.next(func_called.return_type)
+            self.__quads.append((OperationCode.ERA, func_called.func_start, temp.address, None))
+            self.__operands_stack.push(temp)
+        elif func_called.name == "__default_constructor__":
+            temp = self.__temporals.next(func_called.return_type)
+            self.__operands_stack.push(temp)
         else:
             self.__quads.append((OperationCode.ERA, func_called.func_start, None, None))
         
@@ -240,13 +247,18 @@ class IdleInterRepr:
         func_called = self.__func_calls_stack.peek()
 
         if func_called:
-            # If function has return value, save return in temporal
-            if func_called.return_type != None:
-                result = self.__temporals.next(func_called.return_type)
-                self.__quads.append((OperationCode.GOSUB, func_called.name, None, result.address))
-                self.__operands_stack.push(result)
-            else:
-                self.__quads.append((OperationCode.GOSUB, func_called.name, None, None))
+            if func_called.name != "__default_constructor__": # Ignore default constructor
+                
+                # If function has return value, save return in temporal
+                if func_called.return_type != None:
+                    if func_called.return_type == func_called.name: # Constructor call
+                        self.__quads.append((OperationCode.GOSUB, func_called.name, None, self.__operands_stack.peek().address))
+                    else:
+                        result = self.__temporals.next(func_called.return_type)
+                        self.__quads.append((OperationCode.GOSUB, func_called.name, None, result.address))
+                        self.__operands_stack.push(result)
+                else:
+                    self.__quads.append((OperationCode.GOSUB, func_called.name, None, None))
             
             # Check number of parameters
             param_counter = self.__param_counter_stack.pop()
@@ -281,16 +293,17 @@ class IdleInterRepr:
 
         return True
     
-    def add_endproc(self, expected_return_type: DataType) -> bool:
+    def add_endproc(self, current_func: Func) -> bool:
         self.__quads.append((OperationCode.ENDPROC, None, None, None))
         self.__temporals = Temporal()
 
         # Assumes last quad should be return statement
-        if expected_return_type != None:
-            try:
-                if self.__quads[-2][0] != OperationCode.RETURN:
+        if current_func.return_type != None:
+            if current_func.return_type != current_func.name: # Not a constructor
+                try:
+                    if self.__quads[-2][0] != OperationCode.RETURN:
+                        return False
+                except IndexError: # Happens when method is blank
                     return False
-            except IndexError: # Happens when method is blank
-                return False
         
         return True

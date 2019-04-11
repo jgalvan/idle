@@ -174,6 +174,14 @@ class IdleCompiler:
         
         if not class_name in self.classes:
             self.__compiler_errors.append("line %i: Constructor for undefined class '%s'" % (line_num, class_name))
+        else:
+            constructor = self.classes[class_name].find_func(class_name)
+
+            if constructor == None:
+                constructor = Func('__default_constructor__')
+                constructor.return_type = class_name
+            
+            self.__interp.add_func_era(constructor)
     
     def add_var(self, var_name, line_num):
         """Adds variable to current scope. Does not allow duplicates.
@@ -447,7 +455,7 @@ class IdleCompiler:
     def quad_add_endproc(self, line_num):
         """Defines the end of a function. Expects to be called at end of block."""
 
-        if self.__should_gen_quads and not self.__interp.add_endproc(self.__current_scope.return_type):
+        if self.__should_gen_quads and not self.__interp.add_endproc(self.__current_scope):
             self.__compiler_errors.append("line %i: Missing return statement. Function return type should be %s." % 
                 (line_num, self.__current_scope.return_type))
 

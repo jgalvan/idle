@@ -1,0 +1,58 @@
+type Animal class {
+    name string;
+    age int;
+
+    getName() string {
+        return $name;
+    }
+
+    setName(name string) void {
+        $name = name;
+    }
+}
+
+type Dog <- Animal class {
+    other string;
+
+    Dog(name string, age int)
+    {
+        $name = name;
+        $age = age;
+    }
+
+    bark() void {
+        IO.print("BARK!");
+    }
+
+    setOther(other string) void {
+        $other = other;
+    }
+
+    getOther() string {
+        return $other;
+    }
+}
+
+type Main class {
+    main() void
+    {
+        var test Dog;
+
+        test = new Dog("test", 18);
+        IO.print(test.getName());
+        test.setOther("other");
+        IO.print(test.getOther());
+
+        test = new Dog("test2", 18);
+        IO.print(test.getName());
+        test.setOther("other2");
+        IO.print(test.getOther());
+
+        test.bark();
+
+        var test3 Animal;
+        test3 = new Animal();
+        test3.setName("test3");
+        IO.print(test3.getName());
+    }
+}

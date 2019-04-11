@@ -6,7 +6,7 @@ class CompilationMemory():
         DataType.INT: dict(),
         DataType.FLOAT: dict(),
         DataType.BOOL: dict(),
-        DataType.STRING: dict(),
+        DataType.STRING: dict()
     }
 
     
@@ -95,7 +95,7 @@ class Temporal(CompilationMemory):
         self.scope_type = CompilationMemory.TEMP_ID
         
     def next(self, var_type: DataType):
-        available = self.__availables[var_type]
+        available = self.__availables.get(var_type, []) # Default is object. Object temporals should always be new
 
         if len(available) > 0:
             next_var = available.pop()
@@ -111,5 +111,5 @@ class Temporal(CompilationMemory):
 
     def free_up_if_temp(self, var):
         if Temporal.is_temp(var):
-            available = self.__availables[var.var_type]
+            available = self.__availables.get(var.var_type, []) # Default is object. Object temporals should always be new
             available.append(var)
