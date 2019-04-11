@@ -188,7 +188,7 @@ forLoop
 			block {self.icomp.quad_end_for_block()} {self.icomp.quad_end_while()};
 
 expressionCall
-	: call {self.icomp.check_not_void($call.stop.line, check=True)};
+	: {self.icomp.quad_open_parenthesis()} call {self.icomp.quad_close_parenthesis()} {self.icomp.check_not_void($call.stop.line, check=True)};
 
 call
 	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}

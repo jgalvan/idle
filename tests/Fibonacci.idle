@@ -1,0 +1,25 @@
+type Main class {
+    fibonacci(x int) int {
+        if x == 0 {
+            return 0;
+        }
+        else if x == 1 {
+            return 1;
+        }
+        return fibonacci(x-1) + fibonacci(x-2);
+    }
+    
+    main() void
+    {
+        var i int;
+        var smth string;
+        i = fibonacci(3);
+        IO.print(i);
+
+        i = fibonacci(4);
+        IO.print(i);
+
+        i = fibonacci(5);
+        IO.print(i);
+    }
+}
