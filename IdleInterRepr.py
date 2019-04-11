@@ -23,8 +23,9 @@ class IdleInterRepr:
     def constant_quads(self):
         const_quads = []
 
-        for key,value in CompilationMemory.CONSTANTS.items():
-            const_quads.append((OperationCode.ASSIGN, key, None, value.address))
+        for const_dict in CompilationMemory.CONSTANTS.values():
+            for name,var in const_dict.items():
+                const_quads.append((OperationCode.ASSIGN, name, None, var.address))
 
         return const_quads
 
@@ -272,7 +273,9 @@ class IdleInterRepr:
             # Quad appended even on error to avoid also reporting 'missing return statement' on add_endproc
             self.__quads.append((OperationCode.RETURN, return_val, None, None))
 
+        print(return_var.name, return_type, expected_return_type)
         if return_type != expected_return_type:
+            print(self.__quads)
             return False
 
         return True
