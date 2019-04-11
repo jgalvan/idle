@@ -1,4 +1,6 @@
 from scopes.ClassScope import ClassScope
+from scopes.Scope import Scope
+from scopes.Func import Func
 from uuid import uuid4
 from antlr4 import *
 from utils.DataType import DataType
@@ -202,6 +204,10 @@ class IdleCompiler:
             self.__compiler_errors.append("line %i: Type '%s' does not exist." % (line_num, type_name))
 
         self.__current_scope.commit_vars(type_name)
+    
+    def start_scope(self):
+        """Should be called when a new scope begins"""
+        self.__current_scope = Scope(None, self.__current_scope)
     
     def end_scope(self):
         """Should be called when scope ended and returns to parent's scope"""
@@ -428,10 +434,13 @@ class IdleCompiler:
     def quad_add_func_return(self, line_num):
         """Adds quad for return statement."""
 
-        if self.__should_gen_quads and not self.__interp.add_func_return(self.__current_scope.return_type):
-            if self.__current_scope.return_type != None:
+        current_scope = self.__current_scope
+        while not isinstance(current_scope, Func):
+            current_scope = current_scope.parent
+        if self.__should_gen_quads and not self.__interp.add_func_return(current_scope.return_type):
+            if current_scope.return_type != None:
                 self.__compiler_errors.append("line %i: Type mismatch. Function return type should be %s." % 
-                    (line_num, self.__current_scope.return_type))
+                    (line_num, current_scope.return_type))
             else:
                 self.__compiler_errors.append("line %i: Type mismatch. Function is void, should not return anything." % line_num)
 

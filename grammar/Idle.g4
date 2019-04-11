@@ -93,13 +93,13 @@ method
 	| constructor;
 
 nonVoidMethod
-	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' typeState {self.icomp.add_func_return_type($typeState.text)} varsDecl* nonVoidBlock {self.icomp.quad_add_endproc($nonVoidBlock.stop.line)} {self.icomp.end_scope()};
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' typeState {self.icomp.add_func_return_type($typeState.text)} nonVoidBlock {self.icomp.quad_add_endproc($nonVoidBlock.stop.line)} {self.icomp.end_scope()};
 
 voidMethod
-	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' 'void' varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()};
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' 'void' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()};
 
 constructor
-	: ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' varsDecl* block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
+	: ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
 
 nonVoidBlock
 	: '{' (statement {self.icomp.reset_new_line()} )* returnState '}';
@@ -120,11 +120,12 @@ block
 	: '{' (statement {self.icomp.reset_new_line()})* '}';
 
 statement
-	: assignment ';'
-	| condition
+	: varsDecl
+	| assignment ';'
+	| {self.icomp.start_scope()} condition {self.icomp.end_scope()}
 	| call ';' {self.icomp.check_not_void($call.stop.line, check=False)}
-	| forLoop
-	| whileLoop
+	| {self.icomp.start_scope()} forLoop {self.icomp.end_scope()}
+	| {self.icomp.start_scope()} whileLoop {self.icomp.end_scope()}
 	| printState
 	| returnState;
 

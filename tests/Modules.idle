@@ -2,18 +2,33 @@ type Main class {
     name string;
     age int;
 
+    fibonacci(x int) int {
+        IO.print(x);
+        if x == 0 {
+            return 0;
+        }
+        else if x == 1 {
+            return 1;
+        }
+        return fibonacci(x-1) + fibonacci(x-2);
+    }
+
     isAdult() bool
     {
+        var myvar int;
+        myvar = 1;
         if $age >= 18 {
+            var myvar int;
             return true;
         }
         return false;
     }
     
     main() void
-    var ret_val string;
     {
-
+        var ret_val string;
+        ret_val = "test vars";
+        IO.print(ret_val);
         IO.print("Enter name: ");
         $name = IO.readString();
         IO.print("Enter age: ");
@@ -26,5 +41,6 @@ type Main class {
             IO.print("No soy adulto.");
         }
         
+        IO.print(fibonacci(6));
     }
 }
