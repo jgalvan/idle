@@ -116,6 +116,9 @@ class IdleInterRepr:
             self.__quads.append((OperationCode.READSTRING.to_code(), None, None, result.address))
         
         self.__operands_stack.push(result)
+        temp_func = Func('temp')
+        temp_func.return_type = read_type
+        self.__func_calls_stack.push(temp_func)
 
     def print_st(self):
         oper = self.__operands_stack.pop()
