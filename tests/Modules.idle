@@ -2,15 +2,9 @@ type Main class {
     name string;
     age int;
 
-    printFunc(a string) void
-    {
-        IO.print(a);
-    }
-
     isAdult() bool
     {
         if $age >= 18 {
-            IO.print("entro");
             return true;
         }
         return false;
@@ -19,13 +13,18 @@ type Main class {
     main() void
     var ret_val string;
     {
-        $name = "luis";
-        $age = 18;
-        IO.print(4/5.0);
+
+        IO.print("Enter name: ");
+        $name = IO.readString();
+        IO.print("Enter age: ");
+        $age = IO.readInt();
+        IO.print("Hello my name is ");
+        IO.print($name);
         if isAdult() {
-            IO.print("Si es adulto.");
+            IO.print("Si soy adulto.");
+        } else {
+            IO.print("No soy adulto.");
         }
         
-        printFunc($name);
     }
 }
