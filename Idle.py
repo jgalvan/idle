@@ -37,7 +37,6 @@ def main(argv):
     elif(parser.getNumberOfSyntaxErrors()):
         print("Please fix errors.")
     else:
-        print("Parsed succesfully!")
         virtual_machine = IdleVirtualMachine(parser.icomp.const_quads, parser.icomp.quads)
         virtual_machine.run()
 

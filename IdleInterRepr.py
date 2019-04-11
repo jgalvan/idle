@@ -277,7 +277,6 @@ class IdleInterRepr:
             self.__quads.append((OperationCode.RETURN, return_val, None, None))
 
         if return_type != expected_return_type:
-            print(self.__quads)
             return False
 
         return True

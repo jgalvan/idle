@@ -458,7 +458,3 @@ class IdleCompiler:
             if not self.__interp.check_not_void(check):
                 self.__compiler_errors.append("line %i: Expecting expression with value, but called void function instead." % line_num)
                 self.__should_gen_quads = False
-
-    def printQuads(self):
-        for i in range(0,(len(self.__interp.quads))):
-            print(i, self.__interp.quads[i])

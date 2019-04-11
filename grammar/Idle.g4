@@ -73,7 +73,7 @@ WS:                 [ \t\r\n\u000C]+ -> skip;
 /* RULES */
 
 fileState
-	: {self.icomp = IdleCompiler()} imp* classState+ {self.icomp.set_main()} {self.icomp.printQuads()};
+	: {self.icomp = IdleCompiler()} imp* classState+ {self.icomp.set_main()};
 
 imp
 	: 'import' ID ';' {self.icomp.import_file($ID.text)};

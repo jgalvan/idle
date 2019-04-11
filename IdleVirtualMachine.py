@@ -15,6 +15,10 @@ class IdleVirtualMachine():
         curr_class.goto_next_func()
         self.__memory_stack.push(curr_class)
 
+        if self.__debug:
+            for i in range(0,(len(self.__quadruples))):
+                print(i, self.__quadruples[i])
+
     @property
     def current_memory(self):
         return self.__memory_stack.peek()
