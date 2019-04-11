@@ -8,17 +8,24 @@
 ## Requirements
 
 - Python 3.7.2
+- Antlr4
 
 ## Usage
 
-To run the compiler, in your terminal run the following command:
+To compile grammar and run the idle, run the following command in your terminal:
 ```bash
-$ python Idle.py <file-name>
+$ ./idle <file-name>
 ```
 
 ## Development
-To recompile grammar with antlr:
+To recompile grammar with antlr4:
 
 ```bash
 $ antlr4 -Dlanguage=Python3 Idle.g4
+```
+
+To only run the compiler without recompiling the grammar:
+
+```bash
+$ python3 Idle.py <file-name>
 ```
