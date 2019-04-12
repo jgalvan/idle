@@ -42,9 +42,9 @@ class ClassScope(Scope):
         self.__current_function = type_name
 
     def contains_func(self, name) -> bool:
-        """Checks existence of function in class."""
+        """Checks existence of function in class, not parent classes."""
 
-        return self.find_func(name) != None
+        return name in self.__functions
     
     def find_func(self, name) -> Func:
         """Looks for function in class and returns None if not found."""

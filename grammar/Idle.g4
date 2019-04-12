@@ -191,10 +191,23 @@ expressionCall
 	: {self.icomp.quad_open_parenthesis()} call {self.icomp.quad_close_parenthesis()} {self.icomp.check_not_void($call.stop.line, check=True)};
 
 call
-	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
-	| ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
+	: obj_call
+	| func_call
 	| read
-	| 'new' ID {self.icomp.check_class_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
+	| constructor_call
+	| parent_call;
+
+obj_call
+	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
+
+func_call
+	: ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
+
+constructor_call
+	: 'new' ID {self.icomp.check_class_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
+
+parent_call
+	: 'super().' ID {self.icomp.check_super_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
 
 callArguments
 	: expression {self.icomp.quad_add_func_param($expression.start.line)} (',' expression {self.icomp.quad_add_func_param($expression.start.line)})*;

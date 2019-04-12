@@ -168,6 +168,21 @@ class IdleCompiler:
         else:
             self.__compiler_errors.append("line %i: Undeclared function '%s'" % (line_num, func_name))
             self.__should_gen_quads = False
+    
+    def check_super_func_exists(self, func_name, line_num):
+        """Checks if a function is available for use in any parent. Uses first function inherited found."""
+        
+        parent_class = self.__current_class.parent_class
+        if parent_class == None:
+            self.__compiler_errors.append("line %i: Class '%s' has no parent." % (line_num, self.__current_class.name))
+            self.__should_gen_quads = False
+        else:
+            super_func = parent_class.find_func(func_name)
+            if super_func != None:
+                self.__interp.add_func_era(super_func)
+            else:
+                self.__compiler_errors.append("line %i: Function '%s' not found in parent." % (line_num, func_name))
+                self.__should_gen_quads = False
 
     def check_class_exists(self, class_name, line_num):
         """Checks if a class is available for use in current scope."""
@@ -182,6 +197,30 @@ class IdleCompiler:
                 constructor.return_type = class_name
             
             self.__interp.add_func_era(constructor)
+
+    def check_obj_func_exists(self, func_name, line_num):
+        """Checks if a function exists within the class of var_ref
+        
+        Assumes undeclared variable error has already been thrown if var_ref doesn't exist.
+        """
+
+        var_ref = self.__interp.get_last_var()
+        type_name = var_ref.var_type
+
+        if DataType.exists(type_name):
+            self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+        else:
+            class_obj = self.__classes.get(type_name, None)
+            
+            if class_obj != None:
+                class_func = class_obj.find_func(func_name)
+
+            if class_obj != None and class_func != None:
+                self.__interp.add_func_era(class_func, var_ref)
+            else:
+                self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
+                self.__should_gen_quads = False
+
     
     def add_var(self, var_name, line_num):
         """Adds variable to current scope. Does not allow duplicates.
@@ -243,29 +282,6 @@ class IdleCompiler:
         
         self.__should_gen_quads = False
         self.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
-
-    def check_obj_func_exists(self, func_name, line_num):
-        """Checks if a function exists within the class of var_ref
-        
-        Assumes undeclared variable error has already been thrown if var_ref doesn't exist.
-        """
-
-        var_ref = self.__interp.get_last_var()
-        type_name = var_ref.var_type
-
-        if DataType.exists(type_name):
-            self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
-        else:
-            class_obj = self.__classes.get(type_name, None)
-            
-            if class_obj != None:
-                class_func = class_obj.find_func(func_name)
-
-            if class_obj != None and class_func != None:
-                self.__interp.add_func_era(class_func, var_ref)
-            else:
-                self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
-                self.__should_gen_quads = False
                     
     def reset_new_line(self):
         """If there was previously an error, resets quads to be able to continue compilation.

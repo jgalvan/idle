@@ -9,9 +9,19 @@ type Animal class {
     setName(name string) void {
         $name = name;
     }
+
+    doSomething() void {
+        IO.print("ANIMAL");
+    }
 }
 
-type Dog <- Animal class {
+type Mammal <- Animal class {
+    doSomething() void {
+        IO.print("MAMMAL");
+    }
+}
+
+type Dog <- Mammal class {
     other string;
 
     Dog(name string, age int)
@@ -30,6 +40,11 @@ type Dog <- Animal class {
 
     getOther() string {
         return $other;
+    }
+
+    doSomething() void {
+        IO.print("DOG");
+        super().doSomething();
     }
 }
 
@@ -54,5 +69,9 @@ type Main class {
         test3 = new Animal();
         test3.setName("test3");
         IO.print(test3.getName());
+
+
+        test.doSomething();
+        test3.doSomething();
     }
 }
