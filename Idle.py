@@ -3,7 +3,9 @@ from grammar.IdleLexer import IdleLexer
 from grammar.IdleListener import IdleListener
 from grammar.IdleParser import IdleParser
 from IdleVirtualMachine import IdleVirtualMachine
+from IdleCompiler import IdleCompiler
 import sys
+import os
 
 def main(argv):
     """Idle compiler main function, used to compile a file in the Idle Language.
@@ -16,14 +18,21 @@ def main(argv):
         print("usage: python Idle.py <fileName>")
         sys.exit(1)
 
+    file_name = argv[1]
+
     # Check if file exists
     try:
-        lexer = IdleLexer(FileStream(argv[1]))
+        lexer = IdleLexer(FileStream(file_name))
     except:
         print("Unexpected error:", sys.exc_info()[1])
         sys.exit(1)
 
-    # Parse
+    # Set current working directory in case there are imports
+    dir_path = os.path.dirname(os.path.realpath(file_name))
+    IdleCompiler.cwd = dir_path
+    IdleCompiler.files_imported.append(os.path.basename(file_name).replace(".idle", ""))
+
+    # Parse 
     stream = CommonTokenStream(lexer)
     parser = IdleParser(stream)
     tree = parser.fileState()
