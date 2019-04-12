@@ -238,6 +238,11 @@ class IdleCompiler:
         """
         
         self.__current_scope.add_arg(arg_name)
+    
+    def param_to_ref(self, arg_name):
+        """Sets a previously added argument to be copied by reference and not value."""
+
+        self.__current_scope.change_param_to_ref(arg_name)
 
     def commit_vars(self, type_name, line_num):
         """Checks type exists and commits previously added variables.

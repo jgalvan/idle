@@ -49,8 +49,20 @@ type Dog <- Mammal class {
 }
 
 type Main class {
+    doSomething(woof string ref) void {
+        IO.print("dentro");
+        IO.print(woof);
+        woof = "hello world";
+    }
+    
     main() void
     {
+        var name string;
+
+        name = "brian";
+        doSomething(name);
+        IO.print(name);
+
         var test Dog;
 
         test = new Dog("test", 18);

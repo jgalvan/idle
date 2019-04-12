@@ -38,6 +38,7 @@ class OperationCode(Enum):
     # Function calls
     ERA = 'ERA'
     PARAM = 'PARAM'
+    PARAMREF = 'PARAMREF'
     GOSUB = 'GOSUB'
     RETURN = 'RETURN'
     ENDPROC = 'ENDPROC'

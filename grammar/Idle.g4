@@ -105,7 +105,10 @@ nonVoidBlock
 	: '{' (statement {self.icomp.reset_new_line()} )* returnState '}';
 
 methodArguments
-	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)} (',' ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)})*;
+	:  singleArgument (',' singleArgument)*;
+
+singleArgument
+	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState {self.icomp.add_arg($ID.text)} ('ref' {self.icomp.param_to_ref($ID.text)})?;
 
 typeState
 	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text, $type_name.line)};

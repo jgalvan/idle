@@ -3,6 +3,10 @@ from utils.DataType import DataType
 from utils.Stack import Stack
 import copy
 
+class VarWrapper():
+    def __init__(self, value):
+        self.value = value
+
 class Memory():
     CONSTANTS = {
         DataType.INT: [],
@@ -37,17 +41,7 @@ class Memory():
             return Memory.CONSTANTS[var_type]
         return self.__values[var_type]
 
-    def set_value(self, value, address):
-        internal_address = self.get_internal_address(address)
-        value_store = self.get_value_store(address)
-
-        while internal_address >= len(value_store):
-            value_store.append(None)
-        
-        # Cambiaria si se implementa por referencia
-        value_store[internal_address] = copy.deepcopy(value)
-
-    def get_value(self, address):
+    def get_reference(self, address):
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
         internal_address = self.get_internal_address(address)
         value_store = self.get_value_store(address)
@@ -57,11 +51,35 @@ class Memory():
 
         if value_store[internal_address] == None:
             if var_type == 'Other':
-                value_store[internal_address] = ClassMemory()
+                value_store[internal_address] = VarWrapper(ClassMemory())
             else:
-                value_store[internal_address] = self.__defaults[var_type]
+                value_store[internal_address] = VarWrapper(self.__defaults[var_type])
 
         return value_store[internal_address]
+    
+    def get_value(self, address):
+        return self.get_reference(address).value
+
+    def set_reference(self, reference, address):
+        internal_address = self.get_internal_address(address)
+        value_store = self.get_value_store(address)
+
+        while internal_address >= len(value_store):
+            value_store.append(None)
+        
+        value_store[internal_address] = reference
+
+    def set_value(self, value, address):
+        internal_address = self.get_internal_address(address)
+        value_store = self.get_value_store(address)
+
+        while internal_address >= len(value_store):
+            value_store.append(None)
+        
+        if value_store[internal_address] == None:
+            value_store[internal_address] = VarWrapper(copy.deepcopy(value))
+        else:
+            value_store[internal_address].value = copy.deepcopy(value)
 
     def __str__(self):
         return (str(self.__values))
@@ -76,6 +94,18 @@ class LocalMemory(Memory):
     @property
     def last_instruction(self):
         return self.__instruction_counter - 1
+
+    def set_reference(self, reference, address):
+        if address % 10 == CompilationMemory.TEMP_ID:
+            self.__temporal_memory.set_reference(reference, address)
+        else:
+            super().set_reference(reference, address)
+
+    def get_reference(self, address):
+        if address % 10 == CompilationMemory.TEMP_ID:
+            return self.__temporal_memory.get_reference(address)
+        else:
+            return super().get_reference(address)
 
     def set_value(self, value, address):
         if address % 10 == CompilationMemory.TEMP_ID:
@@ -106,6 +136,18 @@ class ClassMemory(Memory):
         self.__func_memory_stack = Stack()
         self.__next_func = Stack()
 
+    def set_reference(self, reference, address):
+        if address % 10 == CompilationMemory.INSTANCE_ID:
+            super().set_reference(reference, address)
+        else:
+            self.__func_memory_stack.peek().set_reference(reference, address)
+
+    def get_reference(self, address):
+        if address % 10 == CompilationMemory.INSTANCE_ID:
+            return super().get_reference(address)
+        else:
+            return self.__func_memory_stack.peek().get_reference(address)
+
     def set_value(self, value, address):
         if address % 10 == CompilationMemory.INSTANCE_ID:
             super().set_value(value, address)
@@ -123,6 +165,9 @@ class ClassMemory(Memory):
 
     def send_param(self, value, address):
         self.__next_func.peek().set_value(value, address)
+    
+    def send_param_by_ref(self, reference, address):
+        self.__next_func.peek().set_reference(reference, address)
 
     def can_return(self):
         return self.__func_memory_stack.size() > 1

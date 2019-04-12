@@ -38,5 +38,9 @@ class Func(Scope):
     def add_arg(self, arg_name):
         self.__arguments.append(self.find_var(arg_name))
 
+    def change_param_to_ref(self, arg_name):
+        var = self.find_var(arg_name)
+        var.make_reference()
+
     def set_func_start(self, start):
         self.__func_start = start

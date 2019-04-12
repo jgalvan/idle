@@ -240,7 +240,10 @@ class IdleInterRepr:
         if origin_var.var_type != destination_var.var_type:
             return (False, destination_var.address, destination_var.var_type)
 
-        self.__quads.append((OperationCode.PARAM, origin_var.address, None, destination_var.address))
+        if destination_var.is_param_by_ref:
+            self.__quads.append((OperationCode.PARAMREF, origin_var.address, None, destination_var.address))
+        else:
+            self.__quads.append((OperationCode.PARAM, origin_var.address, None, destination_var.address))
         return (True, None)
 
     def add_func_gosub(self):

@@ -31,6 +31,7 @@ class IdleVirtualMachine():
             OperationCode.ASSIGN: self.run_assign,
             OperationCode.ERA: self.run_era,
             OperationCode.PARAM: self.run_param,
+            OperationCode.PARAMREF: self.run_paramref,
             OperationCode.GOSUB: self.run_gosub,
             OperationCode.RETURN: self.run_return,
             OperationCode.ENDPROC: self.run_endproc,
@@ -114,6 +115,14 @@ class IdleVirtualMachine():
         else:
             self.current_memory.send_param(value, quad[3])
     
+    def run_paramref(self, quad):
+        reference = self.current_memory.get_reference(quad[1])
+        
+        if not self.__next_class_stack.isEmpty():
+            self.__next_class_stack.peek().send_param_by_ref(reference, quad[3])
+        else:
+            self.current_memory.send_param_by_ref(reference, quad[3])
+
     def run_gosub(self, quad):
         if not self.__next_class_stack.isEmpty():
             self.__memory_stack.push(self.__next_class_stack.pop())
