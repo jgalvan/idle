@@ -6,7 +6,7 @@ class Variable():
     Access modifiers are not currently fully supported.
     """
 
-    def __init__(self, name, var_type, address, access_modifier:AccessModifier=AccessModifier.public):
+    def __init__(self, name, var_type, address, access_modifier:AccessModifier=AccessModifier.PUBLIC):
         self.__name = name
         self.__var_type = var_type
         self.__address = address

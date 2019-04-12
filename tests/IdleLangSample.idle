@@ -1,59 +1,60 @@
 type Animal class {
-    name string;
-    age int;
+    - name string;
+    - age int;
 
-    GetName() string {
+    - GetName() string {
         return $name;
     }
 
-    SetName(name string) void {
+    + SetName(name string) void {
         $name = name;
     }
 }
 
 type Dog <- Animal class {
-    breed string;
+    - breed string;
 
-    bark(woof string) bool {
+    - bark() bool {
         IO.print(GetName());
         if $age > 1 {
-            IO.print("I'm older than 1");
+            IO.print("WOOF");
             return true;
         }
-        IO.print("I'm 1 or younger");
+        IO.print("woof");
         return false;
     }
 
-    setAge(age int) void {
+    + bark2() bool {
+        return bark();
+    }
+
+    + setAge(age int) void {
         $age = age;
     }
 
-    Dog(name string, breed string)
-    var mydog Dog;
+    + Dog(name string, breed string)
     {
+        var mydog Dog;
         IO.print("Corri");
         mydog.SetName(name);
-        IO.print(mydog.GetName());
         return mydog;
     }
 }
 
 type Main class {
 
-    main() void
-    var name string;
-    var mydog Dog;
-    var sum int;
-    var i int;
+    + main() void
     {
+        var name string;
+        var mydog Dog;
+        var sum int;
+        var i int;
         IO.print("Enter name: ");
-        name = "Firulais";
-        //mydog = new Dog(name, "Chihuahua");
-        mydog.SetName(name);
-        IO.print(mydog.GetName());
-        mydog.bark("puta madre");
+        name = IO.readString();
+        mydog = new Dog(name, "Chihuahua");
+        mydog.bark2();
         mydog.setAge(4);
-        mydog.bark("puta otra vez");
+        mydog.bark2();
 
 
 /*

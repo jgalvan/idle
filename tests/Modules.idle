@@ -2,17 +2,6 @@ type Main class {
     name string;
     age int;
 
-    fibonacci(x int) int {
-        IO.print(x);
-        if x == 0 {
-            return 0;
-        }
-        else if x == 1 {
-            return 1;
-        }
-        return fibonacci(x-1) + fibonacci(x-2);
-    }
-
     isAdult() bool
     {
         var myvar int;
@@ -41,6 +30,5 @@ type Main class {
             IO.print("No soy adulto.");
         }
         
-        IO.print(fibonacci(6));
     }
 }

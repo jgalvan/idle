@@ -26,10 +26,10 @@ class ClassScope(Scope):
     def parent_class(self):
         return self.__parent_class
 
-    def add_func(self, name):
+    def add_func(self, name, access_modifier: AccessModifier):
         """Adds a function to the class. Assumes function does not exist."""
 
-        func = Func(name)
+        func = Func(name, access_modifier)
         self.__current_function = func
         self.__functions.update({name: func})
     

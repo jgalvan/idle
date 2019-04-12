@@ -19,7 +19,7 @@ type Main class {
         i = fibonacci(4);
         IO.print(i);
 
-        i = fibonacci(5);
+        i = fibonacci(10);
         IO.print(i);
     }
 }

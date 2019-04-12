@@ -1,5 +1,5 @@
 from scopes.ClassScope import ClassScope
-from scopes.Scope import Scope
+from scopes.Scope import Scope, AccessModifier
 from scopes.Func import Func
 from uuid import uuid4
 from antlr4 import *
@@ -108,7 +108,7 @@ class IdleCompiler:
         self.__current_class = new_class
         self.__current_scope = new_class
 
-    def add_func(self, func_name, line_num):
+    def add_func(self, func_name, line_num, access_modifier):
         """Adds a function to symbol table of the last added class.
         
         If duplicate function name is found, it still saves it but with a UUID to allow 
@@ -125,7 +125,7 @@ class IdleCompiler:
             func_name = func_name + uuid4().hex
         
         # Add function to class and update current_scope
-        self.__current_class.add_func(func_name)
+        self.__current_class.add_func(func_name, AccessModifier(access_modifier))
         self.__current_scope = self.__current_class.find_func(func_name)
         self.__current_scope.set_func_start(len(self.__interp.quads))
     
@@ -154,7 +154,7 @@ class IdleCompiler:
             func_name = func_name + uuid4().hex
         
         # Add function to class and update current_scope
-        self.__current_class.add_func(func_name)
+        self.__current_class.add_func(func_name, AccessModifier.PUBLIC)
         self.__current_scope = self.__current_class.find_func(func_name)
         self.__current_scope.return_type = func_name
         self.__current_scope.set_func_start(len(self.__interp.quads))
@@ -216,7 +216,11 @@ class IdleCompiler:
                 class_func = class_obj.find_func(func_name)
 
             if class_obj != None and class_func != None:
-                self.__interp.add_func_era(class_func, var_ref)
+                if class_func.access_modifier == AccessModifier.PUBLIC:
+                    self.__interp.add_func_era(class_func, var_ref)
+                else:
+                    self.__compiler_errors.append("line %i: Function '%s' is a private member of '%s'." % (line_num, func_name, class_obj.name))
+                    self.__should_gen_quads = False
             else:
                 self.__compiler_errors.append("line %i: Function '%s' not found in '%s'." % (line_num, func_name, type_name))
                 self.__should_gen_quads = False

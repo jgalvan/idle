@@ -7,14 +7,13 @@ type Other class {
     }
 
     test2() void
-    var a string;
     {
         $name = "bye";
     }
 
     test3() void
-    var a string;
     {
+        var a string;
         a = $name;
     }
 
@@ -30,8 +29,8 @@ type Main class {
     name string;
 
     test() void
-    var teststring string;
     {
+        var teststring string;
         teststring = $name;
     }
 
@@ -46,10 +45,10 @@ type Main class {
     }
 
     main() void
-    var otherstring string;
-    var i float;
-    var o Other;
     {
+        var otherstring string;
+        var i float;
+        var o Other;
         $name = "hello";
         test();
         i = 5.0;
