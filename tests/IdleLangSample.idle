@@ -15,12 +15,12 @@ type Dog <- Animal class {
     - breed string;
 
     - bark() bool {
-        IO.print(GetName());
+        print(GetName());
         if $age > 1 {
-            IO.print("WOOF");
+            print("WOOF");
             return true;
         }
-        IO.print("woof");
+        print("woof");
         return false;
     }
 
@@ -35,7 +35,7 @@ type Dog <- Animal class {
     + Dog(name string, breed string)
     {
         var mydog Dog;
-        IO.print("Corri");
+        print("Corri");
         mydog.SetName(name);
         return mydog;
     }
@@ -49,8 +49,9 @@ type Main class {
         var mydog Dog;
         var sum int;
         var i int;
-        IO.print("Enter name: ");
-        name = IO.readString();
+        print("string " + "addition");
+        print("Enter name: ");
+        name = readString();
         mydog = new Dog(name, "Chihuahua");
         mydog.bark2();
         mydog.setAge(4);
@@ -62,7 +63,7 @@ type Main class {
         for i = 0; i < 10; i = i + 1 {
             sum = sum + i;
         }
-        //IO.print(sum);
+        //print(sum);
 
         while true && false {
             // do stuff

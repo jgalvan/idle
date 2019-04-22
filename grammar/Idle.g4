@@ -219,11 +219,10 @@ callArguments
 	: expression {self.icomp.quad_add_func_param($expression.start.line)} (',' expression {self.icomp.quad_add_func_param($expression.start.line)})*;
 
 printState
-	: 'IO' '.' 'print' '(' expression ')' ';' {self.icomp.quad_print_st()};
+	: 'print' '(' expression ')' ';' {self.icomp.quad_print_st()};
 
 read
-	: 'IO' '.' 
-		('readString' {self.icomp.quad_read('string')} 
+	:	('readString' {self.icomp.quad_read('string')} 
 		| 'readInt' {self.icomp.quad_read('int')}
 		| 'readFloat' {self.icomp.quad_read('float')}) 
 		'(' ')';
