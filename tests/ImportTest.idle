@@ -1,9 +1,46 @@
-import IdleLangSample;
+import Constructor;
 
-type Other class {
+type Other1 class {
     test string;
 }
 
-type Dog class {
+type Other2 class {
     test string;
+
+    testO() string {
+        return "test0 !!!";
+    }
+}
+
+type OtherMain class {
+    main() void
+    {
+        var name string;
+
+        name = "brian";
+        IO.print(name);
+
+        var test Dog;
+
+        test = new Dog("test", 18);
+        IO.print(test.getName());
+        test.setOther("other");
+        IO.print(test.getOther());
+
+        test = new Dog("test2", 18);
+        IO.print(test.getName());
+        test.setOther("other2");
+        IO.print(test.getOther());
+
+        test.bark();
+
+        var test3 Animal;
+        test3 = new Animal();
+        test3.setName("test3");
+        IO.print(test3.getName());
+
+
+        test.doSomething();
+        test3.doSomething();
+    }
 }
