@@ -45,6 +45,8 @@ class IdleVirtualMachine():
             OperationCode.LE: self.run_le,
             OperationCode.EQUAL: self.run_equal,
             OperationCode.NOTEQUAL: self.run_not_equal,
+            OperationCode.AND: self.run_and,
+            OperationCode.OR: self.run_or,
             OperationCode.PRINT: self.run_print,
             OperationCode.READFLOAT: self.run_read_float,
             OperationCode.READINT: self.run_read_int,
@@ -199,6 +201,16 @@ class IdleVirtualMachine():
         op1 = self.current_memory.get_value(quad[1])
         op2 = self.current_memory.get_value(quad[2])
         self.current_memory.set_value(op1 != op2, quad[3])
+
+    def run_and(self, quad):
+        op1 = self.current_memory.get_value(quad[1])
+        op2 = self.current_memory.get_value(quad[2])
+        self.current_memory.set_value(op1 and op2, quad[3])
+
+    def run_or(self, quad):
+        op1 = self.current_memory.get_value(quad[1])
+        op2 = self.current_memory.get_value(quad[2])
+        self.current_memory.set_value(op1 or op2, quad[3])
 
     def run_print(self, quad):
         op1 = self.current_memory.get_value(quad[1])
