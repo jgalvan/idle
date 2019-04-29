@@ -169,6 +169,9 @@ class IdleVirtualMachine():
     def run_div(self, quad):
         op1 = self.current_memory.get_value(quad[1])
         op2 = self.current_memory.get_value(quad[2])
+        if op2 == 0:
+            print("Runtime Error: Division by 0.")
+            exit()
         if isinstance(op1, int) and isinstance(op2, int):
             self.current_memory.set_value(op1 // op2, quad[3])
         else:
