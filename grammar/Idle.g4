@@ -161,6 +161,13 @@ literal
 	| expressionCall;
 
 reference
+	: objReference | directReference;
+
+objReference
+	: directReference '.' ID {self.icomp.check_obj_var($ID.text, $ID.line)};
+	//| directReference '.' ID '[' expression ']' {self.icomp.check_obj_array_access($ID.text, $ID.line)};
+
+directReference
 	: ID {self.icomp.check_var_exists($ID.text, $ID.line)}
 	| arrPos
 	| instanceVar;
@@ -206,12 +213,7 @@ call
 	| parent_call;
 
 obj_call
-	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
-	| objectVar;
-
-objectVar
-	: class_name=ID '.' var_name=ID {self.icomp.check_obj_var($class_name.text, $var_name.text, $ID.line)}
-	| class_name=ID '.' var_name=ID '[' expression ']' {self.icomp.check_obj_array_access($class_name.text, $var_name.text, $ID.line)};
+	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
 
 func_call
 	: ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};

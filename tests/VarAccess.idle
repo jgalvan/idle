@@ -1,0 +1,18 @@
+type Other class {
+    var oneVar int;
+    var PublicVar int;
+    var PublicArray[10] int;
+
+    RunSomething() void {
+        $PublicVar = 4;
+    }
+}
+
+type Main class {
+    var objVar Other;
+
+    main() void {
+        $objVar.RunSomething();
+        print($objVar.PublicArray);
+    }
+}

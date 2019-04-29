@@ -100,8 +100,13 @@ class IdleVirtualMachine():
             self.current_memory.goto(quad[3])
 
     def run_assign(self, quad):
-        value = self.current_memory.get_value(quad[1])
-        self.current_memory.set_value(value, quad[3])
+        if quad[2] == None: # Regular access
+            value = self.current_memory.get_value(quad[1])
+            self.current_memory.set_value(value, quad[3])
+        else:   # Instance var access
+            obj_instance = self.current_memory.get_value(quad[1])
+            ref = obj_instance.get_reference(quad[2])
+            self.current_memory.set_reference(ref, quad[3])
 
     def run_era(self, quad):
         if quad[2] != None:

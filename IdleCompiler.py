@@ -253,8 +253,6 @@ class IdleCompiler:
         if IdleCompiler.__current_scope.contains_var(var_name):
             IdleCompiler.__compiler_errors.append("line %i: Duplicate var '%s'" % (line_num, var_name))
         else:
-            if AccessModifier.get_access_modifier(var_name) == AccessModifier.PUBLIC:
-                IdleCompiler.__compiler_errors.append("line %i: '%s' variables and attributes should start with lower case" % (line_num, var_name))
             IdleCompiler.__current_scope.add_var(var_name)
 
     def define_array(self, var_name, size, line_num):
@@ -329,6 +327,34 @@ class IdleCompiler:
         else:
             self.quad_add_var(var)
             return var
+
+    def check_obj_var(self, var_name, line_num):
+
+        class_ref = IdleCompiler.__interp.get_last_var()
+        type_name = class_ref.var_type
+
+        if DataType.exists(type_name):
+            IdleCompiler.__compiler_errors.append("line %i: '%s' does not contain variable '%s'." % (line_num, type_name, var_name))
+            IdleCompiler.__should_gen_quads = False
+        else:
+            class_obj = IdleCompiler.__classes.get(type_name, None)
+            
+            if class_obj != None:
+                obj_var = class_obj.find_var(var_name)
+
+            if class_obj != None and obj_var != None:
+                if obj_var.access_modifier == AccessModifier.PUBLIC:
+                    if obj_var.var_type == DataType.ARRAY:
+                        IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is array. Access is not supported '%s'." % (line_num, var_name, type_name))
+                        IdleCompiler.__should_gen_quads = False
+                    else:
+                        IdleCompiler.__interp.add_access_instance_var(class_ref, obj_var)
+                else:
+                    IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is a private attribute of '%s'." % (line_num, var_name, class_obj.name))
+                    IdleCompiler.__should_gen_quads = False
+            else:
+                IdleCompiler.__compiler_errors.append("line %i: Variable '%s' not found in '%s'." % (line_num, var_name, type_name))
+                IdleCompiler.__should_gen_quads = False
 
     def check_array_access(self, var_name, line_num):
 
