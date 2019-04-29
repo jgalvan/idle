@@ -1,6 +1,6 @@
 type Animal class {
-    - name string;
-    - age int;
+    var name string;
+    var age int;
 
     - GetName() string {
         return $name;
@@ -12,7 +12,7 @@ type Animal class {
 }
 
 type Dog <- Animal class {
-    - breed string;
+    var breed string;
 
     - bark() bool {
         print(GetName());

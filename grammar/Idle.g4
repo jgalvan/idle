@@ -85,7 +85,7 @@ classBlock
 	: '{' attribute* method* '}';
 
 attribute
-	: accessModifier ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
+	: varsDecl;
 
 method
 	: nonVoidMethod
@@ -172,7 +172,8 @@ arrPos returns [attr_ref]
 	: ID '[' expression ']' {$attr_ref = self.icomp.check_array_access($ID.text, $ID.line)};
 
 instanceVar returns [attr_ref]
-	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)};
+	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)}
+	| '$' ID '[' expression ']' {$attr_ref = self.icomp.check_instance_array_access($ID.text, $ID.line)};
 
 condition
 	: 'if' expression {self.icomp.quad_end_if_expr($expression.start.line)} block ({self.icomp.quad_start_else_ifs()} elseIfs)? {self.icomp.quad_fill_if_end_jumps()};
