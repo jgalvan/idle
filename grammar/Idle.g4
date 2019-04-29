@@ -85,7 +85,7 @@ classBlock
 	: '{' attribute* method* '}';
 
 attribute
-	: accessModifier ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
+	: ID {self.icomp.add_var($ID.text, $ID.line)} typeState ';';
 
 method
 	: nonVoidMethod
@@ -93,19 +93,16 @@ method
 	| constructor;
 
 nonVoidMethod
-	: accessModifier ID {self.icomp.add_func($ID.text, $ID.line, $accessModifier.text)} '(' methodArguments? ')' typeState {self.icomp.add_func_return_type($typeState.text)} nonVoidBlock {self.icomp.quad_add_endproc($nonVoidBlock.stop.line)} {self.icomp.end_scope()};
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' typeState {self.icomp.add_func_return_type($typeState.text)} nonVoidBlock {self.icomp.quad_add_endproc($nonVoidBlock.stop.line)} {self.icomp.end_scope()};
 
 voidMethod
-	: accessModifier ID {self.icomp.add_func($ID.text, $ID.line, $accessModifier.text)} '(' methodArguments? ')' 'void' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()};
+	: ID {self.icomp.add_func($ID.text, $ID.line)} '(' methodArguments? ')' 'void' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()};
 
 constructor
-	: '+' ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
+	: ID {self.icomp.add_constructor($ID.text, $ID.line)} '(' methodArguments? ')' block {self.icomp.quad_add_endproc($block.stop.line)} {self.icomp.end_scope()} ;
 
 nonVoidBlock
 	: '{' (statement {self.icomp.reset_new_line()} )* returnState '}';
-
-accessModifier
-	: '+' | '-';
 
 methodArguments
 	:  singleArgument (',' singleArgument)*;

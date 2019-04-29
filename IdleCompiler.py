@@ -114,6 +114,9 @@ class IdleCompiler:
             parent_class = None
         else:
             parent_class = IdleCompiler.__classes.get(parent_name, None)
+
+        if AccessModifier.get_access_modifier(class_name) == AccessModifier.PRIVATE:
+            IdleCompiler.__compiler_errors.append("line %i: '%s' class name should start with upper case." % (line_num, class_name))
         
         # Add to class table and update current_class and current_scope
         new_class = ClassScope(class_name, parent_class)
@@ -121,7 +124,7 @@ class IdleCompiler:
         IdleCompiler.__current_class = new_class
         IdleCompiler.__current_scope = new_class
 
-    def add_func(self, func_name, line_num, access_modifier):
+    def add_func(self, func_name, line_num):
         """Adds a function to symbol table of the last added class.
         
         If duplicate function name is found, it still saves it but with a UUID to allow 
@@ -138,7 +141,7 @@ class IdleCompiler:
             func_name = func_name + uuid4().hex
         
         # Add function to class and update current_scope
-        IdleCompiler.__current_class.add_func(func_name, AccessModifier(access_modifier))
+        IdleCompiler.__current_class.add_func(func_name, AccessModifier.get_access_modifier(func_name))
         IdleCompiler.__current_scope = IdleCompiler.__current_class.find_func(func_name)
         IdleCompiler.__current_scope.set_func_start(len(self.__interp.quads))
     
@@ -250,6 +253,8 @@ class IdleCompiler:
         if IdleCompiler.__current_scope.contains_var(var_name):
             IdleCompiler.__compiler_errors.append("line %i: Duplicate var '%s'" % (line_num, var_name))
         else:
+            if AccessModifier.get_access_modifier(var_name) == AccessModifier.PUBLIC:
+                IdleCompiler.__compiler_errors.append("line %i: '%s' variables and attributes should start with lower case" % (line_num, var_name))
             IdleCompiler.__current_scope.add_var(var_name)
     
     def add_arg(self, arg_name):

@@ -1,20 +1,20 @@
 type Animal class {
-    - name string;
-    - age int;
+    name string;
+    age int;
 
-    - GetName() string {
+    GetName() string {
         return $name;
     }
 
-    + SetName(name string) void {
+    SetName(name string) void {
         $name = name;
     }
 }
 
 type Dog <- Animal class {
-    - breed string;
+    breed string;
 
-    - bark() bool {
+    Bark() bool {
         print(GetName());
         if $age > 1 {
             print("WOOF");
@@ -24,15 +24,15 @@ type Dog <- Animal class {
         return false;
     }
 
-    + bark2() bool {
-        return bark();
+    Bark2() bool {
+        return Bark();
     }
 
-    + setAge(age int) void {
+    SetAge(age int) void {
         $age = age;
     }
 
-    + Dog(name string, breed string)
+    Dog(name string, breed string)
     {
         var mydog Dog;
         print("Corri");
@@ -43,7 +43,7 @@ type Dog <- Animal class {
 
 type Main class {
 
-    + main() void
+    main() void
     {
         var name string;
         var mydog Dog;
@@ -53,9 +53,9 @@ type Main class {
         print("Enter name: ");
         name = readString();
         mydog = new Dog(name, "Chihuahua");
-        mydog.bark2();
-        mydog.setAge(4);
-        mydog.bark2();
+        mydog.Bark2();
+        mydog.SetAge(4);
+        mydog.Bark2();
 
 
 /*
