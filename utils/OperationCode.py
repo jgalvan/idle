@@ -44,6 +44,7 @@ class OperationCode(Enum):
     ENDPROC = 'ENDPROC'
 
     ARRACCESS = 'ARRACCESS'
+    ARRINDEXCHECK = 'ARRINDEXCHECK'
 
 
     @staticmethod

@@ -51,7 +51,8 @@ class IdleVirtualMachine():
             OperationCode.READFLOAT: self.run_read_float,
             OperationCode.READINT: self.run_read_int,
             OperationCode.READSTRING: self.run_read_string,
-            OperationCode.ARRACCESS: self.run_arr_access
+            OperationCode.ARRACCESS: self.run_arr_access,
+            OperationCode.ARRINDEXCHECK: self.run_arr_index_check
         }
 
         self.init_consts()
@@ -248,4 +249,12 @@ class IdleVirtualMachine():
         # RUNTIME ERROR index out of bounds
         
         self.current_memory.set_pointer_address(quad[3], address)
+
+    def run_arr_index_check(self, quad):
+        lower_limit = quad[1]
+        upper_limit = quad[2]
+        index = self.current_memory.get_value(quad[3])
+        if index < lower_limit or index > upper_limit:
+            print("Runtime Error: Array index out of bounds.")
+            exit()
         

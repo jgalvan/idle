@@ -54,6 +54,7 @@ class IdleInterRepr:
         result = self.__temporals.next(DataType.POINTER)
         result.make_pointer(var.array_type)
 
+        self.__quads.append((OperationCode.ARRINDEXCHECK.to_code(), 0, var.array_size-1, index_var.address))
         self.__quads.append((OperationCode.ARRACCESS.to_code(), var.address, index_var.address, result.address))
         self.__operands_stack.push(result)
         self.__temporals.free_up_if_temp(index_var)
