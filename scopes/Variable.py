@@ -12,11 +12,10 @@ class Variable():
     Access modifiers are not currently fully supported.
     """
 
-    def __init__(self, name, var_type, address, access_modifier:AccessModifier=AccessModifier.PUBLIC):
+    def __init__(self, name, var_type, address):
         self.__name = name
         self.__var_type = var_type
         self.__address = address
-        self.__access_modifier = access_modifier
 
         self.__is_param_by_ref = False
         self.__array_info = None
@@ -35,7 +34,7 @@ class Variable():
 
     @property
     def access_modifier(self):
-        return self.__access_modifier
+        return AccessModifier.get_access_modifier(self.__name)
 
     @property
     def address(self):

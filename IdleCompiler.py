@@ -305,31 +305,37 @@ class IdleCompiler:
     def check_var_exists(self, var_name, line_num):
         """Checks if variable is available for use in current scope."""
 
-        if not(IdleCompiler.__current_scope.var_in_scope(var_name)):
-            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
-            IdleCompiler.__should_gen_quads = False
-        
         var = IdleCompiler.__current_scope.find_var(var_name)
-        self.quad_add_var(var)
-        return var
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'." % (line_num, var_name))
+        elif var.var_type == DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Reference to array '%s' without index." % (line_num, var_name))
+        else:
+            self.quad_add_var(var)
+            return var
 
     def check_instance_var_exists(self, var_name, line_num):
         """Checks if an instance variable is available for use in current scope."""
         
         var = IdleCompiler.__current_class.find_instance_var(var_name)
-        if var != None:
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared instance variable '%s'." % (line_num, var_name))
+        elif var.var_type == DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Reference to array '%s' without index." % (line_num, var_name))
+        else:
             self.quad_add_var(var)
             return var
-        
-        IdleCompiler.__should_gen_quads = False
-        IdleCompiler.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
 
     def check_array_access(self, var_name, line_num):
 
         var = IdleCompiler.__current_scope.find_var(var_name)
         if var == None:
             IdleCompiler.__should_gen_quads = False
-            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'." % (line_num, var_name))
         elif var.var_type != DataType.ARRAY:
             IdleCompiler.__should_gen_quads = False
             IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))

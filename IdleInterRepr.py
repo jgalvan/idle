@@ -30,7 +30,7 @@ class IdleInterRepr:
         return const_quads
 
     def get_last_var(self):
-        """Returns top of operands stack. Expects to be called only when calling function within object."""
+        """Returns top of operands stack. Expects to be called only when calling function or variable within object."""
 
         return self.__operands_stack.pop()
     
@@ -44,6 +44,12 @@ class IdleInterRepr:
     
     def add_var(self, var):
         self.__operands_stack.push(var)
+    
+    def add_access_instance_var(self, class_ref: Variable, obj_var: Variable):
+
+        temp = self.__temporals.next(obj_var.var_type)
+        self.__quads.append((OperationCode.ASSIGN, class_ref.address, obj_var.address, temp.address))
+        self.__operands_stack.push(temp)
     
     def array_access(self, var):
         index_var = self.__operands_stack.pop()

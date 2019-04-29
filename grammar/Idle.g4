@@ -160,17 +160,17 @@ literal
 	| BOOL_LITERAL {self.icomp.add_constant($BOOL_LITERAL.text, 'bool')}
 	| expressionCall;
 
-reference returns [attr_ref]
+reference
 	: ID {self.icomp.check_var_exists($ID.text, $ID.line)}
-	| arrPos {$attr_ref = $arrPos.attr_ref}
-	| instanceVar {$attr_ref = $instanceVar.attr_ref};
+	| arrPos
+	| instanceVar;
 
-arrPos returns [attr_ref]
-	: ID '[' expression ']' {$attr_ref = self.icomp.check_array_access($ID.text, $ID.line)};
+arrPos
+	: ID '[' expression ']' {self.icomp.check_array_access($ID.text, $ID.line)};
 
-instanceVar returns [attr_ref]
-	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)}
-	| '$' ID '[' expression ']' {$attr_ref = self.icomp.check_instance_array_access($ID.text, $ID.line)};
+instanceVar
+	: '$' ID {self.icomp.check_instance_var_exists($ID.text, $ID.line)}
+	| '$' ID '[' expression ']' {self.icomp.check_instance_array_access($ID.text, $ID.line)};
 
 condition
 	: 'if' expression {self.icomp.quad_end_if_expr($expression.start.line)} block ({self.icomp.quad_start_else_ifs()} elseIfs)? {self.icomp.quad_fill_if_end_jumps()};
@@ -206,7 +206,12 @@ call
 	| parent_call;
 
 obj_call
-	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
+	: reference '.' ID {self.icomp.check_obj_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)}
+	| objectVar;
+
+objectVar
+	: class_name=ID '.' var_name=ID {self.icomp.check_obj_var($class_name.text, $var_name.text, $ID.line)}
+	| class_name=ID '.' var_name=ID '[' expression ']' {self.icomp.check_obj_array_access($class_name.text, $var_name.text, $ID.line)};
 
 func_call
 	: ID {self.icomp.check_func_exists($ID.text, $ID.line)} '(' callArguments? ')' {self.icomp.quad_add_func_gosub($ID.line)};
