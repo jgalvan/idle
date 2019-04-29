@@ -1,0 +1,14 @@
+type Main class {
+
+    - main() void {
+        var i int;
+        var test[10] int;
+        
+        for i = 0; i < 10; i = i+1 {
+            test[i] = i + 1;
+        }
+        for i = 0; i < 10; i = i+1 {
+            print(test[i] + 1);
+        }
+    }
+}

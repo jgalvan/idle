@@ -55,6 +55,9 @@ class Scope():
         
         self.__pending_variables.clear()
     
+    def skip_addresses_for_array(self, var_type: DataType, size: int):
+        self.compilation_memory.skip_addresses_for(var_type, size-1) # First address already assigned.
+    
     def contains_var(self, name) -> bool:
         """Checks if variable has been declared specifically in current scope."""
 

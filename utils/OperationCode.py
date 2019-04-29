@@ -43,6 +43,8 @@ class OperationCode(Enum):
     RETURN = 'RETURN'
     ENDPROC = 'ENDPROC'
 
+    ARRACCESS = 'ARRACCESS'
+
 
     @staticmethod
     def from_code(code: int) -> 'OperationCode':

@@ -117,7 +117,11 @@ typeState
 	: type_name=('bool' | 'int' | 'float' | 'string' | ID) {self.icomp.commit_vars($type_name.text, $type_name.line)};
 
 varsDecl
-	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* ('[' INT_LITERAL ']')? typeState ';';
+	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} (',' ID {self.icomp.add_var($ID.text, $ID.line)})* typeState ';'
+	| arrayDecl;
+
+arrayDecl
+	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} '[' INT_LITERAL ']' typeState ';' {self.icomp.define_array($ID.text, $INT_LITERAL.text, $ID.line)};
 
 assignment
 	: <assoc=right> reference '=' expression {self.icomp.quad_assign($reference.start.line)};
@@ -165,7 +169,7 @@ reference returns [attr_ref]
 	| instanceVar {$attr_ref = $instanceVar.attr_ref};
 
 arrPos returns [attr_ref]
-	: ID {$attr_ref = self.icomp.check_var_exists($ID.text, $ID.line)} '[' expression ']';
+	: ID '[' expression ']' {$attr_ref = self.icomp.check_array_access($ID.text, $ID.line)};
 
 instanceVar returns [attr_ref]
 	: '$' ID {$attr_ref = self.icomp.check_instance_var_exists($ID.text, $ID.line)};

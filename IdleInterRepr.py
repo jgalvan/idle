@@ -45,6 +45,20 @@ class IdleInterRepr:
     def add_var(self, var):
         self.__operands_stack.push(var)
     
+    def array_access(self, var):
+        index_var = self.__operands_stack.pop()
+
+        if index_var.var_type != DataType.INT:
+            return False
+
+        result = self.__temporals.next(DataType.POINTER)
+        result.make_pointer(var.array_type)
+
+        self.__quads.append((OperationCode.ARRACCESS.to_code(), var.address, index_var.address, result.address))
+        self.__operands_stack.push(result)
+        self.__temporals.free_up_if_temp(index_var)
+        return True
+    
     def add_operator(self, operator):
         self.__operators_stack.push(OperationCode(operator))
 

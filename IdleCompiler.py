@@ -251,7 +251,19 @@ class IdleCompiler:
             IdleCompiler.__compiler_errors.append("line %i: Duplicate var '%s'" % (line_num, var_name))
         else:
             IdleCompiler.__current_scope.add_var(var_name)
-    
+
+    def define_array(self, var_name, size, line_num):
+        
+        size = int(size)
+        var = IdleCompiler.__current_scope.find_var(var_name)
+
+        if size <= 0:
+            IdleCompiler.__compiler_errors.append("line %i: Array size should be a positive integer." % line_num)
+        else:
+            IdleCompiler.__current_scope.skip_addresses_for_array(var.var_type, size)
+
+        var.make_array(size)
+        
     def add_arg(self, arg_name):
         """Adds a variable as an argument for the current function.
         """
@@ -306,6 +318,34 @@ class IdleCompiler:
         
         IdleCompiler.__should_gen_quads = False
         IdleCompiler.__compiler_errors.append("line %i: Undeclared instance variable '%s'" % (line_num, var_name))
+
+    def check_array_access(self, var_name, line_num):
+
+        var = IdleCompiler.__current_scope.find_var(var_name)
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+        elif var.var_type != DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))
+        else:
+            self.quad_array_access(var, line_num)
+        
+        return var
+
+    def check_instance_array_access(self, var_name, line_num):
+
+        var = IdleCompiler.__current_class.find_var(var_name)
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'" % (line_num, var_name))
+        elif var.var_type != DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))
+        else:
+            self.quad_array_access(var, line_num)
+        
+        return var
                     
     def reset_new_line(self):
         """If there was previously an error, resets quads to be able to continue compilation.
@@ -337,6 +377,13 @@ class IdleCompiler:
 
         if IdleCompiler.__should_gen_quads:
             IdleCompiler.__interp.add_var(var)
+
+    def quad_array_access(self, var, line_num):
+
+        if IdleCompiler.__should_gen_quads:
+            if not IdleCompiler.__interp.array_access(var):
+                IdleCompiler.__compiler_errors.append("line %i: Type mismatch: expecting int for array index." % line_num)
+                IdleCompiler.__should_gen_quads = False
     
     def quad_add_oper(self, oper):
         """Adds operator to quads"""

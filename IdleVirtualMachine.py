@@ -50,7 +50,8 @@ class IdleVirtualMachine():
             OperationCode.PRINT: self.run_print,
             OperationCode.READFLOAT: self.run_read_float,
             OperationCode.READINT: self.run_read_int,
-            OperationCode.READSTRING: self.run_read_string
+            OperationCode.READSTRING: self.run_read_string,
+            OperationCode.ARRACCESS: self.run_arr_access
         }
 
         self.init_consts()
@@ -239,4 +240,12 @@ class IdleVirtualMachine():
     def run_read_string(self, quad):
         op1 = str(input())
         self.current_memory.set_value(op1, quad[3])
+    
+    def run_arr_access(self, quad):
+        base_address = quad[1]
+        arr_index = self.current_memory.get_value(quad[2])
+        address = base_address + arr_index*100
+        # RUNTIME ERROR index out of bounds
+        
+        self.current_memory.set_pointer_address(quad[3], address)
         

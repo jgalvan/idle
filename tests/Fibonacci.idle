@@ -1,5 +1,5 @@
 type Main class {
-    fibonacci(x int) int {
+    - fibonacci(x int) int {
         if x == 0 {
             return 0;
         }
@@ -9,17 +9,21 @@ type Main class {
         return fibonacci(x-1) + fibonacci(x-2);
     }
     
-    main() void
+    - main() void
     {
         var i int;
         var smth string;
         i = fibonacci(3);
-        IO.print(i);
+        print(i);
+        print(-4+1);
 
         i = fibonacci(4);
-        IO.print(i);
+        print(i);
 
         i = fibonacci(10);
-        IO.print(i);
+        print(i);
+
+        i = fibonacci(22);
+        print(i);
     }
 }

@@ -21,7 +21,8 @@ class Memory():
             DataType.FLOAT: [],
             DataType.BOOL: [],
             DataType.STRING: [],
-            'Other': []
+            'Other': [],
+            DataType.POINTER: []
         }
 
         self.__defaults = {
@@ -29,9 +30,13 @@ class Memory():
             DataType.FLOAT: 0.0,
             DataType.BOOL: False,
             DataType.STRING: "",
-            'Other': None
+            'Other': None,
+            DataType.POINTER: 0
         }
     
+    def get_type(self, address):
+        return CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
+
     def get_internal_address(self, address):
         return address//100 - 1
     
@@ -137,28 +142,43 @@ class ClassMemory(Memory):
         self.__next_func = Stack()
 
     def set_reference(self, reference, address):
-        if address % 10 == CompilationMemory.INSTANCE_ID:
+        if self.get_type(address) == DataType.POINTER:
+            actual_address = self.__func_memory_stack.peek().get_value(address)
+            self.set_reference(reference, actual_address)
+        elif address % 10 == CompilationMemory.INSTANCE_ID:
             super().set_reference(reference, address)
         else:
             self.__func_memory_stack.peek().set_reference(reference, address)
 
     def get_reference(self, address):
-        if address % 10 == CompilationMemory.INSTANCE_ID:
+        if self.get_type(address) == DataType.POINTER:
+            actual_address = self.__func_memory_stack.peek().get_value(address)
+            return self.get_reference(actual_address)
+        elif address % 10 == CompilationMemory.INSTANCE_ID:
             return super().get_reference(address)
         else:
             return self.__func_memory_stack.peek().get_reference(address)
 
     def set_value(self, value, address):
-        if address % 10 == CompilationMemory.INSTANCE_ID:
+        if self.get_type(address) == DataType.POINTER:
+            actual_address = self.__func_memory_stack.peek().get_value(address)
+            self.set_value(value, actual_address)
+        elif address % 10 == CompilationMemory.INSTANCE_ID:
             super().set_value(value, address)
         else:
             self.__func_memory_stack.peek().set_value(value, address)
 
     def get_value(self, address):
+        if self.get_type(address) == DataType.POINTER:
+            actual_address = self.__func_memory_stack.peek().get_value(address)
+            return self.get_value(actual_address)
         if address % 10 == CompilationMemory.INSTANCE_ID:
             return super().get_value(address)
         else:
             return self.__func_memory_stack.peek().get_value(address)
+
+    def set_pointer_address(self, pointer_address, pointing_address):
+        self.__func_memory_stack.peek().set_value(pointing_address, pointer_address)
 
     def era_func(self, func_start):
         self.__next_func.push(LocalMemory(func_start))
