@@ -8,6 +8,8 @@ class DataType(Enum):
     BOOL = "bool"
     STRING = "string"
     ERROR = "error"
+    ARRAY = "array"
+    POINTER = "pointer"
 
     @staticmethod
     def exists(name: str) -> bool:

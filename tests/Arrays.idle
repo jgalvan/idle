@@ -1,0 +1,25 @@
+type Main class {
+    var instanceVar int;
+    var test[10] int;
+    
+    - otherOtherMethod() void {
+        $test[3] = 1;
+    }
+
+    - otherMethod() void {
+        $instanceVar = 2;
+    }
+
+    - main() void {
+        var i int;
+        
+        for i = 0; i < 10; i = i+1 {
+            $test[i] = i + 1;
+        }
+
+        otherOtherMethod();
+        for i = 0; i < 10; i = i+1 {
+            print($test[i]);
+        }
+    }
+}

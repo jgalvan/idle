@@ -22,7 +22,9 @@ class CompilationMemory():
         DataType.FLOAT: 2,
         DataType.BOOL: 3,
         DataType.STRING: 4,
-        'Other': 5
+        'Other': 5,
+        DataType.ARRAY: 6,
+        DataType.POINTER: 7
     }
 
     VAR_TYPE_FROM_CODE = {
@@ -30,7 +32,9 @@ class CompilationMemory():
         2: DataType.FLOAT,
         3: DataType.BOOL,
         4: DataType.STRING,
-        5: 'Other'
+        5: 'Other',
+        6: DataType.ARRAY,
+        7: DataType.POINTER
     }
 
     def __init__(self):
@@ -39,6 +43,7 @@ class CompilationMemory():
         self.bool_counter = 0
         self.string_counter = 0
         self.obj_counter = 0
+        self.pointer_counter = 0
         self.scope_type = CompilationMemory.LOCAL_ID
 
     @staticmethod
@@ -78,9 +83,26 @@ class CompilationMemory():
         elif var_type == DataType.STRING:
             self.string_counter += 1
             return (self.string_counter)*100 + postfix
+        elif var_type == DataType.POINTER:
+            self.pointer_counter += 1
+            return (self.pointer_counter)*100 + postfix
         else:
             self.obj_counter += 1
             return (self.obj_counter)*100 + postfix
+
+    def skip_addresses_for(self, var_type: DataType, num_addresses):
+        if var_type == DataType.INT:
+            self.int_counter += num_addresses
+        elif var_type == DataType.FLOAT:
+            self.float_counter += num_addresses
+        elif var_type == DataType.BOOL:
+            self.bool_counter += num_addresses
+        elif var_type == DataType.STRING:
+            self.string_counter += num_addresses
+        elif var_type == DataType.POINTER:
+            self.pointer_counter += num_addresses
+        else:
+            self.obj_counter += num_addresses
 
 class Temporal(CompilationMemory):
     def __init__(self):
@@ -89,7 +111,8 @@ class Temporal(CompilationMemory):
             DataType.INT: [],
             DataType.FLOAT: [],
             DataType.BOOL: [],
-            DataType.STRING: []
+            DataType.STRING: [],
+            DataType.POINTER: []
         }
         self.scope_type = CompilationMemory.TEMP_ID
         

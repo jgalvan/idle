@@ -45,10 +45,13 @@ class IdleVirtualMachine():
             OperationCode.LE: self.run_le,
             OperationCode.EQUAL: self.run_equal,
             OperationCode.NOTEQUAL: self.run_not_equal,
+            OperationCode.AND: self.run_and,
+            OperationCode.OR: self.run_or,
             OperationCode.PRINT: self.run_print,
             OperationCode.READFLOAT: self.run_read_float,
             OperationCode.READINT: self.run_read_int,
-            OperationCode.READSTRING: self.run_read_string
+            OperationCode.READSTRING: self.run_read_string,
+            OperationCode.ARRACCESS: self.run_arr_access
         }
 
         self.init_consts()
@@ -200,6 +203,16 @@ class IdleVirtualMachine():
         op2 = self.current_memory.get_value(quad[2])
         self.current_memory.set_value(op1 != op2, quad[3])
 
+    def run_and(self, quad):
+        op1 = self.current_memory.get_value(quad[1])
+        op2 = self.current_memory.get_value(quad[2])
+        self.current_memory.set_value(op1 and op2, quad[3])
+
+    def run_or(self, quad):
+        op1 = self.current_memory.get_value(quad[1])
+        op2 = self.current_memory.get_value(quad[2])
+        self.current_memory.set_value(op1 or op2, quad[3])
+
     def run_print(self, quad):
         op1 = self.current_memory.get_value(quad[1])
         if isinstance(op1, bool):
@@ -227,4 +240,12 @@ class IdleVirtualMachine():
     def run_read_string(self, quad):
         op1 = str(input())
         self.current_memory.set_value(op1, quad[3])
+    
+    def run_arr_access(self, quad):
+        base_address = quad[1]
+        arr_index = self.current_memory.get_value(quad[2])
+        address = base_address + arr_index*100
+        # RUNTIME ERROR index out of bounds
+        
+        self.current_memory.set_pointer_address(quad[3], address)
         
