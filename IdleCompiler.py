@@ -268,10 +268,14 @@ class IdleCompiler:
             var = IdleCompiler.__current_scope.find_var(var_name)
             self.quad_add_var(var)
 
-    def short_var_decl_assign(self, var_name):
-        var = IdleCompiler.__current_scope.find_var(var_name)
-        data_type = IdleCompiler.__interp.short_var_decl_assign()
-        var.change_type(data_type)
+    def short_var_decl_assign(self, var_name, line_num):
+        if IdleCompiler.__should_gen_quads:
+            data_type = IdleCompiler.__interp.short_var_decl_assign()
+            if data_type == DataType.ERROR:
+                IdleCompiler.__compiler_errors.append("line %i: Type mismatch" % line_num)
+                IdleCompiler.__should_gen_quads = False
+            var = IdleCompiler.__current_scope.find_var(var_name)
+            var.change_type(data_type)
 
         
     def define_array(self, var_name, size, line_num):

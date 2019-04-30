@@ -122,7 +122,7 @@ arrayDecl
 	: 'var' ID {self.icomp.add_var($ID.text, $ID.line)} '[' INT_LITERAL ']' typeState ';' {self.icomp.define_array($ID.text, $INT_LITERAL.text, $ID.line)};
 
 shortVarDecl
-	: <assoc=right> ID {self.icomp.short_var_decl($ID.text, $ID.line)} ':=' expression {self.icomp.short_var_decl_assign($ID.text)};
+	: <assoc=right> ID {self.icomp.short_var_decl($ID.text, $ID.line)} ':=' expression {self.icomp.short_var_decl_assign($ID.text, $expression.start.line)};
 
 assignment
 	: <assoc=right> reference '=' expression {self.icomp.quad_assign($reference.start.line)};
