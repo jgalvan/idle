@@ -255,6 +255,25 @@ class IdleCompiler:
         else:
             IdleCompiler.__current_scope.add_var(var_name)
 
+    def short_var_decl(self, var_name, line_num):
+        """Adds a variable to current scope and assigns it a value.
+
+        Infers type from value.
+        """
+        if IdleCompiler.__current_scope.contains_var(var_name):
+            IdleCompiler.__compiler_errors.append("line %i: Duplicate var '%s'" % (line_num, var_name))
+        else:
+            IdleCompiler.__current_scope.add_var(var_name)
+            IdleCompiler.__current_scope.commit_vars(None)
+            var = IdleCompiler.__current_scope.find_var(var_name)
+            self.quad_add_var(var)
+
+    def short_var_decl_assign(self, var_name):
+        var = IdleCompiler.__current_scope.find_var(var_name)
+        data_type = IdleCompiler.__interp.short_var_decl_assign()
+        var.change_type(data_type)
+
+        
     def define_array(self, var_name, size, line_num):
         
         size = int(size)

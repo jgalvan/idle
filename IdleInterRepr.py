@@ -124,6 +124,15 @@ class IdleInterRepr:
         self.__quads.append((OperationCode.ASSIGN.to_code(), oper.address, None, var.address))
         return True
 
+    def short_var_decl_assign(self) -> DataType:
+        oper = self.__operands_stack.pop()
+        var = self.__operands_stack.pop()
+        
+        self.__temporals.free_up_if_temp(oper)
+
+        self.__quads.append((OperationCode.ASSIGN.to_code(), oper.address, None, var.address))
+        return oper.var_type
+
     def read(self, read_type):
         result = self.__temporals.next(read_type)
 

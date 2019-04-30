@@ -1,0 +1,12 @@
+type Main class {
+    main() void {
+        greetings := "hello";
+        print(greetings);
+
+        operations := 4 + 4 / 2;
+        print(operations);
+
+        boool := true;
+        print(boool);
+    }
+}
