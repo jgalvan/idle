@@ -51,6 +51,7 @@ class IdleVirtualMachine():
             OperationCode.READFLOAT: self.run_read_float,
             OperationCode.READINT: self.run_read_int,
             OperationCode.READSTRING: self.run_read_string,
+            OperationCode.TOSTRING: self.run_to_string,
             OperationCode.ARRACCESS: self.run_arr_access,
             OperationCode.ARRINDEXCHECK: self.run_arr_index_check
         }
@@ -249,6 +250,11 @@ class IdleVirtualMachine():
     def run_read_string(self, quad):
         op1 = str(input())
         self.current_memory.set_value(op1, quad[3])
+
+    def run_to_string(self, quad):
+        value = self.current_memory.get_value(quad[1])
+        string_value = str(value)
+        self.current_memory.set_value(string_value, quad[3])
     
     def run_arr_access(self, quad):
         base_address = quad[1]

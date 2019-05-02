@@ -508,6 +508,12 @@ class IdleCompiler:
         if IdleCompiler.__should_gen_quads:
             IdleCompiler.__interp.print_st()
 
+    def quad_to_string(self):
+        """Adds quad for string conversion"""
+
+        if IdleCompiler.__should_gen_quads:
+            IdleCompiler.__interp.to_string()
+
     def quad_start_while(self):
         """Adds pending jump, to be called before loop expression."""
 

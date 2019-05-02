@@ -214,6 +214,7 @@ call
 	: obj_call
 	| func_call
 	| read
+	| toString
 	| constructor_call
 	| parent_call;
 
@@ -240,3 +241,6 @@ read
 		| 'readInt' {self.icomp.quad_read('int')}
 		| 'readFloat' {self.icomp.quad_read('float')}) 
 		'(' ')';
+
+toString
+	: 'toString' '(' expression ')' {self.icomp.quad_to_string()};

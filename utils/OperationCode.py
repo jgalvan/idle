@@ -29,6 +29,7 @@ class OperationCode(Enum):
     READFLOAT = 'READFLOAT'
     READSTRING = 'READSTRING'
     PRINT = 'PRINT'
+    TOSTRING = 'TOSTRING'
 
     # Jumps
     GOTO = 'GOTO'

@@ -150,6 +150,17 @@ class IdleInterRepr:
         temp_func.return_type = read_type
         self.__func_calls_stack.push(temp_func)
 
+    def to_string(self):
+        oper = self.__operands_stack.pop()
+        result = self.__temporals.next(DataType.STRING)
+
+        self.__quads.append((OperationCode.TOSTRING.to_code(), oper.address, None, result.address))
+        
+        self.__operands_stack.push(result)
+        temp_func = Func('temp')
+        temp_func.return_type = DataType.STRING
+        self.__func_calls_stack.push(temp_func)
+
     def print_st(self):
         oper = self.__operands_stack.pop()
         self.__quads.append((OperationCode.PRINT.to_code(), oper.address, None, None))
