@@ -619,3 +619,14 @@ class IdleCompiler:
             if not IdleCompiler.__interp.check_not_void(check):
                 IdleCompiler.__compiler_errors.append("line %i: Expecting expression with value, but called void function instead." % line_num)
                 self.__should_gen_quads = False
+
+    def quad_sort_array(self, var_name, line_num, direction = "asc"):
+        var = IdleCompiler.__current_scope.find_var(var_name)
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'." % (line_num, var_name))
+        elif var.var_type != DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))
+        else:
+            IdleCompiler.__interp.array_sort(var)

@@ -31,6 +31,6 @@ type Main class {
         fib := new Fibonacci();
         print("Fibonacci");
         print("Recurssion: " + toString(fib.Recurssion(6)));
-        print("Cicles: " + toString(fib.Loops(6)));
+        print("Loops: " + toString(fib.Loops(6)));
     }
 }

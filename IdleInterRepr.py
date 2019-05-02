@@ -65,6 +65,13 @@ class IdleInterRepr:
         self.__operands_stack.push(result)
         self.__temporals.free_up_if_temp(index_var)
         return True
+
+    def array_sort(self, var):
+        result = self.__temporals.next(DataType.POINTER)
+        result.make_pointer(var.array_type)
+
+        self.__quads.append((OperationCode.ARRSORT.to_code(), 0, var.array_size, result.address))
+        self.__operands_stack.push(result)
     
     def add_operator(self, operator):
         self.__operators_stack.push(OperationCode(operator))

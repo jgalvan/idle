@@ -89,7 +89,6 @@ class Memory():
     def __str__(self):
         return (str(self.__values))
 
-
 class LocalMemory(Memory):
     def __init__(self, instruction_counter: int):
         super().__init__()

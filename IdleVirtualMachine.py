@@ -53,7 +53,8 @@ class IdleVirtualMachine():
             OperationCode.READSTRING: self.run_read_string,
             OperationCode.TOSTRING: self.run_to_string,
             OperationCode.ARRACCESS: self.run_arr_access,
-            OperationCode.ARRINDEXCHECK: self.run_arr_index_check
+            OperationCode.ARRINDEXCHECK: self.run_arr_index_check,
+            OperationCode.ARRSORT: self.run_arr_sort
         }
 
         self.init_consts()
@@ -271,4 +272,13 @@ class IdleVirtualMachine():
         if index < lower_limit or index > upper_limit:
             print("Runtime Error: Array index out of bounds.")
             exit()
+
+    def run_arr_sort(self, quad):
+        base_address = quad[3]
+        start_address = base_address + quad[1]*100
+        end_address = base_address + quad[2]*100
+        array = self.current_memory.get_memory_slice(start_address, end_address)
+        array.sort()
+        self.current_memory.set_memory_slice(array, start_address, end_address)
+
         

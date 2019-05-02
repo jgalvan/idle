@@ -28,6 +28,6 @@ type Main class {
         fac := new Factorial();
         print("Factorial");
         print("Recurssion: " + toString(fac.Recurssion(6)));
-        print("Cicles: " + toString(fac.Loops(6)));
+        print("Loops: " + toString(fac.Loops(6)));
     }
 }

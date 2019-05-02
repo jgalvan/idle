@@ -138,6 +138,7 @@ statement
 	| call ';' {self.icomp.check_not_void($call.stop.line, check=False)}
 	| {self.icomp.start_scope()} forLoop {self.icomp.end_scope()}
 	| {self.icomp.start_scope()} whileLoop {self.icomp.end_scope()}
+	| sortArray
 	| printState
 	| returnState;
 
@@ -244,3 +245,6 @@ read
 
 toString
 	: 'toString' '(' expression ')' {self.icomp.quad_to_string()};
+
+sortArray
+	: 'sort' '(' ID (',' STRING_LITERAL)? ')' ';' {self.icomp.quad_sort_array($ID.text, $ID.line, $STRING_LITERAL.text)};
