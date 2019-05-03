@@ -11,12 +11,13 @@ type Main class {
         a = b + c;
         a = (a+b)*d+a*a+c;
 
-        c = 4.5;
         e = b*e;
-        e = c;
 
         f = a > e;
 
-        print(e/6);
+        var arr[1] int;
+        arr[0] = 4;
+
+        print(arr[0]);
     }
 }

@@ -121,9 +121,7 @@ class IdleInterRepr:
         var = self.__operands_stack.pop()
 
         if oper.var_type != var.var_type:
-            # Allow assignment of floats to ints and vice versa
-            if not ((oper.var_type == DataType.FLOAT and var.var_type == DataType.INT) or (oper.var_type == DataType.INT and var.var_type == DataType.FLOAT)):
-                return False
+            return False
         
         self.__temporals.free_up_if_temp(oper)
 
