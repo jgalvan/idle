@@ -203,7 +203,7 @@ whileLoop
 	: 'while' {self.icomp.quad_start_while()} expression {self.icomp.quad_end_while_expr($expression.start.line)} block {self.icomp.quad_end_while()};
 
 forLoop
-	: 'for' assignment? ';' {self.icomp.quad_start_while()} 
+	: 'for' (assignment | shortVarDecl)? ';' {self.icomp.quad_start_while()} 
 			expression {self.icomp.quad_end_while_expr($expression.start.line)} ';' 
 			{self.icomp.quad_start_for_assign()} assignment? {self.icomp.quad_end_for_assign()}
 			block {self.icomp.quad_end_for_block()} {self.icomp.quad_end_while()};

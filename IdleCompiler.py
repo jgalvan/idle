@@ -60,7 +60,6 @@ class IdleCompiler:
             IdleCompiler.__compiler_errors.append("File '%s' already imported." % file_name)
             return
 
-        print("Importing '%s'..." % file_name)
         IdleCompiler.files_imported.append(file_name)
 
         # Check for file existence

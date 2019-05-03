@@ -12,6 +12,7 @@ class IdleInterRepr:
         self.__operands_stack = Stack()
         self.__operators_stack = Stack()
         self.__quads = []
+        self.__temp_quads = []
         self.__jump_stack = Stack()
         self.__func_calls_stack = Stack()
         self.__param_counter_stack = Stack()
@@ -120,7 +121,9 @@ class IdleInterRepr:
         var = self.__operands_stack.pop()
 
         if oper.var_type != var.var_type:
-            return False
+            # Allow assignment of floats to ints and vice versa
+            if not ((oper.var_type == DataType.FLOAT and var.var_type == DataType.INT) or (oper.var_type == DataType.INT and var.var_type == DataType.FLOAT)):
+                return False
         
         self.__temporals.free_up_if_temp(oper)
 
@@ -190,9 +193,10 @@ class IdleInterRepr:
         self.__quads.append((OperationCode.GOTO.to_code(), None, None, while_start))
 
         # Update GOTOF jump address after expression
-        expr_end_quad = list(self.__quads[expr_end])
-        expr_end_quad[3] = len(self.__quads)
-        self.__quads[expr_end] = tuple(expr_end_quad)
+        if expr_end:
+            expr_end_quad = list(self.__quads[expr_end])
+            expr_end_quad[3] = len(self.__quads)
+            self.__quads[expr_end] = tuple(expr_end_quad)
 
     def start_for_assign(self):
         # Save current quad list into temporal space and reset quads

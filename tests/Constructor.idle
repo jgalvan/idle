@@ -1,28 +1,28 @@
 type Animal class {
-    name string;
-    age int;
+    var name string;
+    var age int;
 
-    getName() string {
+    GetName() string {
         return $name;
     }
 
-    setName(name string) void {
+    SetName(name string) void {
         $name = name;
     }
 
-    doSomething() void {
-        IO.print("ANIMAL");
+    DoSomething() void {
+        print("ANIMAL");
     }
 }
 
 type Mammal <- Animal class {
-    doSomething() void {
-        IO.print("MAMMAL");
+    DoSomething() void {
+        print("MAMMAL");
     }
 }
 
 type Dog <- Mammal class {
-    other string;
+    var other string;
 
     Dog(name string, age int)
     {
@@ -30,28 +30,28 @@ type Dog <- Mammal class {
         $age = age;
     }
 
-    bark() void {
-        IO.print("BARK!");
+    Bark() void {
+        print("BARK!");
     }
 
-    setOther(other string) void {
+    SetOther(other string) void {
         $other = other;
     }
 
-    getOther() string {
+    GetOther() string {
         return $other;
     }
 
-    doSomething() void {
-        IO.print("DOG");
-        super().doSomething();
+    DoSomething() void {
+        print("DOG");
+        super().DoSomething();
     }
 }
 
 type Main class {
     doSomething(woof string ref) void {
-        IO.print("dentro");
-        IO.print(woof);
+        print("dentro");
+        print(woof);
         woof = "hello world";
     }
     
@@ -61,29 +61,29 @@ type Main class {
 
         name = "brian";
         doSomething(name);
-        IO.print(name);
+        print(name);
 
         var test Dog;
 
         test = new Dog("test", 18);
-        IO.print(test.getName());
-        test.setOther("other");
-        IO.print(test.getOther());
+        print(test.GetName());
+        test.SetOther("other");
+        print(test.GetOther());
 
         test = new Dog("test2", 18);
-        IO.print(test.getName());
-        test.setOther("other2");
-        IO.print(test.getOther());
+        print(test.GetName());
+        test.SetOther("other2");
+        print(test.GetOther());
 
-        test.bark();
+        test.Bark();
 
         var test3 Animal;
         test3 = new Animal();
-        test3.setName("test3");
-        IO.print(test3.getName());
+        test3.SetName("test3");
+        print(test3.GetName());
 
 
-        test.doSomething();
-        test3.doSomething();
+        test.DoSomething();
+        test3.DoSomething();
     }
 }

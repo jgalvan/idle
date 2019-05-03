@@ -1,6 +1,6 @@
 type Main class {
-    name string;
-    age int;
+    var name string;
+    var age int;
 
     isAdult() bool
     {
@@ -17,17 +17,17 @@ type Main class {
     {
         var ret_val string;
         ret_val = "test vars";
-        IO.print(ret_val);
-        IO.print("Enter name: ");
-        $name = IO.readString();
-        IO.print("Enter age: ");
-        $age = IO.readInt();
-        IO.print("Hello my name is ");
-        IO.print($name);
+        print(ret_val);
+        print("Enter name: ");
+        $name = readString();
+        print("Enter age: ");
+        $age = readInt();
+        print("Hello my name is ");
+        print($name);
         if isAdult() {
-            IO.print("Si soy adulto.");
+            print("Si soy adulto.");
         } else {
-            IO.print("No soy adulto.");
+            print("No soy adulto.");
         }
         
     }

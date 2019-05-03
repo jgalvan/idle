@@ -1,11 +1,11 @@
 import Constructor;
 
 type Other1 class {
-    test string;
+    var test string;
 }
 
 type Other2 class {
-    test string;
+    var test string;
 
     testO() string {
         return "test0 !!!";
@@ -18,29 +18,29 @@ type OtherMain class {
         var name string;
 
         name = "brian";
-        IO.print(name);
+        print(name);
 
         var test Dog;
 
         test = new Dog("test", 18);
-        IO.print(test.getName());
-        test.setOther("other");
-        IO.print(test.getOther());
+        print(test.GetName());
+        test.SetOther("other");
+        print(test.GetOther());
 
         test = new Dog("test2", 18);
-        IO.print(test.getName());
-        test.setOther("other2");
-        IO.print(test.getOther());
+        print(test.GetName());
+        test.SetOther("other2");
+        print(test.GetOther());
 
-        test.bark();
+        test.Bark();
 
         var test3 Animal;
         test3 = new Animal();
-        test3.setName("test3");
-        IO.print(test3.getName());
+        test3.SetName("test3");
+        print(test3.GetName());
 
 
-        test.doSomething();
-        test3.doSomething();
+        test.DoSomething();
+        test3.DoSomething();
     }
 }

@@ -1,32 +1,32 @@
 type Other class {
-    name string;
+    var name string;
 
-    test() void 
+    Test() void 
     {
         $name = "hi";
     }
 
-    test2() void
+    Test2() void
     {
         $name = "bye";
     }
 
-    test3() void
+    Test3() void
     {
         var a string;
         a = $name;
     }
 
-    test4(i float) void
-    var b float;
+    Test4(i float) void
     {
+        var b float;
         b = i;
         i = 7.0;
     }
 }
 
 type Main class {
-    name string;
+    var name string;
 
     test() void
     {
@@ -36,7 +36,7 @@ type Main class {
 
     test2(o2 Other) void
     {
-        o2.test();
+        o2.Test();
     }
 
     test3() string
@@ -52,13 +52,13 @@ type Main class {
         $name = "hello";
         test();
         i = 5.0;
-        o.test();
+        o.Test();
         i = 6.0;
-        o.test3();
-        o.test2();
-        o.test4(i);
+        o.Test3();
+        o.Test2();
+        o.Test4(i);
         test2(o);
-        o.test3();
+        o.Test3();
         $name = test3();
     }
 }

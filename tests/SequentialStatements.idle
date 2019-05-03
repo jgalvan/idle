@@ -1,27 +1,22 @@
 type Main class {
     main() void
-    var a int;
-    var b int;
-    var c int;
-    var d int;
-    var e float;
-    var f bool;
-    var g string;
     {
+        var a int;
+        var b int;
+        var c int;
+        var d int;
+        var e float;
+        var f bool;
+        var g string;
         a = b + c;
         a = (a+b)*d+a*a+c;
 
+        c = 4.5;
         e = b*e;
-        e = (a+b)/c*d+a/b+c;
+        e = c;
 
         f = a > e;
 
-        IO.print(a);
-        IO.print(e);
-        IO.print(f);
-
-        a = IO.readInt();
-        e = IO.readFloat();
-        g = IO.readString();
+        print(e/6);
     }
 }

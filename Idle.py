@@ -32,10 +32,24 @@ def main(argv):
     IdleCompiler.cwd = dir_path
     IdleCompiler.files_imported.append(os.path.basename(file_name).replace(".idle", ""))
 
-    # Parse 
-    stream = CommonTokenStream(lexer)
-    parser = IdleParser(stream)
-    tree = parser.fileState()
+    # Parse
+    try:
+        stream = CommonTokenStream(lexer)
+        parser = IdleParser(stream)
+        tree = parser.fileState()
+    except Exception as e:
+        # If the compiler crashed, check if we had any compiler errors
+        errors = parser.icomp.compiler_errors
+        if(len(errors) > 0):
+            for error in errors:
+                print(error)
+            print("Please fix errors.")
+        elif(parser.getNumberOfSyntaxErrors()):
+            print("Please fix errors.")
+        else:
+            # Compiler crashed without any known errors, panic :'(
+            raise e
+        exit()
 
     # Check for errors
     errors = parser.icomp.compiler_errors

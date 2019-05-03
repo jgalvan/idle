@@ -1,5 +1,6 @@
 from utils.OperationCode import OperationCode
 from virtual_machine_utils.Memory import Memory, ClassMemory
+from utils.DataType import DataType
 from utils.Stack import Stack
 
 class IdleVirtualMachine():
@@ -104,6 +105,10 @@ class IdleVirtualMachine():
     def run_assign(self, quad):
         if quad[2] == None: # Regular access
             value = self.current_memory.get_value(quad[1])
+            if self.current_memory.get_type(quad[1]) == DataType.FLOAT and self.current_memory.get_type(quad[3]) == DataType.INT:
+                value = int(value)
+            elif self.current_memory.get_type(quad[1]) == DataType.INT and self.current_memory.get_type(quad[3]) == DataType.FLOAT:
+                value = float(value)
             self.current_memory.set_value(value, quad[3])
         else:   # Instance var access
             obj_instance = self.current_memory.get_value(quad[1])

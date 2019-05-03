@@ -1,18 +1,18 @@
 type Other class {
-    test() string
+    Test() string
     {
         return "test";
     }
 }
 
 type Main class {
-    name string;
+    var name string;
 
     main() void
-    var a string;
-    var o Other;
     {
-        $name = o.test();
-        a = $name;
+        var o Other;
+        $name = o.Test();
+        a := $name;
+        print(a);
     }
 }
