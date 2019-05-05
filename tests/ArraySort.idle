@@ -1,0 +1,19 @@
+type Main class {
+    main() void {
+        var test[10] int;
+        
+        for i := 0; i < 10; i = i+1 {
+            test[9-i] = i*2;
+        }
+
+        for i := 0; i < 10; i = i+1 {
+            print(test[i]);
+        }
+
+        sort(test);
+
+        for i := 0; i < 10; i = i+1 {
+            print(test[i]);
+        }
+    }
+}

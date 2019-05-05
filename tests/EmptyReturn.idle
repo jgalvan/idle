@@ -1,0 +1,15 @@
+type Main class {
+    voidRecursion(n int) int {
+        print(n);
+
+        if n == 0 {
+            return test;
+        }
+
+        voidRecursion(n-1);
+    }
+
+    main() void {
+        voidRecursion(10);
+    }
+}

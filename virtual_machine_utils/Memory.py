@@ -86,6 +86,21 @@ class Memory():
         else:
             value_store[internal_address].value = copy.deepcopy(value)
 
+    def get_memory_slice(self, start_address, end_address):
+        array = []
+
+        for address in range(start_address, end_address, 100):
+            array.append(self.get_value(address))
+
+        return array
+
+    def set_memory_slice(self, array, start_address, end_address):
+        i = 0
+
+        for address in range(start_address, end_address, 100):
+            self.set_value(array[i], address)
+            i += 1
+
     def __str__(self):
         return (str(self.__values))
 
