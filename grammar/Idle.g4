@@ -143,7 +143,8 @@ statement
 	| returnState;
 
 returnState
-	: 'return' expression ';' {self.icomp.quad_add_func_return($expression.start.line)};
+	: 'return' expression ';' {self.icomp.quad_add_func_return($expression.start.line)}
+	| r='return' ';' {self.icomp.quad_add_empty_return($r.line)};
 
 expression
 	: <assoc=right> '!' exp

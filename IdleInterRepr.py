@@ -324,6 +324,9 @@ class IdleInterRepr:
         
         return True
 
+    def add_empty_return(self):
+        self.__quads.append((OperationCode.ENDPROC, None, None, None))
+
     def add_func_return(self, expected_return_type: DataType) -> bool:
         return_val = None
         return_type = None

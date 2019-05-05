@@ -591,6 +591,17 @@ class IdleCompiler:
                 IdleCompiler.__compiler_errors.append("line %i: Wrong number of arguments for function %s, expecting %i but received %i." % 
                     (line_num, quad_result[1], quad_result[2], quad_result[3]))
 
+    def quad_add_empty_return(self, line_num):
+        """Adds quad for empty return statement."""
+
+        current_scope = IdleCompiler.__current_scope
+        while not isinstance(current_scope, Func):
+            current_scope = current_scope.parent
+        if IdleCompiler.__should_gen_quads and current_scope.return_type != None:
+            IdleCompiler.__compiler_errors.append("line %i: Type mismatch. Expecting expression with return type %s." % (line_num, current_scope.return_type))
+
+        IdleCompiler.__interp.add_empty_return()
+
     def quad_add_func_return(self, line_num):
         """Adds quad for return statement."""
 
