@@ -47,6 +47,7 @@ class OperationCode(Enum):
     ARRACCESS = 'ARRACCESS'
     ARRINDEXCHECK = 'ARRINDEXCHECK'
     ARRSORT = 'ARRSORT'
+    ARRFIND = 'ARRFIND'
 
 
     @staticmethod

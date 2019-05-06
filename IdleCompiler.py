@@ -630,7 +630,27 @@ class IdleCompiler:
                 IdleCompiler.__compiler_errors.append("line %i: Expecting expression with value, but called void function instead." % line_num)
                 self.__should_gen_quads = False
 
-    def quad_sort_array(self, var_name, line_num, direction = "asc"):
+    def quad_sort_array(self, var_name, line_num, direction):
+        var = IdleCompiler.__current_scope.find_var(var_name)
+        if not direction:
+            direction = "asc"
+        else:
+            direction = CompilationMemory.clean_string_const(direction)
+
+        if var == None:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Undeclared variable '%s'." % (line_num, var_name))
+        elif var.var_type != DataType.ARRAY:
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))
+        elif direction != "asc" and direction != "desc":
+            print(direction)
+            IdleCompiler.__should_gen_quads = False
+            IdleCompiler.__compiler_errors.append("line %i: Sort direction can only be asc or desc." % (line_num))
+        elif IdleCompiler.__should_gen_quads:
+            IdleCompiler.__interp.array_sort(var, direction)
+
+    def quad_find_array(self, var_name, line_num):
         var = IdleCompiler.__current_scope.find_var(var_name)
         if var == None:
             IdleCompiler.__should_gen_quads = False
@@ -638,5 +658,7 @@ class IdleCompiler:
         elif var.var_type != DataType.ARRAY:
             IdleCompiler.__should_gen_quads = False
             IdleCompiler.__compiler_errors.append("line %i: Variable '%s' is not of enumerable type." % (line_num, var_name))
-        else:
-            IdleCompiler.__interp.array_sort(var)
+        elif IdleCompiler.__should_gen_quads:
+            if not IdleCompiler.__interp.array_find(var):
+                IdleCompiler.__should_gen_quads = False
+                IdleCompiler.__compiler_errors.append("line %i: Find type mismatch." % (line_num))

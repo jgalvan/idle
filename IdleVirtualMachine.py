@@ -55,7 +55,8 @@ class IdleVirtualMachine():
             OperationCode.TOSTRING: self.run_to_string,
             OperationCode.ARRACCESS: self.run_arr_access,
             OperationCode.ARRINDEXCHECK: self.run_arr_index_check,
-            OperationCode.ARRSORT: self.run_arr_sort
+            OperationCode.ARRSORT: self.run_arr_sort,
+            OperationCode.ARRFIND: self.run_arr_find
         }
 
         self.init_consts()
@@ -276,10 +277,27 @@ class IdleVirtualMachine():
 
     def run_arr_sort(self, quad):
         base_address = quad[3]
-        start_address = base_address + quad[1]*100
-        end_address = base_address + quad[2]*100
+        start_address = base_address + quad[1][0]*100
+        end_address = base_address + quad[1][1]*100
         array = self.current_memory.get_memory_slice(start_address, end_address)
         array.sort()
+        if quad[2] == "desc":
+            array.reverse()
         self.current_memory.set_memory_slice(array, start_address, end_address)
+
+    def run_arr_find(self, quad):
+        base_address = quad[2][1]
+        start_address = base_address + quad[1][0]*100
+        end_address = base_address + quad[1][1]*100
+
+        value = self.current_memory.get_value(quad[2][0])
+        array = self.current_memory.get_memory_slice(start_address, end_address)
+        value_index = -1
+        for index, item in enumerate(array):
+            if item == value:
+                value_index = index
+                break
+        
+        self.current_memory.set_value(value_index, quad[3])
 
         

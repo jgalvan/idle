@@ -67,9 +67,24 @@ class IdleInterRepr:
         self.__temporals.free_up_if_temp(index_var)
         return True
 
-    def array_sort(self, var):
-        self.__quads.append((OperationCode.ARRSORT.to_code(), 0, var.array_size, var.address))
+    def array_sort(self, var, direction):
+        self.__quads.append((OperationCode.ARRSORT.to_code(), (0, var.array_size), direction, var.address))
     
+    def array_find(self, var):
+        oper = self.__operands_stack.pop()
+        result = self.__temporals.next(DataType.INT)
+        
+        if oper.var_type != var.array_type:
+            return False
+        
+        self.__quads.append((OperationCode.ARRFIND.to_code(), (0, var.array_size), (oper.address, var.address), result.address))
+        
+        self.__operands_stack.push(result)
+        temp_func = Func('temp')
+        temp_func.return_type = DataType.INT
+        self.__func_calls_stack.push(temp_func)
+        return True
+
     def add_operator(self, operator):
         self.__operators_stack.push(OperationCode(operator))
 

@@ -217,6 +217,7 @@ call
 	| func_call
 	| read
 	| toString
+	| findArray
 	| constructor_call
 	| parent_call;
 
@@ -249,3 +250,6 @@ toString
 
 sortArray
 	: 'sort' '(' ID (',' STRING_LITERAL)? ')' ';' {self.icomp.quad_sort_array($ID.text, $ID.line, $STRING_LITERAL.text)};
+
+findArray
+	: 'find' '(' ID ',' expression ')' {self.icomp.quad_find_array($ID.text, $ID.line)};
