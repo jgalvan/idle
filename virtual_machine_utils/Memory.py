@@ -6,6 +6,7 @@ import copy
 class VarWrapper():
     def __init__(self, value):
         self.value = value
+        self.reset = False
 
 class Memory():
     CONSTANTS = {
@@ -60,6 +61,10 @@ class Memory():
             else:
                 value_store[internal_address] = VarWrapper(self.__defaults[var_type])
 
+        # Reset after using temporal as reference for instance variable
+        if value_store[internal_address].reset:
+            value_store[internal_address] = VarWrapper(value_store[internal_address].value)
+
         return value_store[internal_address]
     
     def get_value(self, address):
@@ -74,6 +79,10 @@ class Memory():
         
         value_store[internal_address] = reference
 
+        # Reset after using temporal as reference for instance variable
+        if address % 10 == CompilationMemory.TEMP_ID:
+            value_store[internal_address].reset = True
+
     def set_value(self, value, address):
         internal_address = self.get_internal_address(address)
         value_store = self.get_value_store(address)
@@ -85,6 +94,10 @@ class Memory():
             value_store[internal_address] = VarWrapper(copy.deepcopy(value))
         else:
             value_store[internal_address].value = copy.deepcopy(value)
+
+        # Reset after using temporal as reference for instance variable
+        if value_store[internal_address].reset:
+            value_store[internal_address] = VarWrapper(copy.deepcopy(value))
 
     def get_memory_slice(self, start_address, end_address):
         array = []

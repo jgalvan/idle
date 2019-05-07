@@ -1,0 +1,50 @@
+type ParentClass class {
+    var name string;
+
+    ChangeParamByRef(refVar int ref) void {
+        refVar = -1;
+    }
+
+    SetName(name string) void {
+        $name = name;
+    }
+
+    GetName() string {
+        return $name;
+    }
+}
+
+type ChildClass <- ParentClass class {
+    var Breed string;
+
+    ChangeParamByRef(refVar int ref) void {
+        super().ChangeParamByRef(refVar);
+    }
+
+    ChildClass(name string, breed string) {
+        $name = name;
+        $Breed = breed;
+    }
+}
+
+type Main class {
+    var num int;
+
+    main() void
+    {
+        var child ChildClass;
+        child = new ChildClass("testName", "testBreed");
+        print(child.GetName() + " " + child.Breed);
+
+        child.Breed = "newBreed";
+        print(child.GetName() + " " + child.Breed);
+
+        child.SetName("newName");
+        print(child.GetName() + " " + child.Breed);
+
+        $num = 3;
+        print($num);
+        child.ChangeParamByRef($num);
+        print($num);
+    }
+}

@@ -1,9 +1,9 @@
 type Main class {
-    voidRecursion(n int) int {
+    voidRecursion(n int) void {
         print(n);
 
         if n == 0 {
-            return test;
+            return;
         }
 
         voidRecursion(n-1);
