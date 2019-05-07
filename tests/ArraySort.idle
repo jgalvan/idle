@@ -1,10 +1,17 @@
 type Main class {
-    main() void {
+    main() void {  
         var test[10] int;
-        
-        for i := 0; i < 10; i = i+1 {
-            test[9-i] = i*2;
-        }
+
+        test[0] = 3;
+        test[1] = 4;
+        test[2] = 1;
+        test[3] = 2;
+        test[4] = 5;
+        test[5] = 7;
+        test[6] = 6;
+        test[7] = 9;
+        test[8] = 0;
+        test[9] = 8;
 
         print("Unsorted array:");
         for i := 0; i < 10; i = i+1 {
@@ -12,11 +19,12 @@ type Main class {
         }
         
         sort(test, "asc");
+
         print("Sorted array:");
         for i := 0; i < 10; i = i+1 {
             print(test[i]);
         }
 
-        print("Find Index: " + toString(find(test, 2+2)));
+        print("Value found on index: " + toString(find(test, 2+2)));
     }
 }
