@@ -31,6 +31,7 @@ IO:					'IO';
 
 // Literals
 BOOL_LITERAL: 'true' | 'false';
+NUMBER_SIGN: '+' | '-';
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 INT_LITERAL: [0-9]+;
 FLOAT_LITERAL: [0-9]+ '.' [0-9]+;
@@ -157,12 +158,12 @@ term
 	: factor {self.icomp.quad_check_divmult($factor.start.line)} (operator=('/' | '*'){self.icomp.quad_add_oper($operator.text)} factor {self.icomp.quad_check_divmult($factor.start.line)})*;
 
 factor
-	: '(' {self.icomp.quad_open_parenthesis()} expression ')' {self.icomp.quad_close_parenthesis()} | ('+' | '-')? literal;
+	: '(' {self.icomp.quad_open_parenthesis()} expression ')' {self.icomp.quad_close_parenthesis()} | literal;
 
 literal
 	: reference
-	| INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int')}
-	| FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float')}
+	| NUMBER_SIGN? INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int', $NUMBER_SIGN.text)}
+	| NUMBER_SIGN? FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float', $NUMBER_SIGN.text)}
 	| STRING_LITERAL {self.icomp.add_constant($STRING_LITERAL.text, 'string')}
 	| BOOL_LITERAL {self.icomp.add_constant($BOOL_LITERAL.text, 'bool')}
 	| expressionCall;

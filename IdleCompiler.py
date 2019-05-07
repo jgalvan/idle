@@ -416,7 +416,7 @@ class IdleCompiler:
             IdleCompiler.__should_gen_quads = True
             IdleCompiler.__interp = IdleInterRepr()
 
-    def add_constant(self, value, var_type):
+    def add_constant(self, value, var_type, number_sign = None):
         var_type = DataType(var_type)
 
         if var_type == DataType.BOOL:
@@ -425,6 +425,9 @@ class IdleCompiler:
             value = float(value)
         elif var_type == DataType.INT:
             value = int(value)
+
+        if number_sign == "-":
+            value = value * -1
 
         const_var = CompilationMemory.get_constant(value, var_type)
 
@@ -630,7 +633,7 @@ class IdleCompiler:
                 IdleCompiler.__compiler_errors.append("line %i: Expecting expression with value, but called void function instead." % line_num)
                 self.__should_gen_quads = False
 
-    def quad_sort_array(self, var_name, line_num, direction):
+    def quad_sort_array(self, var_name, line_num, direction = None):
         var = IdleCompiler.__current_scope.find_var(var_name)
         if not direction:
             direction = "asc"
