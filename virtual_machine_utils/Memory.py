@@ -47,6 +47,9 @@ class Memory():
         return self.__values[var_type]
 
     def get_reference(self, address):
+        """
+        Gets actual pointer reference to a variable in memory.
+        """
         var_type = CompilationMemory.VAR_TYPE_FROM_CODE[(address%100)//10]
         internal_address = self.get_internal_address(address)
         value_store = self.get_value_store(address)
