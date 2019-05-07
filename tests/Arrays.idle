@@ -1,25 +1,108 @@
 type Main class {
-    var instanceVar int;
     var test[10] int;
-    
-    otherOtherMethod() void {
-        $test[3] = 1;
+    var temp[10] int;
+
+    merge(start int, middle int, end int) void {
+        for i := start; i <= end; i = i + 1 {
+            $temp[i] = $test[i];
+        }
+
+        iA := start;
+        iB := middle + 1;
+        iC := start;
+
+        while (iA <= middle) && (iB <= end) {
+            if $temp[iA] < $temp[iB] {
+                $test[iC] = $temp[iA];
+                iA = iA + 1;
+            }
+            else {
+                $test[iC] = $temp[iB];
+                iB = iB + 1;
+            }
+            iC = iC + 1;
+        }
+
+        while iA <= middle {
+            $test[iC] = $temp[iA];
+            iA = iA + 1;
+            iC = iC + 1;
+        }
+
+        while iB <= middle {
+            $test[iC] = $temp[iB];
+            iB = iB + 1;
+            iC = iC + 1;
+        }
     }
 
-    otherMethod() void {
-        $instanceVar = 2;
+    MergeSort(first int, last int) void {
+        if first == last {
+            return;
+        }
+
+        var mid int;
+        mid = (first+last)/2;
+
+        MergeSort(first, mid);
+        MergeSort(mid+1, last);
+        merge(first, mid, last);
+    }
+
+    Find(n int) int {
+        for i := 0; i < 10; i = i+1 {
+            if $test[i] == n {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    ArrayToString() string {
+        arrRepr := "[";
+        for i := 0; i < 10; i = i+1 {
+            arrRepr = arrRepr + toString($test[i]) + ",";
+        }
+        arrRepr = arrRepr + "]";
+
+        return arrRepr;
+    }
+
+    setValues() void {
+        $test[0] = 3;
+        $test[1] = 4;
+        $test[2] = 1;
+        $test[3] = 2;
+        $test[4] = 5;
+        $test[5] = 7;
+        $test[6] = 6;
+        $test[7] = 9;
+        $test[8] = 0;
+        $test[9] = 8;
     }
 
     main() void {
-        var i int;
-        
-        for i = 0; i < 10; i = i+1 {
-            $test[i] = i + 1;
-        }
+        setValues();
 
-        otherOtherMethod();
-        for i = 0; i < 10; i = i+1 {
-            print($test[i]);
-        }
+        print("Original Array:");
+        print(ArrayToString());
+        print("");
+
+        print("Find 3:");
+        print(Find(3));
+        print("");
+
+        print("Find 11:");
+        print(Find(11));
+        print("");
+
+        print("Merge sort");
+        MergeSort(0, 9);
+        print(ArrayToString());
+        print("");
+
+        print("Find 3:");
+        print(Find(3));
     }
 }

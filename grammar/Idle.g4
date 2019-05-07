@@ -31,7 +31,6 @@ IO:					'IO';
 
 // Literals
 BOOL_LITERAL: 'true' | 'false';
-NUMBER_SIGN: '+' | '-';
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 INT_LITERAL: [0-9]+;
 FLOAT_LITERAL: [0-9]+ '.' [0-9]+;
@@ -162,8 +161,8 @@ factor
 
 literal
 	: reference
-	| NUMBER_SIGN? INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int', $NUMBER_SIGN.text)}
-	| NUMBER_SIGN? FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float', $NUMBER_SIGN.text)}
+	| sign=('+'|'-')? INT_LITERAL {self.icomp.add_constant($INT_LITERAL.text, 'int', $sign.text)}
+	| sign=('+'|'-')? FLOAT_LITERAL {self.icomp.add_constant($FLOAT_LITERAL.text, 'float', $sign.text)}
 	| STRING_LITERAL {self.icomp.add_constant($STRING_LITERAL.text, 'string')}
 	| BOOL_LITERAL {self.icomp.add_constant($BOOL_LITERAL.text, 'bool')}
 	| expressionCall;

@@ -33,6 +33,10 @@ class Variable():
         return self.__var_type
 
     @property
+    def var_type_for_temporal(self):
+        return self.__var_type
+
+    @property
     def access_modifier(self):
         return AccessModifier.get_access_modifier(self.__name)
 
