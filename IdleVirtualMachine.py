@@ -25,6 +25,9 @@ class IdleVirtualMachine():
         return self.__memory_stack.peek()
 
     def run(self):
+        """ 
+        Executes all of the quads generated during compilation.
+        """
         instruction_set = {
             OperationCode.GOTO: self.run_goto,
             OperationCode.GOTOF: self.run_gotof,
@@ -59,8 +62,10 @@ class IdleVirtualMachine():
             OperationCode.ARRFIND: self.run_arr_find
         }
 
+        # Add variables for constants to memory
         self.init_consts()
 
+        # Execute all quads
         next_quad = self.next_instruction()
         while next_quad != None:
             instruction = instruction_set[OperationCode(next_quad[0])]
@@ -79,6 +84,9 @@ class IdleVirtualMachine():
             temp.set_value(quad[1], quad[3])
 
     def next_instruction(self):
+        """
+        Gets the next instruction from memory.
+        """
         counter = self.current_memory.next_instruction()
         if counter != None:
             return self.__quadruples[counter]
@@ -246,7 +254,7 @@ class IdleVirtualMachine():
         try:
             op1 = int(op1)
         except ValueError:
-            print("Runtime Error: Expected float.")
+            print("Runtime Error: Expected int.")
             exit()
         self.current_memory.set_value(op1, quad[3])
 
