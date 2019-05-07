@@ -133,5 +133,5 @@ class Temporal(CompilationMemory):
 
     def free_up_if_temp(self, var):
         if Temporal.is_temp(var):
-            available = self.__availables.get(var.var_type, []) # Default is object. Object temporals should always be new
+            available = self.__availables.get(var.var_type_for_temporal, []) # Default is object. Object temporals should always be new
             available.append(var)
