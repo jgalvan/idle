@@ -1,46 +1,11 @@
-import Constructor;
-
-type Other1 class {
-    var test string;
-}
-
-type Other2 class {
-    var test string;
-
-    testO() string {
-        return "test0 !!!";
-    }
-}
+import Fibonacci;
 
 type OtherMain class {
     main() void
     {
-        var name string;
-
-        name = "brian";
-        print(name);
-
-        var test Dog;
-
-        test = new Dog("test", 18);
-        print(test.GetName());
-        test.SetOther("other");
-        print(test.GetOther());
-
-        test = new Dog("test2", 18);
-        print(test.GetName());
-        test.SetOther("other2");
-        print(test.GetOther());
-
-        test.Bark();
-
-        var test3 Animal;
-        test3 = new Animal();
-        test3.SetName("test3");
-        print(test3.GetName());
-
-
-        test.DoSomething();
-        test3.DoSomething();
+        fib := new Fibonacci();
+        print("Fibonacci");
+        print("Recurssion: " + toString(fib.Recurssion(6)));
+        print("Loops: " + toString(fib.Loops(6)));
     }
 }
